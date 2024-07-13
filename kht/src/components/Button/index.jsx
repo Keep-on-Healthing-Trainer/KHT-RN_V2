@@ -17,7 +17,7 @@ const Button = ( props ) => {
 const Styles = StyleSheet.create({
     container: {
         width: constants.width/1.2,
-        height: constants.height/20,
+        height: constants.height/23,
         backgroundColor: color.Blue[10],
         borderRadius: 10,
         paddingLeft: 10,
@@ -28,7 +28,7 @@ const Styles = StyleSheet.create({
     },
     font: {
         color: color.White,
-        fontSize: 14
+        fontSize: 15
     }
 })
 
