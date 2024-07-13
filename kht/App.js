@@ -1,20 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-gesture-handler';
+import React, { useEffect, useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+import Loading from './src/screens/Loading';
+import UserScreen from "./src/navigation/UserScreen";
+
+export default class extends React.Component{
+
+  state={
+    isLoading : true
+  };
+
+  componentDidMount= async() => {
+    setTimeout(() => {this.setState({isLoading: false})}, 3000);
+  }
+
+  render(){
+    if(this.state.isLoading){
+
+      return <Loading/>
+
+    }else{
+
+      return (
+        <NavigationContainer>
+          <UserScreen />
+        </NavigationContainer>
+      );
+    }
+  }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
