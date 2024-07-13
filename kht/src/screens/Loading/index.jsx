@@ -8,10 +8,21 @@ import Logo from '../../assets/icon/Logo';
 const Loading = ({navigation}) => {
 
     return(
-        <View>
+        <View style={Styles.container}>
             <Logo></Logo>
         </View>
     );
 }
+
+const Styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        width: constants.width,
+        height: constants.height,
+        backgroundColor: color.White,
+        alignItems: 'center',
+        justifyContent: 'center'
+    }
+})
 
 export default Loading;
