@@ -17,11 +17,9 @@ const Button = ( props ) => {
 const Styles = StyleSheet.create({
     container: {
         width: constants.width/1.2,
-        height: constants.height/23,
+        height: constants.height/20,
         backgroundColor: color.Blue[10],
         borderRadius: 10,
-        paddingLeft: 10,
-        paddingRight: 10,
         fontSize: 14,
         alignItems: 'center',
         justifyContent: 'center',
