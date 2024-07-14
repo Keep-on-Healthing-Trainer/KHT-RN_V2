@@ -23,7 +23,6 @@ const Styles = StyleSheet.create({
         backgroundColor: color.White,
         alignItems: 'flex-start',
         justifyContent: 'flex-end',
-        position: 'fixed'
     },
     left: {
         width: constants.width/5,
