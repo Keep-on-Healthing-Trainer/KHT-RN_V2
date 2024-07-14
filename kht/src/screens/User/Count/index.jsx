@@ -11,7 +11,7 @@ const CountPage = ({navigation}) => {
     const [isClicked, setIsClicked] = useState(0);
 
     const onClickNext = () => {
-        navigation.navigate("CountPage", { screen: 'CountPage' });
+        navigation.navigate("SickPage", { screen: 'SickPage' });
       }
 
     return(
