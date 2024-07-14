@@ -27,7 +27,7 @@ const CountPage = ({navigation}) => {
                     backgroundColor={color.Gray[2]}
                 />
                 <View style={Styles.textConteiner}>
-                    <Text style={Styles.boldText}> 윗몸 일으키기를 몇 개 수행 가능한가요?</Text>
+                    <Text style={Styles.boldText}>윗몸 일으키기를 몇 개 수행 가능한가요?</Text>
                     <Text style={Styles.text}>잘 모르겠다면 이 질문은 넘어가셔도 괜찮아요.</Text>
                 </View>
                 <View style={Styles.inputContainer}>
