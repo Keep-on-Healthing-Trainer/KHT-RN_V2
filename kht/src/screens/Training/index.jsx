@@ -1,13 +1,99 @@
-import React from 'react';
-import { Text, View, Image, StyleSheet } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, StyleSheet, Alert } from "react-native";
+import { useIsFocused } from '@react-navigation/native';
+import { CameraView, useCameraPermissions } from 'expo-camera';
 import { color } from "../../styles/theme";
 import constants from "../../styles/constants";
 
+import Header from "../../components/Header";
+
 const TrainingPage = ({navigation}) => {
+    const [scanned, setScanned] = useState(false);
+    const [permission, requestPermission] = useCameraPermissions();
+    const isFocused = useIsFocused();
+
+    useEffect(() => {
+        setScanned(true);
+    }, []);
+
+    if (!isFocused) {
+        return null;
+    }
+    
+    if (!permission) {
+        return <View />;
+    }
+    
+    if (!permission.granted) {
+        return (
+          <View style={Styles.container}>
+            <Text style={{ textAlign: 'center' }}>카메라 권한을 허용해주세요</Text>
+            <Button onPress={requestPermission} title="grant permission" />
+          </View>
+        );
+    }
+    
+    const handleBarCodeScanned = (data) => {
+        setScanned(false);
+        const sessionId = (data.data.split('?')[1]).split('=')[1];
+        Alert.alert('QR코드 스캔에 성공했습니다.');
+      };
 
     return(
-        <Text>TRAININGPAGE</Text>
+        <View style={Styles.container}>
+          <Header />
+          <CameraView
+          style={Styles.camera} 
+          barcodeScannerSettings={{
+            barcodeTypes: ["qr"],
+          }} 
+          onBarcodeScanned={scanned ? handleBarCodeScanned : undefined}
+          >
+          <View style={Styles.mainContainer}>
+            <View style={Styles.cameraContainer}></View>
+            <Text style={Styles.traningTypeText}>KHT 기기 화면에 표시된{"\n"}QR을 스캔해주세요</Text>
+          </View>
+        </CameraView>
+      </View>
     );
 }
+
+const Styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: color.White,
+      width: constants.width,
+      height: constants.height,
+    },
+    camera: {
+      flex: 1,
+    },
+    cameraContainer: {
+      width: 300,
+      height: 300,
+      borderColor: color.Blue[10],
+      borderRadius: 30,
+      borderWidth: 3
+    },
+    mainContainer: {
+      flex: 1,
+      alignItems: 'center',
+      borderTopLeftRadius: 30,
+      borderTopRightRadius: 30,
+      justifyContent: 'space-evenly',
+      paddingTop: constants.height/30,
+      paddingBottom: constants.height/30
+    },
+    traningTypeText: {
+      fontSize: 25,
+      textAlign: 'center',
+      color: color.White,
+      marginBottom: constants.height/80
+    },
+    noCheckText: {
+      fontSize: 20,
+      color: color.Black,
+    }
+  })
 
 export default TrainingPage;
