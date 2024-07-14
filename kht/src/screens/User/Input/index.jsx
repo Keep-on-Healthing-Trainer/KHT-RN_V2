@@ -9,6 +9,10 @@ import Button from "../../../components/Button";
 
 const InputPage = ({navigation}) => {
 
+    const onClickNext = () => {
+        navigation.navigate("IntentPage", { screen: 'IntentPage' });
+      }
+
     return(
         <View style={Styles.container} >
             <View style={Styles.center}>
@@ -21,7 +25,7 @@ const InputPage = ({navigation}) => {
                     borderColor={color.Gray[2]}
                     backgroundColor={color.Gray[2]}
                 />
-                <View>
+                <View style={Styles.textConteiner}>
                     <Text style={Styles.boldText}>회원가입을 위한 정보를 입력해주세요.</Text>
                     <Text style={Styles.text}>KHT 서비스를 이용하기 위해 필요한 기본적인 정보를 입력해주세요.</Text>
                 </View>
@@ -32,7 +36,7 @@ const InputPage = ({navigation}) => {
                     <Input innerText="비밀번호" state={true} />
                     <Input innerText="비밀번호 확인" state={true} />
                 </View>
-                <Button innerText="다음" />
+                <Button innerText="다음" onPress={() => onClickNext()}/>
             </View>
         </View>
     );
@@ -55,6 +59,7 @@ const Styles = StyleSheet.create({
     },
     inputContainer: {
         width: constants.width,
+        height: constants.height/3,
         alignItems: 'center',
         justifyContent: 'center',
         rowGap: constants.height/60
@@ -67,6 +72,10 @@ const Styles = StyleSheet.create({
     text: {
         fontSize: 14,
         color: color.Gray[4]
+    },
+    textConteiner: {
+        width: constants.width/1.2,
+        alignItems: 'flex-start',
     }
 })
 
