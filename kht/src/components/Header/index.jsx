@@ -26,7 +26,7 @@ const Styles = StyleSheet.create({
     },
     left: {
         width: constants.width/5,
-        height: constants.height/20,
+        height: constants.height/17,
         justifyContent: 'center',
         alignItems: 'center'
     }
