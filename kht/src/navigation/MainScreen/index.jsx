@@ -25,6 +25,10 @@ const Tab = createBottomTabNavigator();
 const MainScreen = () => {
     const navigation = useNavigation();
 
+    useEffect(() => {
+      navigation.navigate("HomeScreen", { screen: 'HomeScreen'});
+    }, []);
+
     return (
       <Tab.Navigator
         screenOptions={() => ({

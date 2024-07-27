@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import SearchScreen from '../SearchScreen';
-import MyScreen from '../CommunityScreen';
+import MyScreen from '../MyScreen';
 
 const Stack = createStackNavigator();
 
