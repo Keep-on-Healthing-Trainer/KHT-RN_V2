@@ -8,10 +8,15 @@ import Search from "../../../components/Search";
 
 const SearchPage = ({navigation}) => {
 
+    const onClickMy = () => {
+        navigation.navigate("MyScreen", { screen: 'MyScreen' });
+    }
+
     return(
         <View style={Styles.container}>
             <Header />
             <Search />
+            <TouchableOpacity style={Styles.profile} onPress={() => onClickMy()}></TouchableOpacity>
             <Image style={Styles.banner} source={require('../../../assets/image/banner.png')}></Image>
             <View style={Styles.select}>
                 <View style={Styles.buttonContainer}>
@@ -132,7 +137,7 @@ const Styles = StyleSheet.create({
     },
     img: {
         width: 40,
-        height: 60
+        height: 60,
     },
     suggest: {
         width: constants.width,
@@ -185,6 +190,15 @@ const Styles = StyleSheet.create({
         fontSize: 10,
         fontWeight: 'light',
         color: color.Gray[5],
+    },
+    profile: {
+        width: 40,
+        height: 40,
+        backgroundColor: color.Gray[5],
+        borderRadius: 50,
+        position: 'absolute',
+        top: constants.height/20,
+        left: constants.width/1.2,
     }
 })
 
