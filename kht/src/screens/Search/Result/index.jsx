@@ -4,7 +4,7 @@ import { color } from "../../../styles/theme";
 import constants from "../../../styles/constants";
 
 import Search from "../../../components/Search";
-import BackButton from "../../../components/Back";
+import BackButton from "../../../assets/icon/Back";
 
 const ResultPage = ({navigation}) => {
 
