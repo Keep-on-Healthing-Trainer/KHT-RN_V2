@@ -11,7 +11,7 @@ const LoginPage = ({navigation}) => {
 
     const onClickLogin = () => {
         navigation.navigate("MainScreen", { screen: 'MainScreen' });
-      }
+    }
     
     const onClickSignup = () => {
         navigation.navigate("SignupScreen", { screen: 'SignupTab' });
