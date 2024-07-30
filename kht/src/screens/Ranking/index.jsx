@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Image, StyleSheet } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 import { color } from "../../styles/theme";
 import constants from "../../styles/constants";
 
@@ -9,12 +9,12 @@ const RankingPage = ({navigation}) => {
 
     return(
     <View style={Styles.container}>
-      <Header />
-      <View style={Styles.textConteiner}>
-        <Text style={Styles.boldText}>유저 랭킹</Text>
-        <Text style={Styles.text}>KHT로 측정한 운동의 총합 횟수입니다.</Text>
-      </View>
-      <View style={Styles.topRankingContainer}>
+        <Header />
+        <View style={Styles.textConteiner}>
+          <Text style={Styles.boldText}>유저 랭킹</Text>
+          <Text style={Styles.text}>KHT로 측정한 운동의 총합 횟수입니다.</Text>
+        </View>
+        <View style={Styles.topRankingContainer}>
             <View style={Styles.secondRankingContainer}>
                 <Text style={Styles.secondRankingFont}>2nd</Text>
                 <View style={Styles.secondRankingImg}></View>
