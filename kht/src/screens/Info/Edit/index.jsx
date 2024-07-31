@@ -3,15 +3,19 @@ import { Text, View, Image, StyleSheet, TextInput, TouchableOpacity } from "reac
 import { color } from "../../../styles/theme";
 import constants from "../../../styles/constants";
 
-import Header from '../../../components/Header';
+import BackHeader from '../components/Header';
 import Delete from '../../../assets/icon/Delete';
 
 const EditPage = ({navigation, route}) => {
     const name = route.params.name;
 
+    const onClickBack = () => {
+      navigation.navigate("SelectPage", { screen: 'SelectPage' });
+    }
+
     return (
         <View style={Styles.container}>
-            <Header/>
+            <BackHeader data={name} onPress={() => onClickBack()}/>
             <View style={Styles.titleContainer}>
                 <Text style={Styles.nameTitle}>{name}</Text>
                 <View>

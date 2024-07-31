@@ -3,7 +3,7 @@ import { Text, View, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { color } from "../../../styles/theme";
 import constants from "../../../styles/constants";
 
-import Header from '../../../components/Header';
+import BackHeader from '../components/Header';
 import ProfileArrow from '../../../assets/icon/ProfileArrow';
 
 const SelectPage = ({navigation}) => {
@@ -20,9 +20,13 @@ const SelectPage = ({navigation}) => {
         navigation.navigate("EditPage", { screen: 'EditPage', name: "사용자 전화번호" });
     }
 
+    const onClickBack = () => {
+        navigation.navigate("MainPage", { screen: 'MainPage' });
+      }
+
     return(
         <View style={Styles.container}>
-            <Header></Header>
+            <BackHeader data='프로필 편집' onPress={() => onClickBack()} />
             <View style={Styles.profileContainer}>
                 <View style={Styles.profile}></View>
                 <TouchableOpacity>
@@ -53,7 +57,7 @@ const SelectPage = ({navigation}) => {
                 </View>
                 <View style={Styles.nameDiv}>
                     <Text style={Styles.nameTagStyle}>부상 부위 재선택</Text>
-                    <TouchableOpacity style={Styles.nameBox}>
+                    <TouchableOpacity style={Styles.box}>
                         <ProfileArrow></ProfileArrow>
                     </TouchableOpacity>
                 </View>
@@ -110,8 +114,12 @@ const Styles = StyleSheet.create({
     nameBox: {
         width: constants.width/10,
         height: constants.height/30
+    },
+    box: {
+        width: constants.width/10,
+        height: constants.height/30,
+        alignItems: 'center',
     }
-
   })
 
 export default SelectPage;
