@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { color } from '../../../../../styles/theme';
 import constants from '../../../../../styles/constants';
 
@@ -10,7 +10,7 @@ import PullHeart from "../../../../../assets/icon/PullHeart";
 const DataComponents = ( props ) => {
 
     return(
-        <View style={Styles.dataContainer}>
+        <TouchableOpacity style={Styles.dataContainer} onPress={props.onPress}>
             <View style={Styles.profileContainer}>
                 <View style={Styles.profile}></View>
                 <Text style={Styles.boldText}>이기혁</Text>
@@ -33,7 +33,7 @@ const DataComponents = ( props ) => {
                     <Text>4</Text>
                 </View>
             </View>
-        </View>
+        </TouchableOpacity>
     );
 }
 

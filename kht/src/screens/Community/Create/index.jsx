@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Text, View, TextInput, StyleSheet } from "react-native";
 import Textarea from 'react-native-textarea';
 import { color } from "../../../styles/theme";
@@ -8,13 +8,14 @@ import Header from "./components/Header";
 import ImageIcon from "../../../assets/icon/ImageIcon";
 
 const CreatePage = ({navigation}) => {
+
     const onClickBack = () => {
         navigation.navigate("MainPage", { screen: 'MainPage' });
     }
 
     return(
         <View style={Styles.container}>
-            <Header onPress={() => onClickBack()} />
+            <Header onPress={() => onClickBack()}/>
             <View style={Styles.inputContainer}>
                 <TextInput placeholder="제목을 작성해주세요" placeholderTextColor={color.Gray[3]} style={Styles.input}></TextInput>
             </View>
@@ -62,7 +63,7 @@ const Styles = StyleSheet.create({
         fontSize: 18,
     },
     textareaContainer: {
-      height: constants.height/2.2,
+      height: constants.height/2,
       padding: 20,
       backgroundColor: color.White,
     },

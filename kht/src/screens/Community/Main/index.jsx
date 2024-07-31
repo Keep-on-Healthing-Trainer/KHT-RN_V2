@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, TouchableOpacity, ScrollView, StyleSheet } from "react-native";
 import { color } from "../../../styles/theme";
 import constants from "../../../styles/constants";
@@ -8,8 +8,13 @@ import Create from "../../../assets/icon/Create";
 import DataComponents from './components/Data';
 
 const MainPage = ({navigation}) => {
+
     const onClickCreate = () => {
         navigation.navigate("CreatePage", { screen: 'CreatePage' });
+    }
+
+    const onClickView = () => {
+        navigation.navigate("ViewPage", { screen: 'ViewPage' });
     }
 
     return(
@@ -23,12 +28,12 @@ const MainPage = ({navigation}) => {
                 <Create />
             </TouchableOpacity>
             <ScrollView style={Styles.mainContainer}>
-                <DataComponents data={false} />
-                <DataComponents data={true} />
-                <DataComponents data={false} />
-                <DataComponents data={false} />
-                <DataComponents data={false} />
-                <DataComponents data={true} />
+                <DataComponents data={false} onPress={() => onClickView()} />
+                <DataComponents data={true} onPress={() => onClickView()}  />
+                <DataComponents data={false} onPress={() => onClickView()}  />
+                <DataComponents data={false} onPress={() => onClickView()}  />
+                <DataComponents data={false} onPress={() => onClickView()}  />
+                <DataComponents data={true} onPress={() => onClickView()}  />
             </ScrollView>
         </View>
     );
