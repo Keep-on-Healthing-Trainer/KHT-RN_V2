@@ -9,7 +9,7 @@ const Search = ( props ) => {
 
     return(
         <View style={Styles.container}>
-            <TextInput style={Styles.input}></TextInput>
+            <TextInput style={Styles.input} placeholderTextColor={color.Blue[10]} placeholder='원하시는 운동을 검색해보세요.'></TextInput>
             <SearchIcon />
         </View>
     );
