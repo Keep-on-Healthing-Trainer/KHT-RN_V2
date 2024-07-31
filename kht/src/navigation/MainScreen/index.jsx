@@ -1,13 +1,14 @@
 import 'react-native-gesture-handler';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { StyleSheet, TouchableOpacity, Text } from "react-native";
-import { color } from '../../styles/theme';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import { TouchableOpacity } from "react-native";
 import constants from '../../styles/constants';
 
 import CommunityScreen from "./CommunityScreen";
-import HomeScreen from './HomeScreen';
+import MyScreen from "./MyScreen";
+import SearchScreen from "./SearchScreen";
 import TrainingPage from "../../screens/Training";
 import RankingPage from "../../screens/Ranking";
 
@@ -26,113 +27,117 @@ const MainScreen = () => {
     const navigation = useNavigation();
 
     useEffect(() => {
-      navigation.navigate("HomeScreen", { screen: 'HomeScreen'});
+      navigation.navigate("SearchScreen", { screen: 'SearchScreen'});
     }, []);
+
+    const getTabBarVisibility = (route) => {
+        const routeName = getFocusedRouteNameFromRoute(route) ?? '';
+        if (
+            routeName === 'CreatePage' || 
+            routeName === 'ViewPage' || 
+            routeName === 'ResultPage' || 
+            routeName === 'DataPage' || 
+            routeName === 'SelectPage' || 
+            routeName === 'ProfilePage' || 
+            routeName === 'EditPage'
+        ) {
+            return false;
+        }
+        return true;
+    };
 
     return (
       <Tab.Navigator
-        screenOptions={() => ({
-            tabBarShowLabel: false,
-            tabBarStyle: {
+        screenOptions={({ route }) => ({
+          tabBarShowLabel: false,
+          tabBarHideOnKeyboard: true,
+          tabBarStyle: {
+            display: getTabBarVisibility(route) ? 'flex' : 'none',
             height: constants.height/10,
-            }
+          },
         })}
       >
         <Tab.Screen
             name="TrainingPage"
             component={TrainingPage}
-            options={{ headerShown: false,
-                tabBarIcon: ({ focused }) => {
-                return (
-                  <>
-                    {focused ? (
-                      <TouchableOpacity
-                        onPress={() => navigation.navigate("TrainingPage", { screen: 'TrainingPage' })}
-                      >
-                        <Training></Training>
-                      </TouchableOpacity>
-                    ) : (
-                      <TouchableOpacity
-                        onPress={() => navigation.navigate("TrainingPage", { screen: 'TrainingPage' })}
-                      >
-                        <NoTraining></NoTraining>
-                      </TouchableOpacity>
-                    )}
-                  </>
-                  );
-                } }}
+            options={{
+                headerShown: false,
+                tabBarIcon: ({ focused }) => (
+                  <TouchableOpacity
+                      onPress={() => navigation.navigate("TrainingPage", { screen: 'TrainingPage' })}
+                  >
+                      {focused ? <Training /> : <NoTraining />}
+                  </TouchableOpacity>
+              )
+            }}
         />
         <Tab.Screen
-            name="HomeScreen"
-            component={HomeScreen}
-            options={{ headerShown: false,
-                tabBarIcon: ({ focused }) => {
-                return (
-                  <>
-                    {focused ? (
-                      <TouchableOpacity
-                        onPress={() => navigation.navigate("HomeScreen", { screen: 'HomeScreen' })}
-                      >
-                        <Home></Home>
-                      </TouchableOpacity>
-                    ) : (
-                      <TouchableOpacity
-                        onPress={() => navigation.navigate("HomeScreen", { screen: 'HomeScreen' })}
-                      >
-                        <NoHome></NoHome>
-                      </TouchableOpacity>
-                    )}
-                  </>
-                  );
-                } }}
+            name="SearchScreen"
+            component={SearchScreen}
+            options={({ route }) => ({
+              headerShown: false,
+              tabBarIcon: ({ focused }) => (
+                  <TouchableOpacity
+                      onPress={() => navigation.navigate("SearchScreen", { screen: 'SearchScreen' })}
+                  >
+                      {focused ? <Home /> : <NoHome />}
+                  </TouchableOpacity>
+              ),
+              tabBarStyle: {
+                display: getTabBarVisibility(route) ? 'flex' : 'none',
+                height: constants.height/10,
+              },
+          })}
         />
         <Tab.Screen
             name="RankingPage"
             component={RankingPage}
-            options={{ headerShown: false,
-                tabBarIcon: ({ focused }) => {
-                return (
-                  <>
-                    {focused ? (
-                      <TouchableOpacity
-                        onPress={() => navigation.navigate("RankingPage", { screen: 'RankingPage' })}
-                      >
-                        <Ranking></Ranking>
-                      </TouchableOpacity>
-                    ) : (
-                      <TouchableOpacity
-                        onPress={() => navigation.navigate("RankingPage", { screen: 'RankingPage' })}
-                      >
-                        <NoRanking></NoRanking>
-                      </TouchableOpacity>
-                    )}
-                  </>
-                  );
-                } }}
+            options={{
+              headerShown: false,
+              tabBarIcon: ({ focused }) => (
+                  <TouchableOpacity
+                      onPress={() => navigation.navigate("RankingPage", { screen: 'RankingPage' })}
+                  >
+                      {focused ? <Ranking /> : <NoRanking />}
+                  </TouchableOpacity>
+              )
+          }}
         />
         <Tab.Screen
             name="CommunityScreen"
             component={CommunityScreen}
-            options={{ headerShown: false,
-                tabBarIcon: ({ focused }) => {
-                return (
-                  <>
-                    {focused ? (
-                      <TouchableOpacity
-                        onPress={() => navigation.navigate("CommunityScreen", { screen: 'CommunityScreen' })}
-                      >
-                        <Community></Community>
-                      </TouchableOpacity>
-                    ) : (
-                      <TouchableOpacity
-                        onPress={() => navigation.navigate("CommunityScreen", { screen: 'CommunityScreen' })}
-                      >
-                        <NoCommunity></NoCommunity>
-                      </TouchableOpacity>
-                    )}
-                  </>
-                  );
-                } }}
+            options={({ route }) => ({
+              headerShown: false,
+              tabBarIcon: ({ focused }) => (
+                  <TouchableOpacity
+                      onPress={() => navigation.navigate("CommunityScreen", { screen: 'CommunityScreen' })}
+                  >
+                      {focused ? <Community /> : <NoCommunity />}
+                  </TouchableOpacity>
+              ),
+              tabBarStyle: {
+                display: getTabBarVisibility(route) ? 'flex' : 'none',
+                height: constants.height/10,
+              },
+            })}
+        />
+        <Tab.Screen
+            name="MyScreen"
+            component={MyScreen}
+            options={({ route }) => ({
+              headerShown: false,
+              tabBarIcon: ({ focused }) => (
+                  <TouchableOpacity
+                      onPress={() => navigation.navigate("MyScreen", { screen: 'MyScreen' })}
+                  >
+                      {focused ? <Community /> : <NoCommunity />}
+                  </TouchableOpacity>
+              ),
+              tabBarStyle: {
+                display: getTabBarVisibility(route) ? 'flex' : 'none',
+                height: constants.height/10,
+              },
+            })}
         />
     </Tab.Navigator>
     );

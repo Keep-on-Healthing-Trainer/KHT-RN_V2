@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import CreatePage from "../../../screens/Community/Create";
@@ -8,14 +8,14 @@ import ViewPage from "../../../screens/Community/View";
 
 const Stack = createStackNavigator();
 
-const MyScreen = () => {
+const CommunityScreen = () => {
     return (
         <Stack.Navigator initialRouteName="MainPage">
-            <Stack.Screen name="MainPage" component={MainPage} options={{ headerShown: false }} />
+            <Stack.Screen name="MainPage" component={MainPage} options={{ headerShown: false }}/>
             <Stack.Screen name="CreatePage" component={CreatePage} options={{ headerShown: false }} />
             <Stack.Screen name="ViewPage" component={ViewPage} options={{ headerShown: false }} />
         </Stack.Navigator>
     );
 }
 
-export default MyScreen;
+export default CommunityScreen;
