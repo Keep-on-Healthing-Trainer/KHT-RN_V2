@@ -72,6 +72,24 @@ const MainScreen = () => {
             }}
         />
         <Tab.Screen
+            name="CommunityScreen"
+            component={CommunityScreen}
+            options={({ route }) => ({
+              headerShown: false,
+              tabBarIcon: ({ focused }) => (
+                  <TouchableOpacity
+                      onPress={() => navigation.navigate("CommunityScreen", { screen: 'CommunityScreen' })}
+                  >
+                      {focused ? <Community /> : <NoCommunity />}
+                  </TouchableOpacity>
+              ),
+              tabBarStyle: {
+                display: getTabBarVisibility(route) ? 'flex' : 'none',
+                height: constants.height/10,
+              },
+            })}
+        />
+        <Tab.Screen
             name="SearchScreen"
             component={SearchScreen}
             options={({ route }) => ({
@@ -102,24 +120,6 @@ const MainScreen = () => {
                   </TouchableOpacity>
               )
           }}
-        />
-        <Tab.Screen
-            name="CommunityScreen"
-            component={CommunityScreen}
-            options={({ route }) => ({
-              headerShown: false,
-              tabBarIcon: ({ focused }) => (
-                  <TouchableOpacity
-                      onPress={() => navigation.navigate("CommunityScreen", { screen: 'CommunityScreen' })}
-                  >
-                      {focused ? <Community /> : <NoCommunity />}
-                  </TouchableOpacity>
-              ),
-              tabBarStyle: {
-                display: getTabBarVisibility(route) ? 'flex' : 'none',
-                height: constants.height/10,
-              },
-            })}
         />
         <Tab.Screen
             name="MyScreen"
