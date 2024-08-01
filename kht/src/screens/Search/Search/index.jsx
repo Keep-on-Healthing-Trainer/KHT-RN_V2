@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, Image, StyleSheet } from "react-native";
+import { Text, View, TouchableOpacity, Image, ScrollView, StyleSheet } from "react-native";
+import { LinearGradient } from 'expo-linear-gradient'
 import { color } from "../../../styles/theme";
 import constants from "../../../styles/constants";
 
@@ -11,35 +12,82 @@ const SearchPage = ({navigation}) => {
     return(
         <View style={Styles.container}>
             <Header />
-            <Image style={Styles.banner} source={require('../../../assets/image/banner.png')}></Image>
-            <View style={Styles.search}>
-                <Search />
-            </View>
-            <View style={Styles.boxContainer}>
-                <View style={Styles.box}>
-                    <View>
-                        <Text style={Styles.boxText}>운동 전 준비 운동</Text>
-                        <Text style={Styles.boxTextInner}>준비운동으로 부상을 예방하고,</Text>
-                        <Text style={Styles.boxTextInner}>운동 효과를 향상시켜요.</Text>
+            <ScrollView>
+                <Image style={Styles.banner} source={require('../../../assets/image/banner.png')}></Image>
+                <View style={Styles.search}>
+                    <Search />
+                </View>
+                <View style={Styles.boxContainer}>
+                    <View style={Styles.box}>
+                        <View>
+                            <Text style={Styles.boxText}>운동 전 준비 운동</Text>
+                            <Text style={Styles.boxTextInner}>준비운동으로 부상을 예방하고,</Text>
+                            <Text style={Styles.boxTextInner}>운동 효과를 향상시켜요.</Text>
+                        </View>
+                        <Image source={require('../../../assets/image/safety.png')} style={Styles.img}></Image>
                     </View>
-                    <Image source={require('../../../assets/image/safety.png')} style={Styles.img}></Image>
-                </View>
-                <View style={Styles.box}>
-                    <View>
-                        <Text style={Styles.boxText}>운동 후 마무리 운동</Text>
-                        <Text style={Styles.boxTextInner}>운동을 한 후, 신체 각 부위의</Text>
-                        <Text style={Styles.boxTextInner}>근육을 풀어줘요.</Text>
+                    <View style={Styles.box}>
+                        <View>
+                            <Text style={Styles.boxText}>운동 후 마무리 운동</Text>
+                            <Text style={Styles.boxTextInner}>운동을 한 후, 신체 각 부위의</Text>
+                            <Text style={Styles.boxTextInner}>근육을 풀어줘요.</Text>
+                        </View>
+                        <Image source={require('../../../assets/image/finally.png')} style={Styles.img}></Image>
                     </View>
-                    <Image source={require('../../../assets/image/finally.png')} style={Styles.img}></Image>
                 </View>
-            </View>
-            <Text style={Styles.boldText}>000님을 위한 운동</Text>
-            <View style={Styles.dataContainer}>
-                <View>
-                    <View></View>
-                    <View></View>
+                <Text style={Styles.boldText}>000님을 위한 운동</Text>
+                <View style={Styles.dataContainer}>
+                    <View style={Styles.column}>
+                        <View style={Styles.data}>
+                            <Image style={Styles.image} source={require('../../../assets/image/safety.png')}></Image>
+                            <Text style={Styles.boxText}>레그레이즈</Text>
+                            <Text style={Styles.boxTextInner}>복근, 허벅지</Text>
+                        </View>
+                        <View style={Styles.data}>
+                            <Image style={Styles.image} source={require('../../../assets/image/safety.png')}></Image>
+                            <Text style={Styles.boxText}>레그레이즈</Text>
+                            <Text style={Styles.boxTextInner}>복근, 허벅지</Text>
+                        </View>
+                    </View>
+                    <View style={Styles.column}>
+                        <View style={Styles.data}>
+                            <Image style={Styles.image} source={require('../../../assets/image/safety.png')}></Image>
+                            <Text style={Styles.boxText}>레그레이즈</Text>
+                            <Text style={Styles.boxTextInner}>복근, 허벅지</Text>
+                        </View>
+                        <View style={Styles.data}>
+                            <Image style={Styles.image} source={require('../../../assets/image/safety.png')}></Image>
+                            <Text style={Styles.boxText}>레그레이즈</Text>
+                            <Text style={Styles.boxTextInner}>복근, 허벅지</Text>
+                        </View>
+                    </View>
+                    <View style={Styles.column}>
+                        <View style={Styles.data}>
+                            <Image style={Styles.image} source={require('../../../assets/image/safety.png')}></Image>
+                            <Text style={Styles.boxText}>레그레이즈</Text>
+                            <Text style={Styles.boxTextInner}>복근, 허벅지</Text>
+                        </View>
+                        <View style={Styles.data}>
+                            <Image style={Styles.image} source={require('../../../assets/image/safety.png')}></Image>
+                            <Text style={Styles.boxText}>레그레이즈</Text>
+                            <Text style={Styles.boxTextInner}>복근, 허벅지</Text>
+                        </View>
+                    </View>
+                    <View style={Styles.column}>
+                        <View style={Styles.data}>
+                            <Image style={Styles.image} source={require('../../../assets/image/safety.png')}></Image>
+                            <Text style={Styles.boxText}>레그레이즈</Text>
+                            <Text style={Styles.boxTextInner}>복근, 허벅지</Text>
+                        </View>
+                        <View style={Styles.data}>
+                            <Image style={Styles.image} source={require('../../../assets/image/safety.png')}></Image>
+                            <Text style={Styles.boxText}>레그레이즈</Text>
+                            <Text style={Styles.boxTextInner}>복근, 허벅지</Text>
+                        </View>
+                    </View>
                 </View>
-            </View>
+            </ScrollView>
+            <LinearGradient style={Styles.linear} colors={['rgba(0,0,0,0.0)', '#ffffff']}></LinearGradient>
         </View>
     );
 }
@@ -57,12 +105,12 @@ const Styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         color: color.Black,
+        paddingLeft: 20,
     },
     dataContainer: {
         width: constants.width,
         gap: 20,
         rowGap: 20,
-        backgroundColor: color.Blue[2],
     },
     search: {
         width: constants.width,
@@ -109,6 +157,32 @@ const Styles = StyleSheet.create({
         fontWeight: 'light',
         color: color.Gray[5],
     },
+    column: {
+        width: constants.width,
+        height: constants.height/5,
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
+    },
+    data: {
+        width: 170,
+        height: 170,
+        borderRadius: 20,
+        borderWidth: 1,
+        borderColor: color.Gray[1],
+        padding: 10,
+    },
+    linear: {
+        position: 'absolute',
+        width: constants.width,
+        height: constants.height/5,
+        bottom: 0,
+    },
+    image: {
+        width: 160,
+        height: 120,
+    }
 })
 
 export default SearchPage;
