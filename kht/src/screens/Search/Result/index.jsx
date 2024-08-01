@@ -9,7 +9,7 @@ import BackButton from "../../../assets/icon/Back";
 const ResultPage = ({navigation}) => {
 
     const onClickData = () => {
-        navigation.navigate("DataPage", { screen: 'DataPage' });
+        navigation.navigate("DataPage", { screen: 'DataPage', name: false });
     }
 
     return(

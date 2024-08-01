@@ -9,6 +9,10 @@ import Search from "../../../components/Search";
 
 const SearchPage = ({navigation}) => {
 
+    const onClickData = () => {
+        navigation.navigate("DataPage", { screen: 'DataPage', name: true });
+    }
+
     return(
         <View style={Styles.container}>
             <Header />
@@ -38,52 +42,68 @@ const SearchPage = ({navigation}) => {
                 <Text style={Styles.boldText}>000님을 위한 운동</Text>
                 <View style={Styles.dataContainer}>
                     <View style={Styles.column}>
-                        <View style={Styles.data}>
-                            <Image style={Styles.image} source={require('../../../assets/image/safety.png')}></Image>
+                        <TouchableOpacity style={Styles.data} onPress={() => onClickData()}>
+                            <View style={Styles.imgContainer}>
+                                <Image style={Styles.image} source={require('../../../assets/image/training.png')}></Image>
+                            </View>
                             <Text style={Styles.boxText}>레그레이즈</Text>
                             <Text style={Styles.boxTextInner}>복근, 허벅지</Text>
-                        </View>
-                        <View style={Styles.data}>
-                            <Image style={Styles.image} source={require('../../../assets/image/safety.png')}></Image>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={Styles.data} onPress={() => onClickData()}>
+                            <View style={Styles.imgContainer}>
+                                <Image style={Styles.image} source={require('../../../assets/image/training.png')}></Image>
+                            </View>
                             <Text style={Styles.boxText}>레그레이즈</Text>
                             <Text style={Styles.boxTextInner}>복근, 허벅지</Text>
-                        </View>
+                        </TouchableOpacity>
                     </View>
                     <View style={Styles.column}>
-                        <View style={Styles.data}>
-                            <Image style={Styles.image} source={require('../../../assets/image/safety.png')}></Image>
+                        <TouchableOpacity style={Styles.data} onPress={() => onClickData()}>
+                            <View style={Styles.imgContainer}>
+                                <Image style={Styles.image} source={require('../../../assets/image/training.png')}></Image>
+                            </View>
                             <Text style={Styles.boxText}>레그레이즈</Text>
                             <Text style={Styles.boxTextInner}>복근, 허벅지</Text>
-                        </View>
-                        <View style={Styles.data}>
-                            <Image style={Styles.image} source={require('../../../assets/image/safety.png')}></Image>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={Styles.data} onPress={() => onClickData()}>
+                            <View style={Styles.imgContainer}>
+                                <Image style={Styles.image} source={require('../../../assets/image/training.png')}></Image>
+                            </View>
                             <Text style={Styles.boxText}>레그레이즈</Text>
                             <Text style={Styles.boxTextInner}>복근, 허벅지</Text>
-                        </View>
+                        </TouchableOpacity>
                     </View>
                     <View style={Styles.column}>
-                        <View style={Styles.data}>
-                            <Image style={Styles.image} source={require('../../../assets/image/safety.png')}></Image>
+                        <TouchableOpacity style={Styles.data} onPress={() => onClickData()}>
+                            <View style={Styles.imgContainer}>
+                                <Image style={Styles.image} source={require('../../../assets/image/training.png')}></Image>
+                            </View>
                             <Text style={Styles.boxText}>레그레이즈</Text>
                             <Text style={Styles.boxTextInner}>복근, 허벅지</Text>
-                        </View>
-                        <View style={Styles.data}>
-                            <Image style={Styles.image} source={require('../../../assets/image/safety.png')}></Image>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={Styles.data} onPress={() => onClickData()}>
+                            <View style={Styles.imgContainer}>
+                                <Image style={Styles.image} source={require('../../../assets/image/training.png')}></Image>
+                            </View>
                             <Text style={Styles.boxText}>레그레이즈</Text>
                             <Text style={Styles.boxTextInner}>복근, 허벅지</Text>
-                        </View>
+                        </TouchableOpacity>
                     </View>
                     <View style={Styles.column}>
-                        <View style={Styles.data}>
-                            <Image style={Styles.image} source={require('../../../assets/image/safety.png')}></Image>
+                        <TouchableOpacity style={Styles.data} onPress={() => onClickData()}>
+                            <View style={Styles.imgContainer}>
+                                <Image style={Styles.image} source={require('../../../assets/image/training.png')}></Image>
+                            </View>
                             <Text style={Styles.boxText}>레그레이즈</Text>
                             <Text style={Styles.boxTextInner}>복근, 허벅지</Text>
-                        </View>
-                        <View style={Styles.data}>
-                            <Image style={Styles.image} source={require('../../../assets/image/safety.png')}></Image>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={Styles.data} onPress={() => onClickData()}>
+                            <View style={Styles.imgContainer}>
+                                <Image style={Styles.image} source={require('../../../assets/image/training.png')}></Image>
+                            </View>
                             <Text style={Styles.boxText}>레그레이즈</Text>
                             <Text style={Styles.boxTextInner}>복근, 허벅지</Text>
-                        </View>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </ScrollView>
@@ -179,9 +199,14 @@ const Styles = StyleSheet.create({
         height: constants.height/5,
         bottom: 0,
     },
+    imgContainer: {
+        width: 140,
+        height: 110,
+        alignItems: 'center',
+    },
     image: {
-        width: 160,
-        height: 120,
+        height: 110,
+        resizeMode: "contain",
     }
 })
 

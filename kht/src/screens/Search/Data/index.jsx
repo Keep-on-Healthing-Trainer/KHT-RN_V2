@@ -5,15 +5,20 @@ import constants from "../../../styles/constants";
 
 import BackHeader from './components/Header';
 
-const DataPage = ({navigation}) => {
+const DataPage = ({navigation, route}) => {
+    const name = route.params.name;
     
-    const onClickBack = () => {
+    const onClickBackResult = () => {
         navigation.navigate("ResultPage", { screen: 'ResultPage' });
+    }
+
+    const onClickBackSearch = () => {
+        navigation.navigate("SearchPage", { screen: 'SearchPage' });
     }
 
     return(
         <View style={Styles.container}>
-            <BackHeader onPress={() => onClickBack()} />
+            <BackHeader onPress={name ? () => onClickBackSearch() : () => onClickBackResult()} />
             <View style={Styles.img}></View>
             <View style={Styles.textContainer}>
                 <Text style={Styles.boldText}>시작 자세</Text>
