@@ -8,6 +8,10 @@ import ProfileArrow from '../../../assets/icon/ProfileArrow';
 
 const SelectPage = ({navigation}) => {
 
+    const onClickProfile = () => {
+        navigation.navigate("ProfilePage", { screen: 'ProfilePage'});
+      }
+
     const onClickName = () => {
       navigation.navigate("EditPage", { screen: 'EditPage', name: "사용자 이름" });
     }
@@ -29,7 +33,7 @@ const SelectPage = ({navigation}) => {
             <BackHeader data='프로필 편집' onPress={() => onClickBack()} />
             <View style={Styles.profileContainer}>
                 <View style={Styles.profile}></View>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => onClickProfile()}>
                     <Text style={Styles.profileText}>프로필 사진 수정</Text>
                 </TouchableOpacity>
             </View>
