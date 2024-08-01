@@ -15,8 +15,8 @@ const MainPage = ({navigation}) => {
 
     return (
         <View style={Styles.container}>
-          <Header></Header>
           <ScrollView>
+            <Header></Header>
             <View style={Styles.topContainer}>
               <View style={Styles.profileMargin}></View>
               <View style={Styles.profileContainer}>
