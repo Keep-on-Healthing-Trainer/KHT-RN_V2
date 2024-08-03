@@ -20,6 +20,8 @@ import Ranking from "../../assets/icon/TabBar/Ranking";
 import NoRanking from "../../assets/icon/TabBar/NoRanking";
 import Community from "../../assets/icon/TabBar/Community";
 import NoCommunity from "../../assets/icon/TabBar/NoCommunity";
+import My from "../../assets/icon/TabBar/My";
+import NoMy from '../../assets/icon/TabBar/NoMy';
 
 const Tab = createBottomTabNavigator();
 
@@ -58,6 +60,24 @@ const MainScreen = () => {
         })}
       >
         <Tab.Screen
+            name="MyScreen"
+            component={MyScreen}
+            options={({ route }) => ({
+              headerShown: false,
+              tabBarIcon: ({ focused }) => (
+                  <TouchableOpacity
+                      onPress={() => navigation.navigate("MyScreen", { screen: 'MyScreen' })}
+                  >
+                      {focused ? <My /> : <NoMy />}
+                  </TouchableOpacity>
+              ),
+              tabBarStyle: {
+                display: getTabBarVisibility(route) ? 'flex' : 'none',
+                height: constants.height/10,
+              },
+            })}
+        />
+        <Tab.Screen
             name="TrainingPage"
             component={TrainingPage}
             options={{
@@ -70,24 +90,6 @@ const MainScreen = () => {
                   </TouchableOpacity>
               )
             }}
-        />
-        <Tab.Screen
-            name="CommunityScreen"
-            component={CommunityScreen}
-            options={({ route }) => ({
-              headerShown: false,
-              tabBarIcon: ({ focused }) => (
-                  <TouchableOpacity
-                      onPress={() => navigation.navigate("CommunityScreen", { screen: 'CommunityScreen' })}
-                  >
-                      {focused ? <Community /> : <NoCommunity />}
-                  </TouchableOpacity>
-              ),
-              tabBarStyle: {
-                display: getTabBarVisibility(route) ? 'flex' : 'none',
-                height: constants.height/10,
-              },
-            })}
         />
         <Tab.Screen
             name="SearchScreen"
@@ -122,13 +124,13 @@ const MainScreen = () => {
           }}
         />
         <Tab.Screen
-            name="MyScreen"
-            component={MyScreen}
+            name="CommunityScreen"
+            component={CommunityScreen}
             options={({ route }) => ({
               headerShown: false,
               tabBarIcon: ({ focused }) => (
                   <TouchableOpacity
-                      onPress={() => navigation.navigate("MyScreen", { screen: 'MyScreen' })}
+                      onPress={() => navigation.navigate("CommunityScreen", { screen: 'CommunityScreen' })}
                   >
                       {focused ? <Community /> : <NoCommunity />}
                   </TouchableOpacity>
