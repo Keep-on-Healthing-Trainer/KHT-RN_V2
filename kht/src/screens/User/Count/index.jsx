@@ -9,10 +9,11 @@ import InputComponents from './components/InputComponents';
 import ProgressBarComponents from '../components/ProgressBarComponents';
 import TextComponents from '../components/TextComponents';
 
-const CountPage = ({navigation}) => {
-
+const CountPage = ({navigation, route}) => {
+    const signupData = route.params.data;
+    
     const onClickNext = () => {
-        navigation.navigate("SickPage", { screen: 'SickPage' });
+        navigation.navigate("SickPage", { screen: 'SickPage', data: signupData });
       }
 
     return(

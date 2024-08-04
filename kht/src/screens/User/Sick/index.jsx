@@ -8,10 +8,11 @@ import ProgressBarComponents from '../components/ProgressBarComponents';
 import TextComponents from '../components/TextComponents';
 import InputComponents from './components/InputComponents';
 
-const SickPage = ({navigation}) => {
+const SickPage = ({navigation, route}) => {
+    const signupData = route.params.data;
 
     const onClickNext = () => {
-        navigation.navigate("ExitPage", { screen: 'ExitPage' });
+        navigation.navigate("ExitPage", { screen: 'ExitPage', data: signupData });
       }
 
     return(

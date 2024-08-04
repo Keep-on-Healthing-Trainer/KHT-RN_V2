@@ -9,10 +9,11 @@ import ProgressBarComponents from '../components/ProgressBarComponents';
 import TextComponents from '../components/TextComponents';
 import InputComponents from './components/InputComponents';
 
-const IntentPage = ({navigation}) => {
+const IntentPage = ({navigation, route}) => {
+    const signupData = route.params.data;
 
     const onClickNext = () => {
-        navigation.navigate("CountPage", { screen: 'CountPage' });
+        navigation.navigate("CountPage", { screen: 'CountPage', data: signupData });
       }
 
     return(

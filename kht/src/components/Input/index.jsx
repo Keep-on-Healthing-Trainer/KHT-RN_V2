@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { TextInput, StyleSheet } from "react-native";
 import { color } from "../../styles/theme";
 import constants from "../../styles/constants";
 
 const Input = ( props ) => {
+    const [ text, setText ] = useState('');
+
+    useEffect(() => {
+        props.onGetInText(text);
+      }, [text]);
 
     return(
-        <TextInput style={Styles.container} placeholder={props.innerText} secureTextEntry={props.state}></TextInput>
+        <TextInput style={Styles.container} placeholder={props.innerText} secureTextEntry={props.state} onChangeText={(innerText) => setText(innerText)}></TextInput>
     );
 }
 

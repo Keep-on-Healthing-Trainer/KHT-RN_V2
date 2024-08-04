@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, Image, StyleSheet } from "react-native";
 import { color } from "../../../styles/theme";
 import constants from "../../../styles/constants";
@@ -9,10 +9,15 @@ import TextComponents from '../components/TextComponents';
 import InputComponents from './components/InputComponents';
 
 const InputPage = ({navigation}) => {
+    const [ signupData, setSignupData] = useState();
+
+    useEffect(() => {
+        console.log(signupData);
+    },[signupData]);
 
     const onClickNext = () => {
-        navigation.navigate("IntentPage", { screen: 'IntentPage' });
-      }
+        navigation.navigate("IntentPage", { screen: 'IntentPage', data: signupData });
+    }
 
     return(
         <View style={Styles.container} >
@@ -22,7 +27,7 @@ const InputPage = ({navigation}) => {
                     boldText="회원가입을 위한 정보를 입력해주세요."
                     text="KHT 서비스를 이용하기 위해 필요한 기본적인 정보를 입력해주세요."
                 />
-                <InputComponents />
+                <InputComponents onGetInText={(text) => setSignupData(text)}/>
                 <Button innerText="다음" onPress={() => onClickNext()}/>
             </View>
         </View>

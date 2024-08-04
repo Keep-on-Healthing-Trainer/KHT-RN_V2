@@ -10,10 +10,20 @@ import Character from "../../../assets/icon/Character";
 import ProgressBarComponents from "../components/ProgressBarComponents";
 import TextComponents from "../components/TextComponents";
 
-const ExitPage = ({navigation}) => {
+import onSignup from "../../../utils/Signup";
 
-    const onClickNext = () => {
-        navigation.navigate("LoginPage", { screen: 'LoginPage' });
+const ExitPage = ({navigation, route}) => {
+    const signupData = route.params.data;
+
+    const onClickSignup = async () => {
+        try {
+          const signupState = await onSignup(signupData);
+          if (signupState) {
+            navigation.navigate("LoginPage", { screen: 'LoginPage' });
+          }
+        } catch (error) {
+          console.log("회웝가입 오류");
+        }
     }
 
     return(
@@ -26,7 +36,7 @@ const ExitPage = ({navigation}) => {
                 />
                 <Character />
                 <Text style={Styles.fixText}>KHT가 최고의 맞춤 플랜을 제공할게요!</Text>
-                <Button innerText="로그인" onPress={onClickNext} />
+                <Button innerText="로그인" onPress={onClickSignup} />
             </View>
         </View>
     );
