@@ -8,6 +8,10 @@ import Check from "../../assets/icon/Check";
 const CheckBox = ( props ) => {
   const [loginSelect, setLoginSelect] = useState(false);
 
+  useEffect(() => {
+    props.onGetInPress(loginSelect);
+  }, [loginSelect]);
+
   return (
     <TouchableOpacity style={Styles.Bottom} onPress={() => setLoginSelect(!loginSelect)}>
         {loginSelect ? (

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import constants from '../../../../styles/constants';
 import { color } from '../../../../styles/theme';
@@ -7,10 +7,15 @@ import Button from '../../../../components/Button';
 import CheckBox from '../../../../components/CheckBox';
 
 const ButtonComponents = ( props ) => {
+    const [ checkBoxState, setCheckBoxState ] = useState(false);
+
+    useEffect(() => {
+        props.onGetInState(checkBoxState);
+      }, [checkBoxState]);
 
     return(
         <View style={Styles.inputContainer}>
-            <CheckBox />
+            <CheckBox onGetInPress={(state) => setCheckBoxState(state)}/>
             <Button innerText="로그인" onPress={props.onLogin} />
             <TouchableOpacity style={Styles.buttonContainer} onPress={props.onSignup} >
                 <Text style={Styles.text}>계정이 없으신가요?</Text>
