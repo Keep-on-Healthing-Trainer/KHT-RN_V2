@@ -1,75 +1,70 @@
 import React, { useState } from 'react';
 import { Text, View, Image, StyleSheet, TouchableOpacity } from "react-native";
 import * as DocumentPicker from 'expo-document-picker';
-import axios from "axios";
 
 import { color } from "../../../styles/theme";
 import constants from "../../../styles/constants";
 
 import BackHeader from "../components/Header";
 
+import ImageUpload from '../../../utils/ImageUpload';
+
 const ProfilePage = ({navigation}) => {
-    const [imageUrl, setImageUrl] = useState();
+    const [imageData, setImageData] = useState();
     const formData = new FormData();
 
     const onClickBack = () => {
         navigation.navigate("SelectPage", { screen: 'SelectPage' });
     }
 
-    const uploadImage = async () => {
+    const onClickEdit = async () => {
         try {
             const result = await DocumentPicker.getDocumentAsync({
                 type: 'image/*',
             });
+
             console.log(result);
 
-            //if (result.type === 'success') {
-                setImageUrl(result.assets[0].uri);
-                formData.append("image", result);
-                formData.append("userId", '');
-                API();
-            //}
+            setImageData(result.assets[0]);
         } catch (err) {
             console.error(err);
         }
     }
 
-    const API = () => {
-        const token = '';
-        axios
-          .post(
-            `{API_URL}/user/modifyProfile`,
-            formData,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          )
-          .then((res) => {
-            console.log('성공');
-          })
-          .catch((err) => {
-            console.error(err);
-            console.log('실패');
-          });
-      };
+    const onClickSave = () => {
+        formData.append("userId", userId);
+
+        const data = {
+            uri: imageData.uri,
+            type: imageData.mimeType,
+            name: imageData.name,
+        }
+
+        if(imageData) {
+            formData.append("image", data);
+            console.log('폼데이터 추가');
+        } else {
+            formData.append("image", "");
+        }
+
+        ImageUpload(formData);
+    }
 
     return (
         <View style={Styles.container}>
             <BackHeader data="프로필 사진" onPress={() => onClickBack()} />
             <View style={Styles.profileContainer}>
-                <Image style={Styles.profile} source={imageUrl ? {uri: imageUrl} : undefined} />
+                <Image style={Styles.profile} source={imageData ? {uri: imageData.uri} : undefined} />
                 <View style={Styles.textContainer}>
                     <Text style={Styles.text}>프로필 이미지를 설정하지 않을</Text>
                     <Text style={Styles.text}>경우에는 기본 프로필로 설정됩니다.</Text>
                 </View>
             </View>
             <View style={Styles.buttonContainer}>
-                <TouchableOpacity style={Styles.button} onPress={() => uploadImage()}>
+                <TouchableOpacity style={Styles.button} onPress={() => onClickEdit()}>
                     <Text style={Styles.buttonText}>수정하기</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={Styles.button}>
+                <TouchableOpacity style={Styles.button} onPress={() => onClickSave()}>
                     <Text style={Styles.buttonText}>저장하기</Text>
                 </TouchableOpacity>
             </View>
