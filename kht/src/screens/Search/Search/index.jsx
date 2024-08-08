@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, TouchableOpacity, Image, ScrollView, StyleSheet } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient'
 import { color } from "../../../styles/theme";
@@ -7,10 +7,33 @@ import constants from "../../../styles/constants";
 import Header from '../../../components/Header';
 import Search from "../../../components/Search";
 
+import onSearch from '../../../apis/Search';
+
 const SearchPage = ({navigation}) => {
+    const [ searchData, setSearchData ] = useState({
+        title: "",
+        tag: "허벅지",
+    });
+    
+    const handleInputChange = (text, field) => {
+        setSearchData(prevData => ({
+          ...prevData,
+          [field]: text
+        }));
+      };
 
     const onClickData = () => {
         navigation.navigate("DataPage", { screen: 'DataPage', name: true });
+    }
+
+    const onClickEnter = async () => {
+        try {
+            const data = await onSearch(searchData);
+            console.log(data);
+            navigation.navigate("ResultPage", { screen: 'ResultPage', name: data });
+        } catch (error) {
+            console.log("검색 정보 가져오기 오류");
+        }
     }
 
     return(
@@ -19,7 +42,7 @@ const SearchPage = ({navigation}) => {
             <ScrollView>
                 <Image style={Styles.banner} source={require('../../../assets/image/banner.png')}></Image>
                 <View style={Styles.search}>
-                    <Search />
+                    <Search onGetInText={(text) => handleInputChange(text, "title")} enter={() => onClickEnter()} />
                 </View>
                 <View style={Styles.boxContainer}>
                     <View style={Styles.box}>

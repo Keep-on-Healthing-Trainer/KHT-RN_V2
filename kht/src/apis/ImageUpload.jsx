@@ -3,9 +3,6 @@ import { Alert } from 'react-native';
 import * as SecureStore from "expo-secure-store";
 
 const ImageUpload = async (data) => {
-    for (let key of formData.keys()) {
-        console.log(key, ":", formData.get(key));
-    }
 
     const result = await SecureStore.getItemAsync('token');
     const token = result && JSON.parse(result);

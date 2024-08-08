@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, Image, ScrollView, StyleSheet, TouchableOpacity } from "react-native";
 import { color } from "../../../styles/theme";
 import constants from "../../../styles/constants";
@@ -6,19 +6,36 @@ import constants from "../../../styles/constants";
 import Search from "../../../components/Search";
 import BackButton from "../../../assets/icon/Back";
 
-const ResultPage = ({navigation}) => {
+const ResultPage = ({navigation, route}) => {
+    const resultData = route.params.name;
+
+    const [ searchData, setSearchData ] = useState({
+        title: "",
+        tag: "",
+    });
+    
+    const handleInputChange = (text, field) => {
+        setSearchData(prevData => ({
+          ...prevData,
+          [field]: text
+        }));
+    };
+
+    const onClickBack = () => {
+        navigation.navigate("SearchPage", { screen: 'SearchPage' });
+    }
 
     const onClickData = () => {
-        navigation.navigate("DataPage", { screen: 'DataPage', name: false });
+        navigation.navigate("DataPage", { screen: 'DataPage' });
     }
 
     return(
         <View style={Styles.container}>
             <View style={Styles.back}>
-                <View style={Styles.button}>
+                <TouchableOpacity style={Styles.button} onPress={() => onClickBack()} >
                     <BackButton />
-                </View>
-                <Search />
+                </TouchableOpacity>
+                <Search onGetInText={(text) => handleInputChange(text, "title")} enter={() => onClickEnter()} />
             </View>
             <View style={Styles.select}>
                 <TouchableOpacity style={Styles.focusSelect}>
@@ -44,62 +61,19 @@ const ResultPage = ({navigation}) => {
                 </TouchableOpacity>
             </View>
             <ScrollView>
-                <TouchableOpacity style={Styles.box} onPress={() => onClickData()}>
-                    <View style={Styles.img}></View>
-                    <View style={Styles.right}> 
-                        <Text style={Styles.boldText}>캡틴스 체어 레그 레이즈</Text>
-                        <Text style={Styles.text}>복근, 허벅지</Text>
-                        <Text style={Styles.text}>기본 레그 레이즈는 누워서 했다면 캡틴스 체어 레그 레이즈는 선채로  다리를 드는 운동이에요. 서서 다리를 올리는 운동이다 보니 코어뿐만 아니라 전신 근육이 쓰이게 돼요!</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={Styles.box}>
-                    <View style={Styles.img}></View>
-                    <View style={Styles.right}> 
-                        <Text style={Styles.boldText}>캡틴스 체어 레그 레이즈</Text>
-                        <Text style={Styles.text}>복근, 허벅지</Text>
-                        <Text style={Styles.text}>기본 레그 레이즈는 누워서 했다면 캡틴스 체어 레그 레이즈는 선채로  다리를 드는 운동이에요. 서서 다리를 올리는 운동이다 보니 코어뿐만 아니라 전신 근육이 쓰이게 돼요!</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={Styles.box}>
-                    <View style={Styles.img}></View>
-                    <View style={Styles.right}> 
-                        <Text style={Styles.boldText}>캡틴스 체어 레그 레이즈</Text>
-                        <Text style={Styles.text}>복근, 허벅지</Text>
-                        <Text style={Styles.text}>기본 레그 레이즈는 누워서 했다면 캡틴스 체어 레그 레이즈는 선채로  다리를 드는 운동이에요. 서서 다리를 올리는 운동이다 보니 코어뿐만 아니라 전신 근육이 쓰이게 돼요!</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={Styles.box}>
-                    <View style={Styles.img}></View>
-                    <View style={Styles.right}> 
-                        <Text style={Styles.boldText}>캡틴스 체어 레그 레이즈</Text>
-                        <Text style={Styles.text}>복근, 허벅지</Text>
-                        <Text style={Styles.text}>기본 레그 레이즈는 누워서 했다면 캡틴스 체어 레그 레이즈는 선채로  다리를 드는 운동이에요. 서서 다리를 올리는 운동이다 보니 코어뿐만 아니라 전신 근육이 쓰이게 돼요!</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={Styles.box}>
-                    <View style={Styles.img}></View>
-                    <View style={Styles.right}> 
-                        <Text style={Styles.boldText}>캡틴스 체어 레그 레이즈</Text>
-                        <Text style={Styles.text}>복근, 허벅지</Text>
-                        <Text style={Styles.text}>기본 레그 레이즈는 누워서 했다면 캡틴스 체어 레그 레이즈는 선채로  다리를 드는 운동이에요. 서서 다리를 올리는 운동이다 보니 코어뿐만 아니라 전신 근육이 쓰이게 돼요!</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={Styles.box}>
-                    <View style={Styles.img}></View>
-                    <View style={Styles.right}> 
-                        <Text style={Styles.boldText}>캡틴스 체어 레그 레이즈</Text>
-                        <Text style={Styles.text}>복근, 허벅지</Text>
-                        <Text style={Styles.text}>기본 레그 레이즈는 누워서 했다면 캡틴스 체어 레그 레이즈는 선채로  다리를 드는 운동이에요. 서서 다리를 올리는 운동이다 보니 코어뿐만 아니라 전신 근육이 쓰이게 돼요!</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={Styles.box}>
-                    <View style={Styles.img}></View>
-                    <View style={Styles.right}> 
-                        <Text style={Styles.boldText}>캡틴스 체어 레그 레이즈</Text>
-                        <Text style={Styles.text}>복근, 허벅지</Text>
-                        <Text style={Styles.text}>기본 레그 레이즈는 누워서 했다면 캡틴스 체어 레그 레이즈는 선채로  다리를 드는 운동이에요. 서서 다리를 올리는 운동이다 보니 코어뿐만 아니라 전신 근육이 쓰이게 돼요!</Text>
-                    </View>
-                </TouchableOpacity>
+                {resultData ? resultData.map((item, index) => {
+                        return (
+                            <TouchableOpacity key={index} style={Styles.box} onPress={() => onClickData()}>
+                                <View style={Styles.img}></View>
+                                <View style={Styles.right}>
+                                    <Text style={Styles.boldText}>{item.title}</Text>
+                                    <Text style={Styles.text}>{item.tags}</Text>
+                                    <Text style={Styles.text}>{item.introduction}</Text>
+                                </View>
+                            </TouchableOpacity>
+                        );
+                    }) : <Text>값이 없어</Text>
+                }
             </ScrollView>
         </View>
     );
