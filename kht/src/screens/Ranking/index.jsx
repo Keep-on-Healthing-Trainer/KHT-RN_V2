@@ -1,11 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet } from "react-native";
 import { color } from "../../styles/theme";
 import constants from "../../styles/constants";
 
 import Header from '../../components/Header';
+import TopRankingComponent from './components/topRanking';
+import BottomRankingComponent from './components/bottomRanking';
+
+import onRanking from "../../apis/RankingList";
 
 const RankingPage = ({navigation}) => {
+  const [ isLoading, setIsLoading ] = useState(false);
+  const [ data, setData ] = useState(null);
+  //const [ userData, setUserData ]= useState(null);
+
+  useEffect(() => {
+    setIsLoading(false);
+    onGetRanking();
+  }, []);
+
+  useEffect(() => {
+    if(data != null) {
+      setIsLoading(true);
+    }
+  }, [data]);
+
+  const onGetRanking = async () => {
+    try {
+      const rank = await onRanking();
+      if(rank) {
+        setData(rank);
+      }
+    } catch (error) {
+      console.log("랭킹 정보 가져오기 오류");
+    }
+  }
 
     return(
     <View style={Styles.container}>
@@ -14,68 +43,19 @@ const RankingPage = ({navigation}) => {
           <Text style={Styles.boldText}>유저 랭킹</Text>
           <Text style={Styles.text}>KHT로 측정한 운동의 총합 횟수입니다.</Text>
         </View>
-        <View style={Styles.topRankingContainer}>
-            <View style={Styles.secondRankingContainer}>
-                <Text style={Styles.secondRankingFont}>2nd</Text>
-                <View style={Styles.secondRankingImg}></View>
-                <Text style={Styles.text}>2000회</Text>
-                <Text style={Styles.boldText}>이기혁</Text>
+        {isLoading && data ? (
+            <View>
+                <TopRankingComponent data={data} />
+                <BottomRankingComponent data={data} />
             </View>
-            <View style={Styles.secondRankingContainer}>
-                <Text style={Styles.topRankingFont}>1ST</Text>
-                <View style={Styles.topRankingImg}></View>
-                <Text style={Styles.text}>2000회</Text>
-                <Text style={Styles.boldText}>이기혁</Text>
-            </View>
-            <View style={Styles.secondRankingContainer}>
-                <Text style={Styles.secondRankingFont}>3rd</Text>
-                <View style={Styles.secondRankingImg}></View>
-                <Text style={Styles.text}>2000회</Text>
-                <Text style={Styles.boldText}>이기혁</Text>
-            </View>
+        ) : (
+            <View></View>
+        )}
+        <View style={Styles.bottom}>
+            <View style={Styles.myRankingImg}></View>
+            <Text style={Styles.myBoldText}>이기혁</Text>
+            <Text style={Styles.myBoldText}>3회</Text>
         </View>
-        <View>
-            <View style={Styles.rankingContainer}>
-                <View style={Styles.rankingImg}></View>
-                <Text>이기혁</Text>
-                <Text>800회</Text>
-            </View>
-            <View style={Styles.rankingContainer}>
-                <View style={Styles.rankingImg}></View>
-                <Text>이기혁</Text>
-                <Text>800회</Text>
-            </View>
-            <View style={Styles.rankingContainer}>
-                <View style={Styles.rankingImg}></View>
-                <Text>이기혁</Text>
-                <Text>800회</Text>
-            </View>
-            <View style={Styles.rankingContainer}>
-                <View style={Styles.rankingImg}></View>
-                <Text>이기혁</Text>
-                <Text>800회</Text>
-            </View>
-            <View style={Styles.rankingContainer}>
-                <View style={Styles.rankingImg}></View>
-                <Text>이기혁</Text>
-                <Text>800회</Text>
-            </View>
-            <View style={Styles.rankingContainer}>
-                <View style={Styles.rankingImg}></View>
-                <Text>이기혁</Text>
-                <Text>800회</Text>
-            </View>
-            <View style={Styles.rankingContainer}>
-                <View style={Styles.rankingImg}></View>
-                <Text>이기혁</Text>
-                <Text>800회</Text>
-            </View>
-        </View>
-      <View style={Styles.bottom}>
-        <View style={Styles.myRankingImg}></View>
-        <Text style={Styles.myBoldText}>이기혁</Text>
-        <Text style={Styles.myBoldText}>3회</Text>
-      </View>
     </View>
     );
 }
@@ -101,54 +81,6 @@ const Styles = StyleSheet.create({
     textConteiner: {
         width: constants.width/1.1,
         alignItems: 'flex-start',
-    },
-    topRankingContainer: {
-        width: constants.width,
-        height: constants.height/6,
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-evenly'
-    },
-    secondRankingContainer: {
-        display: 'flex',
-        alignItems: 'center',
-    },
-    topRankingFont: {
-        fontSize: 22,
-        fontWeight: '900',
-        color: color.Blue[10],
-    },
-    secondRankingFont: {
-        fontSize: 18,
-        fontWeight: '900',
-        color: color.Blue[10],
-    },
-    topRankingImg: {
-        width: 90,
-        height: 90,
-        borderRadius: 50,
-        backgroundColor: color.Gray[2]
-    },
-    secondRankingImg: {
-        width: 75,
-        height: 75,
-        borderRadius: 50,
-        backgroundColor: color.Gray[2]
-    },
-    rankingContainer: {
-        width: constants.width,
-        height: constants.height/20,
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-around'
-    },
-    rankingImg: {
-        width: 30,
-        height: 30,
-        borderRadius: 50,
-        backgroundColor: color.Gray[2]
     },
     bottom: {
         borderColor: color.Gray[2],
