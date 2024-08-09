@@ -2,7 +2,6 @@ import axios from 'axios';
 import { Alert } from 'react-native';
 
 const onSearch = async ( data ) => {
-    console.log(data);
 
     const result = await SecureStore.getItemAsync('token');
     const token = result && JSON.parse(result);

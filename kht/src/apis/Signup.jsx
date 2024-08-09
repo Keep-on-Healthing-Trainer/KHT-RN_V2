@@ -2,7 +2,6 @@ import axios from 'axios';
 import { Alert } from 'react-native';
 
 const onSignup = async ( data ) => {
-    console.log(data);
 
     try {
         const response = await axios.post(`${process.env.API_KEY}/user/signup`, {

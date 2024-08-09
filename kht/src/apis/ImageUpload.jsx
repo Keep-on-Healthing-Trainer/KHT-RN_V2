@@ -2,12 +2,10 @@ import axios from 'axios';
 import { Alert } from 'react-native';
 import * as SecureStore from "expo-secure-store";
 
-const ImageUpload = async (data) => {
+const onImageUpload = async (data) => {
 
     const result = await SecureStore.getItemAsync('token');
     const token = result && JSON.parse(result);
-
-    //console.log(token);
 
     try {
         const response = await axios.post(`${process.env.API_KEY}/user/modifyProfile`,
@@ -38,4 +36,4 @@ const ImageUpload = async (data) => {
     }
 };
 
-export default ImageUpload;
+export default onImageUpload;
