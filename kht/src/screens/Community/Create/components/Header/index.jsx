@@ -9,14 +9,14 @@ const Header = ( props ) => {
 
     return(
         <View style={Styles.container}>
-            <TouchableOpacity style={Styles.button} onPress={props.onPress}>
+            <TouchableOpacity style={Styles.button} onPress={props.onBackPress}>
               <X />
             </TouchableOpacity>
             <View style={Styles.button}>
                 <Text style={Styles.boldText}>작성하기</Text>
             </View>
-            {props.data ? (
-                <TouchableOpacity style={Styles.button}>
+            {props.backState ? (
+                <TouchableOpacity style={Styles.button} onPress={props.onPostPress}>
                     <Text style={Styles.colorText}>등록</Text>
                 </TouchableOpacity>
             ) : (
