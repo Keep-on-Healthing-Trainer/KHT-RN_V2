@@ -11,35 +11,46 @@ import onWeb from "../../apis/WebSocket";
 
 const TrainingPage = ({navigation}) => {
     const [scanned, setScanned] = useState(false);
+    const [ data, setData ] = useState({});
     const [permission, requestPermission] = useCameraPermissions();
     const isFocused = useIsFocused();
 
     useEffect(() => {
-        setScanned(true);
+      setScanned(true);
+      userData();
     }, []);
 
+    const userData = async () => {
+      const res = await onGetUserData();
+      if(res) {
+        setData(res);
+      }
+    }
+
     if (!isFocused) {
-        return null;
+      return null;
     }
     
     if (!permission) {
-        return <View />;
+      return <View />;
     }
     
     if (!permission.granted) {
-        return (
+      return (
           <View style={Styles.container}>
             <Text style={{ textAlign: 'center' }}>카메라 권한을 허용해주세요</Text>
             <Button onPress={requestPermission} title="grant permission" />
           </View>
-        );
+      );
     }
     
     const handleBarCodeScanned = (data) => {
       setScanned(false);
       const sessionId = (data.data.split('?')[1]).split('=')[1];
-      onWeb(sessionId, userData.id);
-      Alert.alert('QR코드 스캔에 성공했습니다.');
+      const res = onWeb(sessionId, userData.id);
+      if(res) { 
+        Alert.alert('QR코드 스캔에 성공했습니다.');
+      }
     };
 
     return(
