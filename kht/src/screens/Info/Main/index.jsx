@@ -6,8 +6,21 @@ import constants from "../../../styles/constants";
 import Header from '../../../components/Header';
 import Chart from "./LineChart";
 
+import onGetUserData from "../../../apis/GetUserData";
+
 const MainPage = ({navigation}) => {
     const [ data, setData ] = useState({});
+
+    useEffect(() => {
+      userData();
+    }, []);
+
+    const userData = async () => {
+      const res = await onGetUserData();
+      if(res) {
+        setData(res);
+      }
+    }
 
     const onClickSelect = () => {
         navigation.navigate("SelectPage", { screen: 'SelectPage' });
@@ -24,26 +37,26 @@ const MainPage = ({navigation}) => {
                   <Text style={Styles.editButtonText}>편집</Text>
                 </TouchableOpacity>
                 <View style={Styles.nameContanier}>
-                  <Text style={Styles.IdName}>이기혁</Text>
-                  <Text style={Styles.IdComment}>누적 운동 횟수 : 1510</Text>
+                  <Text style={Styles.IdName}>{data.name}</Text>
+                  <Text style={Styles.IdComment}>누적 운동 횟수 : {data.totalCounts}</Text>
                 </View>
               </View>
               <View style={Styles.profile}></View>
             </View>
             <View style={Styles.containerGap}>
               <View style={Styles.dataContainer}>
-                <Text style={Styles.textCount}>총 1004회</Text>
-                <Text style={Styles.textComment}>KHT와 함께 1004회 윗몸일으키기를 진행했어요</Text>
+                <Text style={Styles.textCount}>총 {data.sitUpCounts == null ? 0 : data.sitUpCounts}회</Text>
+                <Text style={Styles.textComment}>KHT와 함께 {data.sitUpCounts == null ? 0 : data.sitUpCounts}회 윗몸일으키기를 진행했어요</Text>
                 <Chart data={data.exerciseResponses}></Chart>
               </View>
               <View style={Styles.dataContainer}>
-                <Text style={Styles.textCount}>총 1004회</Text>
-                <Text style={Styles.textComment}>KHT와 함께 1004회 스쿼트를 진행했어요</Text>
+                <Text style={Styles.textCount}>총 {data.squatCounts == null ? 0 : data.squatCounts}회</Text>
+                <Text style={Styles.textComment}>KHT와 함께 {data.squatCounts == null ? 0 : data.squatCounts}회 스쿼트를 진행했어요</Text>
                 <Chart data={data.exerciseResponses}></Chart>
               </View>
               <View style={Styles.dataContainer}>
-                <Text style={Styles.textCount}>총 1004회</Text>
-                <Text style={Styles.textComment}>KHT와 함께 1004회 팔굽혀펴기를 진행했어요</Text>
+                <Text style={Styles.textCount}>총 {data.pushUpCounts == null ? 0 : data.pushUpCounts}회</Text>
+                <Text style={Styles.textComment}>KHT와 함께 {data.pushUpCounts == null ? 0 : data.pushUpCounts}회 팔굽혀펴기를 진행했어요</Text>
                 <Chart data={data.exerciseResponses}></Chart>
               </View>
             </View>

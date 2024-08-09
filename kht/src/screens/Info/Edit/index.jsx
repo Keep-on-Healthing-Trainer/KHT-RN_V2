@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, Image, StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import { color } from "../../../styles/theme";
 import constants from "../../../styles/constants";
@@ -6,30 +6,72 @@ import constants from "../../../styles/constants";
 import BackHeader from '../components/Header';
 import Delete from '../../../assets/icon/Delete';
 
+import onUserDataPatch from "../../../apis/UserDataPatch";
+import onGetUserData from '../../../apis/GetUserData';
+
 const EditPage = ({navigation, route}) => {
-    const name = route.params.name;
+    const [ data, setData ] = useState();
+
+    useEffect(() => {
+      userData();
+    }, []);
+
+    useEffect(() => {
+      console.log(data);
+    }, [data]);
+
+    const userData = async () => {
+      const res = await onGetUserData();
+      if(res) {
+        setData(res);
+      }
+    }
+
+    const onClickPatch = () => {
+      const res = onUserDataPatch();
+      if(res) {
+        navigation.navigate("SelectPage", { screen: 'SelectPage' });
+      }
+    }
 
     const onClickBack = () => {
       navigation.navigate("SelectPage", { screen: 'SelectPage' });
     }
 
+    const handleInputChange = (text, field) => {
+      setData(prevData => ({
+        ...prevData,
+        [field]: text
+      }));
+    };
+
     return (
         <View style={Styles.container}>
-            <BackHeader data={name} onPress={() => onClickBack()}/>
+            <BackHeader
+            // data={name}
+            onPress={() => onClickBack()}
+            />
             <View style={Styles.titleContainer}>
-                <Text style={Styles.nameTitle}>{name}</Text>
+                <Text style={Styles.nameTitle}></Text>
                 <View>
-                    <TextInput style={Styles.Bottom}></TextInput>
+                    <TextInput
+                    style={Styles.Bottom}
+                    // data={name == 'name' ? data.name : (name == 'userId' ? data.userId : data.phoneNumber)}
+                    onGetInText={(text) => handleInputChange(text)}
+                    ></TextInput>
                     <TouchableOpacity style={Styles.topItem}>
                         <Delete></Delete>
                     </TouchableOpacity>
                 </View>
             </View>
+            <TouchableOpacity style={Styles.button} onPress={() => onClickPatch()}>
+              <Text style={Styles.buttonText}>저장하기</Text>
+            </TouchableOpacity>
         </View>
       )
-    }
+  }
     
-    const Styles = StyleSheet.create({
+  const Styles = StyleSheet.create({
       container: {
         flex: 1,
         backgroundColor: color.White,
@@ -39,7 +81,7 @@ const EditPage = ({navigation, route}) => {
       },
       titleContainer: {
         marginTop: constants.height/30,
-        marginBottom: constants.height/2
+        marginBottom: constants.height/1.7
       },
       nameTitle: {
         color: color.Gray[4],
@@ -66,8 +108,22 @@ const EditPage = ({navigation, route}) => {
         top: constants.height/50,
         justifyContent: 'center',
         alignItems: 'flex-end'
+    },
+    button: {
+      borderColor: color.Blue[10],
+      borderWidth: 1,
+      borderRadius: 10,
+      width: 300,
+      height: 40,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    buttonText: {
+        fontSize: 16,
+        color: color.Blue[10],
+        fontWeight: '600',
     }
-    })
+  })
     
 
 export default EditPage;

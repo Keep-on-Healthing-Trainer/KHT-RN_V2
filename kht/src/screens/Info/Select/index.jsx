@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, View, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { color } from "../../../styles/theme";
 import constants from "../../../styles/constants";
@@ -6,22 +6,40 @@ import constants from "../../../styles/constants";
 import BackHeader from '../components/Header';
 import ProfileArrow from '../../../assets/icon/ProfileArrow';
 
+import onGetUserData from '../../../apis/GetUserData';
+
 const SelectPage = ({navigation}) => {
+    const [ data, setData ] = useState();
+
+    useEffect(() => {
+      userData();
+    }, []);
+
+    useEffect(() => {
+        console.log(data);
+    }, [data]);
+
+    const userData = async () => {
+      const res = await onGetUserData();
+      if(res) {
+        setData(res);
+      }
+    }
 
     const onClickProfile = () => {
         navigation.navigate("ProfilePage", { screen: 'ProfilePage'});
-      }
+    }
 
     const onClickName = () => {
-      navigation.navigate("EditPage", { screen: 'EditPage', name: "사용자 이름" });
+        navigation.navigate("EditPage", { screen: 'EditPage', name: "name"});
     }
 
     const onClickId = () => {
-        navigation.navigate("EditPage", { screen: 'EditPage', name: "사용자 아이디" });
+        navigation.navigate("EditPage", { screen: 'EditPage', name: "userId"});
     }
 
     const onClickPhone = () => {
-        navigation.navigate("EditPage", { screen: 'EditPage', name: "사용자 전화번호" });
+        navigation.navigate("EditPage", { screen: 'EditPage', name: "phoneNumber"});
     }
 
     const onClickBack = () => {
@@ -40,22 +58,22 @@ const SelectPage = ({navigation}) => {
             <View style={Styles.nameContainer}>
                 <View style={Styles.nameDiv}>
                     <Text style={Styles.nameTagStyle}>이름</Text>
-                    <Text style={Styles.nameStyle}>이기혁</Text>
-                    <TouchableOpacity style={Styles.nameBox} onPress={onClickName}>
+                    <Text style={Styles.nameStyle}>{data ? data.name : null}</Text>
+                    <TouchableOpacity style={Styles.nameBox} onPress={() => onClickName()}>
                         <ProfileArrow></ProfileArrow>
                     </TouchableOpacity>
                 </View>
                 <View style={Styles.nameDiv}>
                     <Text style={Styles.nameTagStyle}>아이디</Text>
-                    <Text style={Styles.nameStyle}>testtest</Text>
-                    <TouchableOpacity style={Styles.nameBox} onPress={onClickId}>
+                    <Text style={Styles.nameStyle}>{data ? data.userId : null}</Text>
+                    <TouchableOpacity style={Styles.nameBox} onPress={() => onClickId()}>
                         <ProfileArrow></ProfileArrow>
                     </TouchableOpacity>
                 </View>
                 <View style={Styles.nameDiv}>
                     <Text style={Styles.nameTagStyle}>전화번호</Text>
-                    <Text style={Styles.nameStyle}>01012345678</Text>
-                    <TouchableOpacity style={Styles.nameBox} onPress={onClickPhone}>
+                    <Text style={Styles.nameStyle}>{data ? data.phoneNumber : null}</Text>
+                    <TouchableOpacity style={Styles.nameBox} onPress={() => onClickPhone()}>
                         <ProfileArrow></ProfileArrow>
                     </TouchableOpacity>
                 </View>
