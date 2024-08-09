@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, TouchableOpacity, TouchableWithoutFeedback, Keyboard, StyleSheet } from "react-native";
+import { Text, View, Alert, TouchableWithoutFeedback, Keyboard, StyleSheet } from "react-native";
 import { color } from "../../styles/theme";
 import constants from "../../styles/constants";
 
@@ -13,20 +13,17 @@ const LoginPage = ({navigation}) => {
     const [ loginData, setLoginData] = useState();
     const [ autoLogin, setAutoLogin ] = useState(false);
 
-    useEffect(() => {
-        console.log(loginData);
-        console.log(autoLogin);
-    },[loginData, autoLogin]);
-
     const onClickLogin = async () => {
-        // try {
-        //   const loginState = await onLogin(loginData, autoLogin);
-        //   if (loginState) {
-            navigation.navigate("MainScreen", { screen: 'MainScreen' });
-        //   }
-        // } catch (error) {
-        //   console.log("로그인 오류");
-        // }
+        if(loginData !== null) {
+            try {
+                const loginState = await onLogin(loginData, autoLogin);
+                if (loginState) {
+                  navigation.navigate("MainScreen", { screen: 'MainScreen' });
+                }
+            } catch (error) {
+                console.log("로그인 오류");
+            }
+        }
     }
     
     const onClickSignup = () => {
@@ -40,8 +37,8 @@ const LoginPage = ({navigation}) => {
                     <Logo />
                     <InputComponents onGetInText={(text) => setLoginData(text)} />
                     <ButtonComponents
-                    onLogin={()=>onClickLogin()}
-                    onSignup={()=>onClickSignup()}
+                    onLogin={() => onClickLogin()}
+                    onSignup={() => onClickSignup()}
                     onGetInState={(state) => setAutoLogin(state)}
                     />
                 </View>
