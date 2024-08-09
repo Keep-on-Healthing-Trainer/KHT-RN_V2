@@ -16,11 +16,13 @@ const onWeb = async ( sessionId, id ) => {
     webSocket.onmessage = () => {
         webSocket.close();
         console.log('정상적으로 작동했습니다.');
+        return true;
     }
 
     webSocket.onerror = (error) => {
         webSocket.close();
         console.log(error);
+        return false;
     };
 };
 

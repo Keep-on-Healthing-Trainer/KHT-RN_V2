@@ -1,10 +1,12 @@
 import axios from 'axios';
 import { Alert } from 'react-native';
+import * as SecureStore from "expo-secure-store";
 
 const onCommunityList = async ( data ) => {
 
     const result = await SecureStore.getItemAsync('token');
     const token = result && JSON.parse(result);
+    
     try {
         const response = await axios.get(`${process.env.API_KEY}/post/list`, {
             headers: {
