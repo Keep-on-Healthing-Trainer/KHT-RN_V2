@@ -72,7 +72,7 @@ const ResultPage = ({navigation, route}) => {
                                 </View>
                             </TouchableOpacity>
                         );
-                    }) : <Text>값이 없어</Text>
+                    }) : undefined
                 }
             </ScrollView>
         </View>

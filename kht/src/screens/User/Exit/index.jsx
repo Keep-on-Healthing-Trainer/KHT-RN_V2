@@ -10,7 +10,7 @@ import Character from "../../../assets/icon/Character";
 import ProgressBarComponents from "../components/ProgressBarComponents";
 import TextComponents from "../components/TextComponents";
 
-import onSignup from "../../../utils/Signup";
+import onSignup from "../../../apis/Signup";
 
 const ExitPage = ({navigation, route}) => {
     const signupData = route.params.data;

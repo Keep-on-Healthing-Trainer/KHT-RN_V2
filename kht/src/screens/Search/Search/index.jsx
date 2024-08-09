@@ -130,7 +130,7 @@ const SearchPage = ({navigation}) => {
                     </View>
                 </View>
             </ScrollView>
-            <LinearGradient style={Styles.linear} colors={['rgba(0,0,0,0.0)', '#ffffff']}></LinearGradient>
+            <LinearGradient style={Styles.linear} colors={['rgba(255,255,255,0)', '#ffffff']}></LinearGradient>
         </View>
     );
 }

@@ -7,7 +7,7 @@ import constants from "../../../styles/constants";
 
 import BackHeader from "../components/Header";
 
-import ImageUpload from '../../../utils/ImageUpload';
+import onImageUpload from '../../../apis/ImageUpload';
 
 const ProfilePage = ({navigation}) => {
     const [imageData, setImageData] = useState();
@@ -47,7 +47,7 @@ const ProfilePage = ({navigation}) => {
             formData.append("image", "");
         }
 
-        ImageUpload(formData);
+        onImageUpload(formData);
     }
 
     return (
