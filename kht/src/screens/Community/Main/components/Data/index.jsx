@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { color } from '../../../../../styles/theme';
 import constants from '../../../../../styles/constants';
 
@@ -12,12 +12,12 @@ const DataComponents = ( props ) => {
     return(
         <TouchableOpacity style={Styles.dataContainer} onPress={props.onPress}>
             <View style={Styles.profileContainer}>
-                <View style={Styles.profile}></View>
-                <Text style={Styles.boldText}>이기혁</Text>
+                <Image style={Styles.profile} source={props.profile}></Image>
+                <Text style={Styles.boldText}>{props.name}</Text>
             </View>
             <View style={Styles.textContainer}>
-                <Text style={Styles.mainBoldText}>확실히 체중 감소 하려면 운동 뿐만 아니라</Text>
-                <Text style={Styles.text}>식단도 같이 해야하는듯 ㄹㅇ;; 운동만 해서 빼는게 더 힘드러ㅓㅓㅓㄹㅇ ㅇㅈ?</Text>
+                <Text style={Styles.mainBoldText}>{props.title}</Text>
+                <Text style={Styles.text}></Text>
             </View>
             <View style={Styles.labelContainer}>
                 <View style={Styles.label}>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, TouchableOpacity, ScrollView, StyleSheet } from "react-native";
+import { useFocusEffect } from '@react-navigation/native';
 import { color } from "../../../styles/theme";
 import constants from "../../../styles/constants";
 
@@ -7,7 +8,16 @@ import Header from "../../../components/Header";
 import Create from "../../../assets/icon/Create";
 import DataComponents from './components/Data';
 
+import onCommunityList from '../../../apis/CommunityList';
+
 const MainPage = ({navigation}) => {
+    const [ listData, setListData ] = useState();
+
+    useFocusEffect(
+        React.useCallback(() => {
+            onDataList();
+        }, [])
+    );
 
     const onClickCreate = () => {
         navigation.navigate("CreatePage", { screen: 'CreatePage' });
@@ -15,6 +25,15 @@ const MainPage = ({navigation}) => {
 
     const onClickView = () => {
         navigation.navigate("ViewPage", { screen: 'ViewPage' });
+    }
+
+    const onDataList = async () => {
+        try {
+            const data = await onCommunityList();
+            setListData(data);
+        } catch (error) {
+            console.log("게시물 목록 불러오기 성공");
+        }
     }
 
     return(
@@ -28,12 +47,12 @@ const MainPage = ({navigation}) => {
                 <Create />
             </TouchableOpacity>
             <ScrollView style={Styles.mainContainer}>
-                <DataComponents data={false} onPress={() => onClickView()} />
-                <DataComponents data={true} onPress={() => onClickView()}  />
-                <DataComponents data={false} onPress={() => onClickView()}  />
-                <DataComponents data={false} onPress={() => onClickView()}  />
-                <DataComponents data={false} onPress={() => onClickView()}  />
-                <DataComponents data={true} onPress={() => onClickView()}  />
+                {listData ? listData.map((item, index) => {
+                        return (
+                            <DataComponents key={index} name={item.userNickname} profile={item.profile} title={item.title} onPress={() => onClickView()} />
+                        );
+                    }) : undefined
+                }
             </ScrollView>
         </View>
     );
