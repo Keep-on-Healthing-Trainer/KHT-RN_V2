@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
+import { Text, View, TouchableOpacity, TouchableWithoutFeedback, Keyboard, StyleSheet } from "react-native";
 import { color } from "../../styles/theme";
 import constants from "../../styles/constants";
 
@@ -7,7 +7,7 @@ import Logo from "../../assets/icon/Logo";
 import InputComponents from './components/InputComponents';
 import ButtonComponents from './components/ButtonComponents';
 
-import onLogin from '../../utils/Login';
+import onLogin from '../../apis/Login';
 
 const LoginPage = ({navigation}) => {
     const [ loginData, setLoginData] = useState();
@@ -19,14 +19,14 @@ const LoginPage = ({navigation}) => {
     },[loginData, autoLogin]);
 
     const onClickLogin = async () => {
-        try {
-          const loginState = await onLogin(loginData, autoLogin);
-          if (loginState) {
+        // try {
+        //   const loginState = await onLogin(loginData, autoLogin);
+        //   if (loginState) {
             navigation.navigate("MainScreen", { screen: 'MainScreen' });
-          }
-        } catch (error) {
-          console.log("로그인 오류");
-        }
+        //   }
+        // } catch (error) {
+        //   console.log("로그인 오류");
+        // }
     }
     
     const onClickSignup = () => {
@@ -34,17 +34,19 @@ const LoginPage = ({navigation}) => {
     }
 
     return(
-        <View style={Styles.container}>
-            <View style={Styles.center}>
-                <Logo />
-                <InputComponents onGetInText={(text) => setLoginData(text)} />
-                <ButtonComponents
-                onLogin={()=>onClickLogin()}
-                onSignup={()=>onClickSignup()}
-                onGetInState={(state) => setAutoLogin(state)}
-                />
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+            <View style={Styles.container}>
+                <View style={Styles.center}>
+                    <Logo />
+                    <InputComponents onGetInText={(text) => setLoginData(text)} />
+                    <ButtonComponents
+                    onLogin={()=>onClickLogin()}
+                    onSignup={()=>onClickSignup()}
+                    onGetInState={(state) => setAutoLogin(state)}
+                    />
+                </View>
             </View>
-        </View>
+        </TouchableWithoutFeedback>
     );
 }
 
