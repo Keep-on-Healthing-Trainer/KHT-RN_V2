@@ -12,7 +12,7 @@ const DataComponents = ( props ) => {
     return(
         <TouchableOpacity style={Styles.dataContainer} onPress={props.onPress}>
             <View style={Styles.profileContainer}>
-                <Image style={Styles.profile} source={props.profile}></Image>
+                <Image style={Styles.profile} source={{uri: props.profile}}></Image>
                 <Text style={Styles.boldText}>{props.name}</Text>
             </View>
             <View style={Styles.textContainer}>

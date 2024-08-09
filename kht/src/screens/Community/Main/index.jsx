@@ -11,13 +11,21 @@ import DataComponents from './components/Data';
 import onCommunityList from '../../../apis/CommunityList';
 
 const MainPage = ({navigation}) => {
+    const [ isLoading, setIsLoading ] = useState(false);
     const [ listData, setListData ] = useState();
 
     useFocusEffect(
         React.useCallback(() => {
+            setIsLoading(false);
             onDataList();
         }, [])
     );
+
+    useEffect(() => {
+        if(listData != null) {
+          setIsLoading(true);
+        }
+      }, [listData]);
 
     const onClickCreate = () => {
         navigation.navigate("CreatePage", { screen: 'CreatePage' });
@@ -32,7 +40,7 @@ const MainPage = ({navigation}) => {
             const data = await onCommunityList();
             setListData(data);
         } catch (error) {
-            console.log("게시물 목록 불러오기 성공");
+            console.log("게시물 목록 불러오기 실패");
         }
     }
 
@@ -47,7 +55,7 @@ const MainPage = ({navigation}) => {
                 <Create />
             </TouchableOpacity>
             <ScrollView style={Styles.mainContainer}>
-                {listData ? listData.map((item, index) => {
+                {isLoading && listData ? listData.map((item, index) => {
                         return (
                             <DataComponents key={index} name={item.userNickname} profile={item.profile} title={item.title} onPress={() => onClickView()} />
                         );
