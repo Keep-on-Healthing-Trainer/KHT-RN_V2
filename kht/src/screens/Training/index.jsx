@@ -7,6 +7,8 @@ import constants from "../../styles/constants";
 
 import Header from "../../components/Header";
 
+import onWeb from "../../apis/WebSocket";
+
 const TrainingPage = ({navigation}) => {
     const [scanned, setScanned] = useState(false);
     const [permission, requestPermission] = useCameraPermissions();
@@ -34,10 +36,11 @@ const TrainingPage = ({navigation}) => {
     }
     
     const handleBarCodeScanned = (data) => {
-        setScanned(false);
-        const sessionId = (data.data.split('?')[1]).split('=')[1];
-        Alert.alert('QR코드 스캔에 성공했습니다.');
-      };
+      setScanned(false);
+      const sessionId = (data.data.split('?')[1]).split('=')[1];
+      onWeb(sessionId, userData.id);
+      Alert.alert('QR코드 스캔에 성공했습니다.');
+    };
 
     return(
         <View style={Styles.container}>
