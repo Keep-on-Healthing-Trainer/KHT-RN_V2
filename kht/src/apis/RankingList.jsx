@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { Alert } from 'react-native';
-import * as SecureStore from "expo-secure-store";
+import { getStorage, setStorage, removeStorage } from "../utils/Storage";
 
 const onRanking = async () => {
-    const result = await SecureStore.getItemAsync('token')
-    const token = result && JSON.parse(result);
 
+    const result = await getStorage('token')
+    const token = result && JSON.parse(result);
 
     try {
         const response = await axios.get(`${process.env.API_KEY}/rank`, {
