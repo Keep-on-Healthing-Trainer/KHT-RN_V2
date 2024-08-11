@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Alert } from "react-native";
-import * as SecureStore from "expo-secure-store";
+import { getStorage, setStorage, removeStorage } from "../utils/Storage";
 
 const onLogin = async ( data, state ) => {
 
@@ -14,9 +14,9 @@ const onLogin = async ( data, state ) => {
         const refreshToken = response.data.refreshToken;
         
         if(response.status == 201) {
-            await SecureStore.setItemAsync('token', JSON.stringify(accessToken));
-            await SecureStore.setItemAsync('refreshToken', JSON.stringify(refreshToken));
-            await SecureStore.setItemAsync('autoLogin', JSON.stringify(state));
+            await setStorage('token', JSON.stringify(accessToken));
+            await setStorage('refreshToken', JSON.stringify(refreshToken));
+            await setStorage('autoLogin', JSON.stringify(state));
             console.log("로그인에 성공하였습니다.");
             return true;
         }
