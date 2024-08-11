@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Text, View, StyleSheet } from "react-native";
+import React, { useEffect, useState, useCallback } from 'react';
+import { Text, View, StyleSheet, Image } from "react-native";
+import { useFocusEffect } from '@react-navigation/native';
 import { color } from "../../styles/theme";
 import constants from "../../styles/constants";
 
@@ -8,11 +9,25 @@ import TopRankingComponent from './components/topRanking';
 import BottomRankingComponent from './components/bottomRanking';
 
 import onRanking from "../../apis/RankingList";
+import onGetUserData from "../../apis/GetUserData";
 
 const RankingPage = ({navigation}) => {
   const [ isLoading, setIsLoading ] = useState(false);
   const [ data, setData ] = useState(null);
-  //const [ userData, setUserData ]= useState(null);
+  const [ userData, setUserData ] = useState({});
+
+  useFocusEffect(
+    useCallback(() => {
+      getUserData();
+    }, [])
+  );
+
+  const getUserData = async () => {
+    const res = await onGetUserData();
+    if(res) {
+      setUserData(res);
+    }
+  }
 
   useEffect(() => {
     setIsLoading(false);
@@ -52,9 +67,9 @@ const RankingPage = ({navigation}) => {
             <View></View>
         )}
         <View style={Styles.bottom}>
-            <View style={Styles.myRankingImg}></View>
-            <Text style={Styles.myBoldText}>이기혁</Text>
-            <Text style={Styles.myBoldText}>3회</Text>
+            <Image style={Styles.myRankingImg} source={userData ? {uri: userData.profileImgeUrl} : undefined}></Image>
+            <Text style={Styles.myBoldText}>{userData.name}</Text>
+            <Text style={Styles.myBoldText}>{userData.totalCounts}회</Text>
         </View>
     </View>
     );
