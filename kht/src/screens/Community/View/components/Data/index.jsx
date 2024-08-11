@@ -52,7 +52,6 @@ const Styles = StyleSheet.create({
         width: constants.width,
         backgroundColor: color.White,
         marginBottom: 5,
-        padding: 10,
     },
     profileContainer: {
         width: constants.width,

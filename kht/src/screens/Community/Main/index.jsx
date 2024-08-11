@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Text, View, TouchableOpacity, ScrollView, StyleSheet } from "react-native";
 import { useFocusEffect } from '@react-navigation/native';
 import { color } from "../../../styles/theme";
@@ -15,7 +15,7 @@ const MainPage = ({navigation}) => {
     const [ listData, setListData ] = useState();
 
     useFocusEffect(
-        React.useCallback(() => {
+        useCallback(() => {
             setIsLoading(false);
             onDataList();
         }, [])
@@ -31,8 +31,8 @@ const MainPage = ({navigation}) => {
         navigation.navigate("CreatePage", { screen: 'CreatePage' });
     }
 
-    const onClickView = () => {
-        navigation.navigate("ViewPage", { screen: 'ViewPage' });
+    const onClickView = ( key ) => {
+        navigation.navigate("ViewPage", { screen: 'ViewPage', name: key });
     }
 
     const onDataList = async () => {
@@ -57,7 +57,7 @@ const MainPage = ({navigation}) => {
             <ScrollView style={Styles.mainContainer}>
                 {isLoading && listData ? listData.map((item, index) => {
                         return (
-                            <DataComponents key={index} name={item.userNickname} profile={item.profile} title={item.title} onPress={() => onClickView()} />
+                            <DataComponents key={index} name={item.userNickname} profile={item.profile} title={item.title} content={item.content} path={item.path} onPress={(key) => onClickView(key)} />
                         );
                     }) : undefined
                 }

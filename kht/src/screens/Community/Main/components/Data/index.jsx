@@ -7,17 +7,20 @@ import Comment from '../../../../../assets/icon/Comment';
 import Heart from '../../../../../assets/icon/Heart';
 import PullHeart from "../../../../../assets/icon/PullHeart";
 
-const DataComponents = ( props ) => {
+const DataComponents = (props) => {
 
-    return(
+    return (
         <TouchableOpacity style={Styles.dataContainer} onPress={props.onPress}>
             <View style={Styles.profileContainer}>
-                <Image style={Styles.profile} source={{uri: props.profile}}></Image>
+                <Image style={Styles.profile} source={{ uri: props.profile }} />
                 <Text style={Styles.boldText}>{props.name}</Text>
             </View>
             <View style={Styles.textContainer}>
                 <Text style={Styles.mainBoldText}>{props.title}</Text>
-                <Text style={Styles.text}></Text>
+                <Text style={Styles.text}>{props.content}</Text>
+                {props.path ? (
+                    <Image style={Styles.dataImage} source={{ uri: props.path }} />
+                ) : null}
             </View>
             <View style={Styles.labelContainer}>
                 <View style={Styles.label}>
@@ -55,7 +58,7 @@ const Styles = StyleSheet.create({
     },
     profileContainer: {
         width: constants.width,
-        height: constants.height/15,
+        height: constants.height / 15,
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
@@ -92,7 +95,7 @@ const Styles = StyleSheet.create({
     labelContainer: {
         width: constants.width,
         height: 30,
-        display: 'flex', 
+        display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
         gap: 20,
@@ -104,7 +107,12 @@ const Styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         gap: 5,
+    },
+    dataImage: {
+        height: 200,
+        resizeMode: 'contain',
+        marginTop: 10,
     }
-})
+});
 
 export default DataComponents;
