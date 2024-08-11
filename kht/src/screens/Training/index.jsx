@@ -11,19 +11,19 @@ import onWeb from "../../apis/WebSocket";
 
 const TrainingPage = ({navigation}) => {
     const [scanned, setScanned] = useState(false);
-    const [ data, setData ] = useState({});
+    const [ userData, setUserData ] = useState({});
     const [permission, requestPermission] = useCameraPermissions();
     const isFocused = useIsFocused();
 
     useEffect(() => {
       setScanned(true);
-      userData();
+      getUserData();
     }, []);
 
-    const userData = async () => {
+    const getUserData = async () => {
       const res = await onGetUserData();
       if(res) {
-        setData(res);
+        setUserData(res);
       }
     }
 
@@ -44,7 +44,7 @@ const TrainingPage = ({navigation}) => {
       );
     }
     
-    const handleBarCodeScanned = (data) => {
+    const handleBarCodeScanned = ( data ) => {
       setScanned(false);
       const sessionId = (data.data.split('?')[1]).split('=')[1];
       const res = onWeb(sessionId, userData.id);
