@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { Alert } from 'react-native';
-import * as SecureStore from "expo-secure-store";
+import { getStorage, setStorage, removeStorage } from "../utils/Storage";
 
-const onImageUpload = async (data) => {
+const onImageUpload = async ( data ) => {
 
-    const result = await SecureStore.getItemAsync('token');
+    const result = await getStorage('token');
     const token = result && JSON.parse(result);
 
     try {
@@ -19,6 +19,7 @@ const onImageUpload = async (data) => {
           );
         if(response.status == 201) {
             console.log("이미지 업로드에 성공했습니다.");
+            return true;
         }
     } catch (error) {
         if (error.response) {
@@ -33,6 +34,7 @@ const onImageUpload = async (data) => {
             console.log('image : 네트워크 오류');
             Alert.alert('네트워크 오류입니다.');
         }
+        return false;
     }
 };
 
