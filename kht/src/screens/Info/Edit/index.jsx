@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, Image, StyleSheet, TextInput, TouchableOpacity } from "react-native";
+import { Text, View, Keyboard, StyleSheet, TextInput, TouchableOpacity, TouchableWithoutFeedback } from "react-native";
 import { color } from "../../../styles/theme";
 import constants from "../../../styles/constants";
 
@@ -10,14 +10,15 @@ import onUserDataPatch from "../../../apis/UserDataPatch";
 import onGetUserData from '../../../apis/GetUserData';
 
 const EditPage = ({navigation, route}) => {
-    const [ data, setData ] = useState();
+    const [ data, setData ] = useState({});
+    const [ name, setName ] = useState(null); 
 
     useEffect(() => {
       userData();
     }, []);
 
     useEffect(() => {
-      console.log(data);
+      setName(route.params.name);
     }, [data]);
 
     const userData = async () => {
@@ -27,8 +28,8 @@ const EditPage = ({navigation, route}) => {
       }
     }
 
-    const onClickPatch = () => {
-      const res = onUserDataPatch();
+    const onClickPatch = async () => {
+      const res = await onUserDataPatch(data);
       if(res) {
         navigation.navigate("SelectPage", { screen: 'SelectPage' });
       }
@@ -46,21 +47,22 @@ const EditPage = ({navigation, route}) => {
     };
 
     return (
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={Styles.container}>
             <BackHeader
-            // data={name}
+            data={name === 'name' ? '사용자 이름' : (name === 'userId' ? '사용자 아이디' : '사용자 전화번호')}
             onPress={() => onClickBack()}
             />
             <View style={Styles.titleContainer}>
-                <Text style={Styles.nameTitle}></Text>
+                <Text style={Styles.nameTitle}>{name === 'name' ? '이름' : (name === 'userId' ? '아이디' : '전화번호')}</Text>
                 <View>
                     <TextInput
                     style={Styles.Bottom}
-                    // data={name == 'name' ? data.name : (name == 'userId' ? data.userId : data.phoneNumber)}
-                    onGetInText={(text) => handleInputChange(text)}
-                    ></TextInput>
-                    <TouchableOpacity style={Styles.topItem}>
-                        <Delete></Delete>
+                    value={name === 'name' ? data.name : (name === 'userId' ? data.userId : data.phoneNumber)}
+                    onChangeText={(text) => handleInputChange(text, name)}
+                    />
+                    <TouchableOpacity style={Styles.topItem} onPress={() => handleInputChange(null, name)}>
+                        <Delete />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -68,6 +70,7 @@ const EditPage = ({navigation, route}) => {
               <Text style={Styles.buttonText}>저장하기</Text>
             </TouchableOpacity>
         </View>
+      </TouchableWithoutFeedback>
       )
   }
     

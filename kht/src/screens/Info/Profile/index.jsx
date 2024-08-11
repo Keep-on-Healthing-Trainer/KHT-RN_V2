@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, Image, StyleSheet, TouchableOpacity } from "react-native";
 import * as DocumentPicker from 'expo-document-picker';
 
@@ -8,10 +8,23 @@ import constants from "../../../styles/constants";
 import BackHeader from "../components/Header";
 
 import onImageUpload from '../../../apis/ImageUpload';
+import onGetUserData from '../../../apis/GetUserData';
 
 const ProfilePage = ({navigation}) => {
     const [imageData, setImageData] = useState();
     const formData = new FormData();
+    const [ data, setData ] = useState(null);
+
+    useEffect(() => {
+      userData();
+    }, []);
+
+    const userData = async () => {
+      const res = await onGetUserData();
+      if(res) {
+        setData(res);
+      }
+    }
 
     const onClickBack = () => {
         navigation.navigate("SelectPage", { screen: 'SelectPage' });
@@ -31,30 +44,33 @@ const ProfilePage = ({navigation}) => {
         }
     }
 
-    const onClickSave = () => {
-        formData.append("userId", userId);
+    const onClickSave = async () => {
+        formData.append("userId", data.userId);
 
-        const data = {
+        const image = {
             uri: imageData.uri,
             type: imageData.mimeType,
             name: imageData.name,
         }
 
         if(imageData) {
-            formData.append("image", data);
+            formData.append("image", image);
             console.log('폼데이터 추가');
         } else {
             formData.append("image", "");
         }
 
-        onImageUpload(formData);
+        const res = await onImageUpload(formData);
+        if(res) {
+            navigation.navigate("SelectPage", { screen: 'SelectPage' });
+        }
     }
 
     return (
         <View style={Styles.container}>
             <BackHeader data="프로필 사진" onPress={() => onClickBack()} />
             <View style={Styles.profileContainer}>
-                <Image style={Styles.profile} source={imageData ? {uri: imageData.uri} : undefined} />
+                <Image style={Styles.profile} source={imageData ? {uri: imageData.uri} : (data ? {uri: data.profileImgeUrl} : undefined)} />
                 <View style={Styles.textContainer}>
                     <Text style={Styles.text}>프로필 이미지를 설정하지 않을</Text>
                     <Text style={Styles.text}>경우에는 기본 프로필로 설정됩니다.</Text>

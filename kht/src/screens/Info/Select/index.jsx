@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Text, View, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { useFocusEffect } from '@react-navigation/native';
 import { color } from "../../../styles/theme";
 import constants from "../../../styles/constants";
 
@@ -11,13 +12,11 @@ import onGetUserData from '../../../apis/GetUserData';
 const SelectPage = ({navigation}) => {
     const [ data, setData ] = useState();
 
-    useEffect(() => {
-      userData();
-    }, []);
-
-    useEffect(() => {
-        console.log(data);
-    }, [data]);
+    useFocusEffect(
+        useCallback(() => {
+            userData();
+        }, [])
+    );
 
     const userData = async () => {
       const res = await onGetUserData();
@@ -50,7 +49,7 @@ const SelectPage = ({navigation}) => {
         <View style={Styles.container}>
             <BackHeader data='프로필 편집' onPress={() => onClickBack()} />
             <View style={Styles.profileContainer}>
-                <View style={Styles.profile}></View>
+                <Image style={Styles.profile} source={data ? {uri: data.profileImgeUrl} : undefined}></Image>
                 <TouchableOpacity onPress={() => onClickProfile()}>
                     <Text style={Styles.profileText}>프로필 사진 수정</Text>
                 </TouchableOpacity>

@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image, ScrollView } from "react-native";
+import { useFocusEffect } from '@react-navigation/native';
 import { color } from "../../../styles/theme";
 import constants from "../../../styles/constants";
 
@@ -11,9 +12,11 @@ import onGetUserData from "../../../apis/GetUserData";
 const MainPage = ({navigation}) => {
     const [ data, setData ] = useState({});
 
-    useEffect(() => {
-      userData();
-    }, []);
+    useFocusEffect(
+      useCallback(() => {
+          userData();
+      }, [])
+    );
 
     const userData = async () => {
       const res = await onGetUserData();
@@ -41,7 +44,7 @@ const MainPage = ({navigation}) => {
                   <Text style={Styles.IdComment}>누적 운동 횟수 : {data.totalCounts}</Text>
                 </View>
               </View>
-              <View style={Styles.profile}></View>
+              <Image style={Styles.profile} source={data ? {uri: data.profileImgeUrl} : undefined}></Image>
             </View>
             <View style={Styles.containerGap}>
               <View style={Styles.dataContainer}>
