@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, Alert, TouchableWithoutFeedback, Keyboard, StyleSheet } from "react-native";
+import { View, TouchableWithoutFeedback, Keyboard, StyleSheet } from "react-native";
 import { color } from "../../styles/theme";
 import constants from "../../styles/constants";
 
