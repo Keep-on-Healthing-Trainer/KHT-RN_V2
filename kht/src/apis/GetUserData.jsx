@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { Alert } from 'react-native';
-import * as SecureStore from "expo-secure-store";
+import { getStorage, setStorage, removeStorage } from "../utils/Storage";
 
 const onGetUserData = async ( ) => {
 
-    const result = await SecureStore.getItemAsync('token');
+    const result = await getStorage('token');
     const token = result && JSON.parse(result);
     
     try {
