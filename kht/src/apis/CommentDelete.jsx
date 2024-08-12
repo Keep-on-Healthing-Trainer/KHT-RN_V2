@@ -20,9 +20,9 @@ const onCommentDelete = async ( id ) => {
         }
     } catch (error) {
         if (error.response) {
-            if (error.response.status === 403) {
-              console.log('comment del : 존재하지 않는 유저입니다.');
-              Alert.alert('존재하지 않는 유저입니다.');
+            if (error.response.status === 404) {
+              console.log('comment del : 일치하지 유저입니다.');
+              Alert.alert('삭제할 수 없는 댓글입니다.');
             } else {
               console.log('comment del : 댓글 삭제 오류');
               Alert.alert('댓글 삭제 오류입니다.');
