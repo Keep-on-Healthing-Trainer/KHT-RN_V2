@@ -32,7 +32,7 @@ const MainPage = ({navigation}) => {
     }
 
     const onClickView = ( key ) => {
-        navigation.navigate("ViewPage", { screen: 'ViewPage', name: key });
+        navigation.navigate("ViewPage", { screen: 'ViewPage', data: key });
     }
 
     const onDataList = async () => {
@@ -57,7 +57,14 @@ const MainPage = ({navigation}) => {
             <ScrollView style={Styles.mainContainer}>
                 {isLoading && listData ? listData.map((item, index) => {
                         return (
-                            <DataComponents key={index} name={item.userNickname} profile={item.profile} title={item.title} content={item.content} path={item.path} onPress={(key) => onClickView(key)} />
+                            <DataComponents
+                            key={index}
+                            name={item.userNickname}
+                            profile={item.profile}
+                            title={item.title}
+                            content={item.content}
+                            path={item.path}
+                            onPress={() => onClickView(item.id)} />
                         );
                     }) : undefined
                 }

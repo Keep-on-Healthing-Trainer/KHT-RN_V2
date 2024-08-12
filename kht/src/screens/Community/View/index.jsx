@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { TextInput, View, TouchableOpacity, Text, ScrollView, StyleSheet, TouchableWithoutFeedback, Keyboard, Image } from "react-native";
+import { TextInput, View, TouchableOpacity, Text, ScrollView, StyleSheet, TouchableWithoutFeedback, Keyboard, Image, Alert } from "react-native";
 import { useFocusEffect } from '@react-navigation/native';
 import { color } from "../../../styles/theme";
 import constants from "../../../styles/constants";
@@ -9,12 +9,17 @@ import DataComponents from './components/Data';
 import CommentDataComponents from './components/Comment';
 
 import onCommentPost from "../../../apis/CommentPost";
+import onCommunityGet from '../../../apis/CommunityGet';
 import onGetUserData from "../../../apis/GetUserData";
+import onCommentCount from "../../../apis/CommentCount";
 
-const ViewPage = ({navigation}) => {
+const ViewPage = ({navigation, route}) => {
     const [ data, setData ] = useState();
-    const [ comment, setComment ] = useState();
+    const [ commentCount, setCommentCount ] = useState();
     const [ userData, setUserData ] = useState();
+    const [ viewData, setViewData ] = useState();
+
+    const id = route.params.data;
 
     useFocusEffect(
         useCallback(() => {
@@ -26,6 +31,21 @@ const ViewPage = ({navigation}) => {
         const res = await onGetUserData();
         if(res) {
             setUserData(res);
+            getViewData();
+        }
+    }
+
+    const getViewData = async () => {
+        console.log(id);
+        
+        const res = await onCommunityGet(id);
+        if(res) {
+            setViewData(res);
+        }
+
+        const commentRes = await onCommentCount(id);
+        if(commentRes) {
+            setCommentCount(commentRes);
         }
     }
 
@@ -34,9 +54,16 @@ const ViewPage = ({navigation}) => {
     }
 
     const onClickPost = async () => {
-        const res = await onCommentPost(data, id);
-        if(res) {
-            setData(null);
+        console.log(id);
+
+        if(data.length >= 5 && data.length <= 5000) {
+            const res = await onCommentPost(data, id);
+            if(res) {
+                setData(null);
+                getViewData();
+            }
+        } else {
+            Alert.alert('댓글 길이는 5~5000자 사이여야 합니다.');
         }
     }
 
@@ -45,13 +72,31 @@ const ViewPage = ({navigation}) => {
                 <View style={Styles.container}>
                     <BackHeader onPress={() => onClickBack()} />
                     <ScrollView>
-                        <DataComponents />
-                        <CommentDataComponents />
-                        {/* {comment.map((item, index) => {
+                        <View>
+                        {viewData ? (
+                            <DataComponents
+                            count={commentCount}
+                            userNickname={viewData.userNickname}
+                            profileImage={viewData.profileImage}
+                            title={viewData.title}
+                            content={viewData.content}
+                            file={viewData.file}
+                            />
+                        ) : 
+                            undefined
+                        }
+                        <Text style={Styles.text}>댓글</Text>
+                        {viewData && viewData.comments.map((item, index) => {
                             return (
-                                <CommentDataComponents />
+                                <CommentDataComponents
+                                id={item.id}
+                                content={item.content}
+                                userNickname={item.userNickname}
+                                profileImage={item.profileImage}
+                                />
                             );
-                        })} */}
+                        })}
+                        </View>
                     </ScrollView>
                     <View style={Styles.inputFixed}>
                         <Image style={Styles.profile} source={userData ? {uri: userData.profileImgeUrl} : undefined}></Image>
@@ -76,6 +121,12 @@ const Styles = StyleSheet.create({
         width: constants.width,
         height: constants.height,
         backgroundColor: color.White,
+    },
+    text: {
+        fontSize: 18,
+        fontWeight: '600',
+        color: color.Black,
+        paddingLeft: 20,
     },
     inputFixed: {
         position: 'absolute',

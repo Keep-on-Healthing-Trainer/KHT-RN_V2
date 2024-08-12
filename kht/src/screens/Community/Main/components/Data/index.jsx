@@ -3,10 +3,6 @@ import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { color } from '../../../../../styles/theme';
 import constants from '../../../../../styles/constants';
 
-import Comment from '../../../../../assets/icon/Comment';
-import Heart from '../../../../../assets/icon/Heart';
-import PullHeart from "../../../../../assets/icon/PullHeart";
-
 const DataComponents = (props) => {
 
     return (
@@ -20,21 +16,7 @@ const DataComponents = (props) => {
                 <Text style={Styles.text}>{props.content}</Text>
                 {props.path ? (
                     <Image style={Styles.dataImage} source={{ uri: props.path }} />
-                ) : null}
-            </View>
-            <View style={Styles.labelContainer}>
-                <View style={Styles.label}>
-                    <Comment />
-                    <Text>3</Text>
-                </View>
-                <View style={Styles.label}>
-                    {props.data ? (
-                        <PullHeart />
-                    ) : (
-                        <Heart />
-                    )}
-                    <Text>4</Text>
-                </View>
+                ) : undefined}
             </View>
         </TouchableOpacity>
     );
@@ -92,26 +74,9 @@ const Styles = StyleSheet.create({
         color: color.Black,
         fontWeight: '500',
     },
-    labelContainer: {
-        width: constants.width,
-        height: 30,
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 20,
-        paddingLeft: 20,
-        paddingRight: 20,
-    },
-    label: {
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 5,
-    },
     dataImage: {
-        height: 200,
+        height: constants.width,
         resizeMode: 'contain',
-        marginTop: 10,
     }
 });
 

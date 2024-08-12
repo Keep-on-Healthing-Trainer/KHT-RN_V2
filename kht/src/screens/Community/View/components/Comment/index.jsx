@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, TouchableOpacity, Text, Alert, StyleSheet } from "react-native";
+import { View, TouchableOpacity, Text, Alert, Image, StyleSheet } from "react-native";
 import { color } from "../../../../../styles/theme";
 import constants from "../../../../../styles/constants";
 
@@ -15,7 +15,7 @@ const CommentDataComponents = ( props ) => {
     }
 
     const onClickDelete = async () => {
-        const res = await onCommentDelete(id);
+        const res = await onCommentDelete(props.id);
         if(res) {
             Alert.alert('댓글 삭제에 성공했습니다.');
         }
@@ -23,13 +23,12 @@ const CommentDataComponents = ( props ) => {
 
     return(
             <View style={Styles.container}>
-                <Text style={Styles.text}>댓글</Text>
                 <View style={Styles.dataContainer}>
                     <View style={Styles.profileContainer}>
-                        <View style={Styles.profile}></View>
+                        <Image style={Styles.profile} source={props.profileImage ? {uri: props.profileImage} : undefined}></Image>
                         <View>
-                            <Text style={Styles.profileText}>사나경</Text>
-                            <Text style={Styles.dataText}>근데 몸빵 지리긴 한다 ㅋㅋㅋ</Text>
+                            <Text style={Styles.profileText}>{props.userNickname}</Text>
+                            <Text style={Styles.dataText}>{props.content}</Text>
                         </View>
                     </View>
                     {moreState ? (
@@ -69,12 +68,6 @@ const Styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: '500',
         color: color.Gray[5],
-    },
-    text: {
-        fontSize: 18,
-        fontWeight: '600',
-        color: color.Black,
-        paddingLeft: 20,
     },
     profile: {
         width: 40,

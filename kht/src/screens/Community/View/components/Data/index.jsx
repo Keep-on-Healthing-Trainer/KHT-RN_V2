@@ -1,36 +1,29 @@
 import React from 'react';
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet } from "react-native";
 import { color } from '../../../../../styles/theme';
 import constants from '../../../../../styles/constants';
 
 import Comment from '../../../../../assets/icon/Comment';
-import Heart from '../../../../../assets/icon/Heart';
-import PullHeart from "../../../../../assets/icon/PullHeart";
 
 const DataComponents = ( props ) => {
 
     return(
         <View style={Styles.dataContainer}>
             <View style={Styles.profileContainer}>
-                <View style={Styles.profile}></View>
-                <Text style={Styles.boldText}>이기혁</Text>
+                <Image style={Styles.profile} source={{uri: props.profileImage}}></Image>
+                <Text style={Styles.boldText}>{props.userNickname}</Text>
             </View>
             <View style={Styles.textContainer}>
-                <Text style={Styles.mainBoldText}>확실히 체중 감소 하려면 운동 뿐만 아니라</Text>
-                <Text style={Styles.text}>식단도 같이 해야하는듯 ㄹㅇ;; 운동만 해서 빼는게 더 힘드러ㅓㅓㅓㄹㅇ ㅇㅈ?</Text>
+                <Text style={Styles.mainBoldText}>{props.title}</Text>
+                <Text style={Styles.text}>{props.content}</Text>
+                {props.file ? (
+                    <Image style={Styles.fileImage} source={{uri: props.file}}></Image>
+                ) : undefined}
             </View>
             <View style={Styles.labelContainer}>
                 <View style={Styles.label}>
                     <Comment />
-                    <Text>3</Text>
-                </View>
-                <View style={Styles.label}>
-                    {props.data ? (
-                        <PullHeart />
-                    ) : (
-                        <Heart />
-                    )}
-                    <Text>4</Text>
+                    <Text>{props.count ? props.count : 0}</Text>
                 </View>
             </View>
         </View>
@@ -74,7 +67,6 @@ const Styles = StyleSheet.create({
         width: constants.width,
         paddingLeft: 20,
         paddingRight: 20,
-        paddingBottom: 20,
         rowGap: 5,
     },
     mainBoldText: {
@@ -89,11 +81,10 @@ const Styles = StyleSheet.create({
     },
     labelContainer: {
         width: constants.width,
-        height: 30,
+        height: 50,
         display: 'flex', 
         flexDirection: 'row',
         alignItems: 'center',
-        gap: 20,
         paddingLeft: 20,
         paddingRight: 20,
     },
@@ -102,6 +93,10 @@ const Styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         gap: 5,
+    },
+    fileImage: {
+        height: constants.width,
+        resizeMode: 'contain',
     }
 })
 
