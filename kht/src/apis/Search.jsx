@@ -7,6 +7,8 @@ const onSearch = async ( data ) => {
     const result = await getStorage('token');
     const token = result && JSON.parse(result);
 
+    console.log(data.tag);
+
     try {
         const response = await axios.get(`${process.env.API_KEY}/guide/search?title=${data.title}&tag=${data.tag}`, {
             headers: {
@@ -26,6 +28,7 @@ const onSearch = async ( data ) => {
               Alert.alert('잘못된 요청입니다.');
             } else {
               console.log('search : 검색 오류');
+              console.log()
               Alert.alert('검색 오류입니다.');
             }
         } else {

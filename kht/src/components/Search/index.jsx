@@ -10,23 +10,22 @@ const Search = ( props ) => {
 
     useEffect(() => {
         props.onGetInText(text);
-      }, [text]);
+    }, [text]);
 
-    return(
+    return (
         <View style={Styles.container}>
             <TextInput
-            style={Styles.input}
-            placeholderTextColor={color.Blue[10]}
-            placeholder='원하시는 운동을 검색해보세요.'
-            onChangeText={(innerText) => setText(innerText)}
-            onSubmitEditing={props.enter}
-            returnKeyType="done"
-            ></TextInput>
+                style={Styles.input}
+                placeholderTextColor={color.Blue[10]}
+                placeholder='원하시는 운동을 검색해보세요.'
+                onChangeText={(innerText) => setText(innerText)}
+                onSubmitEditing={props.enter}
+                returnKeyType="done"
+            />
             <SearchIcon />
         </View>
     );
 }
-
 const Styles = StyleSheet.create({
     container: {
         width: constants.width/1.2,

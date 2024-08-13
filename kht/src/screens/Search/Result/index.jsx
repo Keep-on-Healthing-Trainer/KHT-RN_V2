@@ -5,9 +5,18 @@ import constants from "../../../styles/constants";
 
 import Search from "../../../components/Search";
 import BackButton from "../../../assets/icon/Back";
+import SelectComponents from './components/SelectComponents';
+
+import onSearch from '../../../apis/Search';
 
 const ResultPage = ({navigation, route}) => {
     const resultData = route.params.name;
+    const [ state, setState ] = useState('전체');
+
+    useEffect(() => {
+        handleInputChange(state, "tag");
+        onClickEnter();
+    }, [state]);
 
     const [ searchData, setSearchData ] = useState({
         title: "",
@@ -29,36 +38,32 @@ const ResultPage = ({navigation, route}) => {
         navigation.navigate("DataPage", { screen: 'DataPage' });
     }
 
+    const onClickEnter = async () => {
+        try {
+            const data = await onSearch(searchData);
+            navigation.navigate("ResultPage", { screen: 'ResultPage', name: data });
+        } catch (error) {
+            console.log("검색 정보 가져오기 오류");
+        }
+    }
+
     return(
         <View style={Styles.container}>
             <View style={Styles.back}>
-                <TouchableOpacity style={Styles.button} onPress={() => onClickBack()} >
+                <TouchableOpacity style={Styles.button} onPress={() => onClickBack()}>
                     <BackButton />
                 </TouchableOpacity>
                 <Search onGetInText={(text) => handleInputChange(text, "title")} enter={() => onClickEnter()} />
             </View>
             <View style={Styles.select}>
-                <TouchableOpacity style={Styles.focusSelect}>
-                    <Text style={Styles.focusSelectText}>전체</Text> 
-                </TouchableOpacity>
-                <TouchableOpacity style={Styles.noFocusSelect}>
-                    <Text style={Styles.noFocusSelectText}>허리</Text> 
-                </TouchableOpacity>
-                <TouchableOpacity style={Styles.noFocusSelect}>
-                    <Text style={Styles.noFocusSelectText}>복근</Text> 
-                </TouchableOpacity>
-                <TouchableOpacity style={Styles.noFocusSelect}>
-                    <Text style={Styles.noFocusSelectText}>팔</Text> 
-                </TouchableOpacity>
-                <TouchableOpacity style={Styles.noFocusSelect}>
-                    <Text style={Styles.noFocusSelectText}>허벅지</Text> 
-                </TouchableOpacity>
-                <TouchableOpacity style={Styles.noFocusSelect}>
-                    <Text style={Styles.noFocusSelectText}>종아리</Text> 
-                </TouchableOpacity>
-                <TouchableOpacity style={Styles.noFocusSelect}>
-                    <Text style={Styles.noFocusSelectText}>등</Text> 
-                </TouchableOpacity>
+                <SelectComponents state={state} data="전체" onPress={() => setState('전체')} />
+                <SelectComponents state={state} data="유산소" onPress={() => setState('유산소')} />
+                <SelectComponents state={state} data="어깨" onPress={() => setState('어깨')} />
+                <SelectComponents state={state} data="팔" onPress={() => setState('팔')} />
+                <SelectComponents state={state} data="복근" onPress={() => setState('복근')} />
+                <SelectComponents state={state} data="등" onPress={() => setState('등')} />
+                <SelectComponents state={state} data="허벅지" onPress={() => setState('허벅지')} />
+                <SelectComponents state={state} data="종아리" onPress={() => setState('종아리')} />
             </View>
             <ScrollView>
                 {resultData ? resultData.map((item, index) => {
@@ -144,32 +149,6 @@ const Styles = StyleSheet.create({
         paddingLeft: 20,
         paddingRight: 20,
     },
-    focusSelect: {
-        paddingLeft: 2,
-        paddingRight: 2,
-        height: constants.height/32,
-        display: 'flex',
-        alignItems: 'center',
-        borderBottomColor: color.Black,
-        borderBottomWidth: 1,
-    },
-    focusSelectText: {
-        fontSize: 15,
-        color: color.Black,
-        fontWeight: '500',
-    },
-    noFocusSelect: {
-        paddingLeft: 2,
-        paddingRight: 2,
-        height: constants.height/32,
-        display: 'flex',
-        alignItems: 'center',
-    },
-    noFocusSelectText: {
-        fontSize: 15,
-        color: color.Gray[4],
-        fontWeight: '500',
-    }
 });
 
 export default ResultPage;
