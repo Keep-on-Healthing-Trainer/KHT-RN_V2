@@ -9,10 +9,12 @@ const BackHeader = ( props ) => {
 
     return(
         <View style={Styles.container}>
-            <TouchableOpacity onPress={props.onPress}>
-                 <Back />
-            </TouchableOpacity>
-            <Text style={Styles.text}>커뮤니티</Text>
+            <View style={Styles.textContainer}>
+                <TouchableOpacity onPress={props.onPress}>
+                    <Back />
+                </TouchableOpacity>
+                <Text style={Styles.text}>커뮤니티</Text>
+            </View>
         </View>
     );
 }
@@ -25,8 +27,15 @@ const Styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'flex-end',
         justifyContent: 'flex-start',
-        gap: 20,
         paddingLeft: 20,
+    },
+    textContainer: {
+        height: constants.height/20,
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        gap: 20,
     },
     text: {
         fontSize: 18,

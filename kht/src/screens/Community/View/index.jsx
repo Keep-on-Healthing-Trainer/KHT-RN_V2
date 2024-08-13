@@ -71,33 +71,33 @@ const ViewPage = ({navigation, route}) => {
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
                 <View style={Styles.container}>
                     <BackHeader onPress={() => onClickBack()} />
-                    <ScrollView>
-                        <View>
-                        {viewData ? (
-                            <DataComponents
-                            count={commentCount}
-                            userNickname={viewData.userNickname}
-                            profileImage={viewData.profileImage}
-                            title={viewData.title}
-                            content={viewData.content}
-                            file={viewData.file}
-                            />
-                        ) : 
-                            undefined
-                        }
-                        <Text style={Styles.text}>댓글</Text>
-                        {viewData && viewData.comments.map((item, index) => {
-                            return (
-                                <CommentDataComponents
-                                id={item.id}
-                                content={item.content}
-                                userNickname={item.userNickname}
-                                profileImage={item.profileImage}
+                        <ScrollView>
+                            <View onStartShouldSetResponder={() => true}>
+                            {viewData ? (
+                                <DataComponents
+                                count={commentCount}
+                                userNickname={viewData.userNickname}
+                                profileImage={viewData.profileImage}
+                                title={viewData.title}
+                                content={viewData.content}
+                                file={viewData.file}
                                 />
-                            );
-                        })}
-                        </View>
-                    </ScrollView>
+                            ) : 
+                                undefined
+                            }
+                            <Text style={Styles.text}>댓글</Text>
+                            {viewData && viewData.comments.map((item, index) => {
+                                return (
+                                    <CommentDataComponents
+                                    id={item.id}
+                                    content={item.content}
+                                    userNickname={item.userNickname}
+                                    profileImage={item.profileImage}
+                                    />
+                                );
+                            })}
+                            </View>
+                        </ScrollView>
                     <View style={Styles.inputFixed}>
                         <Image style={Styles.profile} source={userData ? {uri: userData.profileImgeUrl} : undefined}></Image>
                         <TextInput style={Styles.input} placeholder='댓글 추가...' onChangeText={(text) => setData(text)}>{data}</TextInput>
@@ -122,6 +122,11 @@ const Styles = StyleSheet.create({
         height: constants.height,
         backgroundColor: color.White,
     },
+    dataContainer: {
+        flex: 1,
+        width: constants.width,
+        height: constants.height/1.1,
+    },
     text: {
         fontSize: 18,
         fontWeight: '600',
@@ -129,7 +134,6 @@ const Styles = StyleSheet.create({
         paddingLeft: 20,
     },
     inputFixed: {
-        position: 'absolute',
         width: constants.width,
         height: constants.height/13,
         backgroundColor: color.White,
