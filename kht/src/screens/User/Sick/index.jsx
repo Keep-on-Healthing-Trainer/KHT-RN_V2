@@ -10,10 +10,15 @@ import InputComponents from './components/InputComponents';
 
 const SickPage = ({navigation, route}) => {
     const signupData = route.params.data;
+    const [ data, setData ] = useState();
 
     const onClickNext = () => {
-        navigation.navigate("ExitPage", { screen: 'ExitPage', data: signupData });
-      }
+        navigation.navigate("ExitPage", { screen: 'ExitPage', data: signupData, sick: data });
+    }
+
+    useEffect(() => {
+        console.log(data);
+    }, [data]);
 
     return(
         <View style={Styles.container} >
@@ -23,7 +28,9 @@ const SickPage = ({navigation, route}) => {
                     boldText="운동을 할 때 불편한 부위가 있으신가요?"
                     text="KHT가 필요한 운동을 추천해드릴게요."
                 />
-                <InputComponents />
+                <InputComponents 
+                    state={(state) => setData(state)}
+                />
                 <Button innerText="다음" onPress={onClickNext} />
             </View>
         </View>

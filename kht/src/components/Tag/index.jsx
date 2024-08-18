@@ -16,6 +16,10 @@ const Tag = (props) => {
         setIsAnimated(!isAnimated);
     };
 
+    useEffect(() => {
+        props.state(isAnimated);
+    }, [isAnimated]);
+
     const borderWidth = borderAnim.interpolate({
         inputRange: [0, 1],
         outputRange: [0, 1]
