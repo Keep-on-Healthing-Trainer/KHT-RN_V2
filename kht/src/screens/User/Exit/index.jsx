@@ -14,10 +14,11 @@ import onSignup from "../../../apis/Signup";
 
 const ExitPage = ({navigation, route}) => {
     const signupData = route.params.data;
+    const sick = route.params.sick;
 
     const onClickSignup = async () => {
         try {
-          const signupState = await onSignup(signupData);
+          const signupState = await onSignup(signupData, sick);
           if (signupState) {
             navigation.navigate("LoginPage", { screen: 'LoginPage' });
           }
