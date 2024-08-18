@@ -43,7 +43,11 @@ const SelectPage = ({navigation}) => {
 
     const onClickBack = () => {
         navigation.navigate("MainPage", { screen: 'MainPage' });
-      }
+    }
+
+    const onClickReSelect = () => {
+        navigation.navigate("ReSelectPage", { screen: 'ReSelectPage' });
+    }
 
     return(
         <View style={Styles.container}>
@@ -78,7 +82,7 @@ const SelectPage = ({navigation}) => {
                 </View>
                 <View style={Styles.nameDiv}>
                     <Text style={Styles.nameTagStyle}>부상 부위 재선택</Text>
-                    <TouchableOpacity style={Styles.box}>
+                    <TouchableOpacity style={Styles.box} onPress={() => onClickReSelect()}>
                         <ProfileArrow></ProfileArrow>
                     </TouchableOpacity>
                 </View>
