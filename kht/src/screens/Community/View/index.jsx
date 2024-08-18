@@ -61,9 +61,17 @@ const ViewPage = ({navigation, route}) => {
             if(res) {
                 setData(null);
                 getViewData();
+                Keyboard.dismiss();
             }
         } else {
             Alert.alert('댓글 길이는 5~5000자 사이여야 합니다.');
+        }
+    }
+
+    const onDelete = async (state) => {
+        if(state) {
+            getViewData();
+            Keyboard.dismiss();
         }
     }
 
@@ -93,6 +101,7 @@ const ViewPage = ({navigation, route}) => {
                                     content={item.content}
                                     userNickname={item.userNickname}
                                     profileImage={item.profileImage}
+                                    onGetInState={(state) => onDelete(state)}
                                     />
                                 );
                             })}

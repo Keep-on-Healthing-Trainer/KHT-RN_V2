@@ -8,6 +8,7 @@ import More from "../../../../../assets/icon/More";
 import onCommentDelete from "../../../../../apis/CommentDelete";
 
 const CommentDataComponents = ( props ) => {
+    const [ state, setState ] = useState(false);
     const [ moreState, setMoreState ] = useState(false);
 
     const onClickMore = () => {
@@ -16,10 +17,17 @@ const CommentDataComponents = ( props ) => {
 
     const onClickDelete = async () => {
         const res = await onCommentDelete(props.id);
+
         if(res) {
             Alert.alert('댓글 삭제에 성공했습니다.');
+            setState(true);
         }
     }
+
+    useEffect(() => {
+        props.onGetInState(state);
+        setState(false);
+    }, [state]);
 
     return(
             <View style={Styles.container}>
