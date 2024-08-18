@@ -8,9 +8,11 @@ import Header from '../../../components/Header';
 import Chart from "./LineChart";
 
 import onGetUserData from "../../../apis/GetUserData";
+import onGetChartData from "../../../apis/GetChartData";
 
 const MainPage = ({navigation}) => {
     const [ data, setData ] = useState({});
+    const [ chartData, setChartData ] = useState({});
 
     useFocusEffect(
       useCallback(() => {
@@ -22,6 +24,15 @@ const MainPage = ({navigation}) => {
       const res = await onGetUserData();
       if(res) {
         setData(res);
+        getChartData();
+      }
+    }
+
+    const getChartData = async () => {
+      const res = await onGetChartData();
+      if(res) {
+        setChartData(res);
+        console.log(res);
       }
     }
 
@@ -49,18 +60,18 @@ const MainPage = ({navigation}) => {
             <View style={Styles.containerGap}>
               <View style={Styles.dataContainer}>
                 <Text style={Styles.textCount}>총 {data.sitUpCounts == null ? 0 : data.sitUpCounts}회</Text>
-                <Text style={Styles.textComment}>KHT와 함께 {data.sitUpCounts == null ? 0 : data.sitUpCounts}회 윗몸일으키기를 진행했어요</Text>
-                <Chart data={data.exerciseResponses}></Chart>
+                <Text style={Styles.textComment}>KHT와 함께 {chartData.totalSitUpCounts == null ? 0 : chartData.totalSitUpCounts}회 윗몸일으키기를 진행했어요</Text>
+                <Chart data={chartData.sitUpResponses}></Chart>
               </View>
               <View style={Styles.dataContainer}>
                 <Text style={Styles.textCount}>총 {data.squatCounts == null ? 0 : data.squatCounts}회</Text>
-                <Text style={Styles.textComment}>KHT와 함께 {data.squatCounts == null ? 0 : data.squatCounts}회 스쿼트를 진행했어요</Text>
-                <Chart data={data.exerciseResponses}></Chart>
+                <Text style={Styles.textComment}>KHT와 함께 {chartData.totalSquatCounts == null ? 0 : chartData.totalSquatCounts}회 스쿼트를 진행했어요</Text>
+                <Chart data={chartData.squatResponses}></Chart>
               </View>
               <View style={Styles.dataContainer}>
                 <Text style={Styles.textCount}>총 {data.pushUpCounts == null ? 0 : data.pushUpCounts}회</Text>
-                <Text style={Styles.textComment}>KHT와 함께 {data.pushUpCounts == null ? 0 : data.pushUpCounts}회 팔굽혀펴기를 진행했어요</Text>
-                <Chart data={data.exerciseResponses}></Chart>
+                <Text style={Styles.textComment}>KHT와 함께 {chartData.totalPushUpCounts == null ? 0 : chartData.totalPushUpCounts}회 팔굽혀펴기를 진행했어요</Text>
+                <Chart data={chartData.pushUpResponses}></Chart>
               </View>
             </View>
           </ScrollView>
