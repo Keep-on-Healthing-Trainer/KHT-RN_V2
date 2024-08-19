@@ -1,14 +1,15 @@
 import axios from 'axios';
 import { Alert } from 'react-native';
 
-const onSignup = async ( data ) => {
+const onSignup = async ( data, sick ) => {
 
     try {
         const response = await axios.post(`${process.env.API_KEY}/user/signup`, {
             "userId" : data.userId,
             "name" : data.name,
             "phoneNumber" : data.phoneNumber,
-            "password" : data.password
+            "password" : data.password,
+            "uncomfortableParts" : sick
         });
 
         if(response.status == 201) {

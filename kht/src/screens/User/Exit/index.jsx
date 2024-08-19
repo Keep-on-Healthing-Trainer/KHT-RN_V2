@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, Touchable } from "react-native";
-import * as Progress from 'react-native-progress';
 import { color } from "../../../styles/theme";
 import constants from "../../../styles/constants";
 
@@ -10,21 +9,10 @@ import Character from "../../../assets/icon/Character";
 import ProgressBarComponents from "../components/ProgressBarComponents";
 import TextComponents from "../components/TextComponents";
 
-import onSignup from "../../../apis/Signup";
-
 const ExitPage = ({navigation, route}) => {
-    const signupData = route.params.data;
-    const sick = route.params.sick;
 
-    const onClickSignup = async () => {
-        try {
-          const signupState = await onSignup(signupData, sick);
-          if (signupState) {
-            navigation.navigate("LoginPage", { screen: 'LoginPage' });
-          }
-        } catch (error) {
-          console.log("회웝가입 오류");
-        }
+    const onClickLogin = () => {
+        navigation.navigate("LoginPage", { screen: 'LoginPage' });
     }
 
     return(
@@ -37,7 +25,7 @@ const ExitPage = ({navigation, route}) => {
                 />
                 <Character />
                 <Text style={Styles.fixText}>KHT가 최고의 맞춤 플랜을 제공할게요!</Text>
-                <Button innerText="로그인" onPress={onClickSignup} />
+                <Button innerText="로그인" onPress={onClickLogin} />
             </View>
         </View>
     );

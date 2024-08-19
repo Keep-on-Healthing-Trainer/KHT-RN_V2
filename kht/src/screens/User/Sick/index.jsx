@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Alert } from "react-native";
 import { color } from "../../../styles/theme";
 import constants from "../../../styles/constants";
 
@@ -8,12 +8,23 @@ import ProgressBarComponents from '../components/ProgressBarComponents';
 import TextComponents from '../components/TextComponents';
 import InputComponents from './components/InputComponents';
 
+import onSignup from "../../../apis/Signup";
+
 const SickPage = ({navigation, route}) => {
     const signupData = route.params.data;
     const [ data, setData ] = useState();
+    const [ sick, setSick ] = useState({});
 
-    const onClickNext = () => {
-        navigation.navigate("ExitPage", { screen: 'ExitPage', data: signupData, sick: data });
+    const onClickNext = async () => {
+
+        const res = await onSignup(signupData, data);
+        if(res) {
+            navigation.navigate("ExitPage", { screen: 'ExitPage' });
+        }
+        else {
+            Alert.alert('회원가입에 실패했습니다.');
+            navigation.navigate("InputPage", { screen: 'InputPage' });
+        }
     }
 
     useEffect(() => {

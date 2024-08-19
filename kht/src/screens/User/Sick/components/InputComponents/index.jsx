@@ -6,16 +6,13 @@ import Tag from '../../../../../components/Tag';
 
 const InputComponents = ( props ) => {
     const [ data, setData ] = useState({
-        '척추': false,
-        '목': false,
-        '어깨': false,
-        '골반': false,
-        '허리디스크': false,
-        '심장': false,
-        '상체': false,
-        '하체': false,
-        '손목': false,
-        '발목': false,
+        'CARDIO': false,
+        'SHOULDER': false,
+        'ARM': false,
+        'ABDOMINAL': false,
+        'BACK': false,
+        'THIGH': false,
+        'CALF': false,
     });
 
     useEffect(() => {
@@ -32,20 +29,17 @@ const InputComponents = ( props ) => {
     return(
         <View style={Styles.inputContainer}>
             <View style={Styles.TagContainer}>
-                <Tag innerText="척추" state={(state) => handleSelectChange(state, '척추')} />
-                <Tag innerText="목" state={(state) => handleSelectChange(state, '목')} />
-                <Tag innerText="어깨" state={(state) => handleSelectChange(state, '어깨')} />
+                <Tag innerText="유산소" state={(state) => handleSelectChange(state, 'CARDIO')} />
+                <Tag innerText="어깨" state={(state) => handleSelectChange(state, 'SHOULDER')} />
+                <Tag innerText="팔" state={(state) => handleSelectChange(state, 'ARM')} />
             </View>
             <View style={Styles.TagContainer}>
-                <Tag innerText="골반" state={(state) => handleSelectChange(state, '골반')} />
-                <Tag innerText="허리 디스크" state={(state) => handleSelectChange(state, '허리디스크')} />
-                <Tag innerText="심장" state={(state) => handleSelectChange(state, '심장')} />
+                <Tag innerText="복근" state={(state) => handleSelectChange(state, 'ABDOMINAL')} />
+                <Tag innerText="등" state={(state) => handleSelectChange(state, 'BACK')} />
             </View>
             <View style={Styles.TagContainer}>
-                <Tag innerText="상체" state={(state) => handleSelectChange(state, '상체')} />
-                <Tag innerText="하체" state={(state) => handleSelectChange(state, '하체')} />
-                <Tag innerText="손목" state={(state) => handleSelectChange(state, '손목')} />
-                <Tag innerText="발목" state={(state) => handleSelectChange(state, '발목')} />
+                <Tag innerText="허벅지" state={(state) => handleSelectChange(state, 'THIGH')} />
+                <Tag innerText="종아리" state={(state) => handleSelectChange(state, 'CALF')} />
             </View>
         </View>
     );

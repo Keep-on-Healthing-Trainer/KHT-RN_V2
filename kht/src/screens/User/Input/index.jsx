@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, Image, TouchableWithoutFeedback, Keyboard, StyleSheet } from "react-native";
+import { Text, View, Alert, TouchableWithoutFeedback, Keyboard, StyleSheet } from "react-native";
 import { color } from "../../../styles/theme";
 import constants from "../../../styles/constants";
 
@@ -16,7 +16,27 @@ const InputPage = ({navigation}) => {
     },[signupData]);
 
     const onClickNext = () => {
-        navigation.navigate("IntentPage", { screen: 'IntentPage', data: signupData });
+        if(signupData.name.length >= 2 && signupData.name.length <= 8) {
+            if(signupData.userId.length >= 6 && signupData.userId.length <= 15) {
+                if(signupData.phoneNumber.length == 11) {
+                    if(signupData.password == signupData.passwordCheck) {
+                        if(signupData.password.length >= 8 && signupData.password.length <= 20) {
+                            navigation.navigate("IntentPage", { screen: 'IntentPage', data: signupData });
+                        } else {
+                            Alert.alert('비밀번호의 길이는 8~20자 사이여야 합니다.');
+                        }
+                    } else {
+                        Alert.alert('비밀번호 확인이 일치하지 않습니다.');
+                    }
+                } else {
+                    Alert.alert('전화번호의 길이는 11자여야 합니다.');
+                }
+            } else {
+                Alert.alert('아이디의 길이는 6~15자 사이여야 합니다.');
+            }
+        } else {
+            Alert.alert('이름의 길이는 2~8자 사이여야 합니다.');
+        }
     }
 
     return(
