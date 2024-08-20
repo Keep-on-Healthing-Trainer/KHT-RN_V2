@@ -7,19 +7,30 @@ const onSearch = async ( data ) => {
     const result = await getStorage('token');
     const token = result && JSON.parse(result);
 
-    console.log(data.tag);
-
     try {
-        const response = await axios.get(`${process.env.API_KEY}/guide/search?title=${data.title}&tag=${data.tag}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
+        if(data.tag !== '전체') {
+            const response = await axios.get(`${process.env.API_KEY}/guide/search?title=${data.title}&tag=${data.tag}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
 
-        if(response.status == 200) {
-            console.log("검색에 성공하였습니다.");
-            //console.log(response.data);
-            return response.data;
+            if(response.status == 200) {
+                console.log("검색에 성공하였습니다.");
+                return response.data;
+            }
+        } else {
+            const response = await axios.get(`${process.env.API_KEY}/guide/search?title=${data.title}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            if(response.status == 200) {
+                console.log("검색에 성공하였습니다.");
+                console.log(response.data);
+                return response.data;
+            }
         }
     } catch (error) {
         if (error.response) {
@@ -28,7 +39,6 @@ const onSearch = async ( data ) => {
               Alert.alert('잘못된 요청입니다.');
             } else {
               console.log('search : 검색 오류');
-              console.log()
               Alert.alert('검색 오류입니다.');
             }
         } else {

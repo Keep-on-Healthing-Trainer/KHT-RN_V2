@@ -11,17 +11,18 @@ import onSearch from '../../../apis/Search';
 
 const ResultPage = ({navigation, route}) => {
     const resultData = route.params.name;
+    const beforeData = route.params.title;
     const [ state, setState ] = useState('전체');
-
-    useEffect(() => {
-        handleInputChange(state, "tag");
-        onClickEnter();
-    }, [state]);
-
     const [ searchData, setSearchData ] = useState({
-        title: "",
-        tag: "",
+        title: beforeData || "",
+        tag: '전체',
     });
+
+    const onPressData = (item, data) => {
+        setState(item);
+        handleInputChange(data, "tag");
+        onClickEnter();
+    };
     
     const handleInputChange = (text, field) => {
         setSearchData(prevData => ({
@@ -56,14 +57,14 @@ const ResultPage = ({navigation, route}) => {
                 <Search onGetInText={(text) => handleInputChange(text, "title")} enter={() => onClickEnter()} />
             </View>
             <View style={Styles.select}>
-                <SelectComponents state={state} data="전체" onPress={() => setState('전체')} />
-                <SelectComponents state={state} data="유산소" onPress={() => setState('유산소')} />
-                <SelectComponents state={state} data="어깨" onPress={() => setState('어깨')} />
-                <SelectComponents state={state} data="팔" onPress={() => setState('팔')} />
-                <SelectComponents state={state} data="복근" onPress={() => setState('복근')} />
-                <SelectComponents state={state} data="등" onPress={() => setState('등')} />
-                <SelectComponents state={state} data="허벅지" onPress={() => setState('허벅지')} />
-                <SelectComponents state={state} data="종아리" onPress={() => setState('종아리')} />
+                <SelectComponents state={state} data="전체" onPress={() => onPressData('전체', '전체')} />
+                <SelectComponents state={state} data="유산소" onPress={() => onPressData('유산소', 'CARDIO')} />
+                <SelectComponents state={state} data="어깨" onPress={() => onPressData('어깨', 'SHOULDER')} />
+                <SelectComponents state={state} data="팔" onPress={() => onPressData('팔', 'ARM')} />
+                <SelectComponents state={state} data="복근" onPress={() => onPressData('복근', 'ABDOMINAL')} />
+                <SelectComponents state={state} data="등" onPress={() => onPressData('등', 'BACK')} />
+                <SelectComponents state={state} data="허벅지" onPress={() => onPressData('허벅지', 'THIGH')} />
+                <SelectComponents state={state} data="종아리" onPress={() => onPressData('종아리', 'CALF')} />
             </View>
             <ScrollView>
                 {resultData ? resultData.map((item, index) => {

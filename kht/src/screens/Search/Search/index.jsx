@@ -9,12 +9,38 @@ import Header from '../../../components/Header';
 import Search from "../../../components/Search";
 
 import onSearch from '../../../apis/Search';
+import onGetUserData from "../../../apis/GetUserData";
+import onGetRecommendData from '../../../apis/GetRecommendData';
 
 const SearchPage = ({navigation}) => {
     const [ searchData, setSearchData ] = useState({
         title: "",
         tag: "전체",
     });
+    const [ userData, setUserData ] = useState({});
+    const [ recommendData, setRecommendData ] = useState();
+
+    useFocusEffect(
+      useCallback(() => {
+        getUserData();
+      }, [])
+    );
+
+    const getUserData = async () => {
+      const res = await onGetUserData();
+      if(res) {
+        setUserData(res);
+        getRecommendData();
+      }
+    }
+
+    const getRecommendData = async () => {
+        const res = await onGetRecommendData();
+        if(res) {
+            setRecommendData(res);
+            console.log(res);
+        }
+    }
     
     const handleInputChange = (text, field) => {
         setSearchData(prevData => ({
@@ -30,7 +56,7 @@ const SearchPage = ({navigation}) => {
     const onClickEnter = async () => {
         try {
             const data = await onSearch(searchData);
-            navigation.navigate("ResultPage", { screen: 'ResultPage', name: data });
+            navigation.navigate("ResultPage", { screen: 'ResultPage', name: data, title: searchData.title });
         } catch (error) {
             console.log("검색 정보 가져오기 오류");
         }
@@ -65,56 +91,8 @@ const SearchPage = ({navigation}) => {
                         <Image source={require('../../../assets/image/finally.png')} style={Styles.img}></Image>
                     </View>
                 </View>
-                <Text style={Styles.boldText}>000님을 위한 운동</Text>
+                <Text style={Styles.boldText}>{userData.name}님을 위한 운동</Text>
                 <View style={Styles.dataContainer}>
-                    <View style={Styles.column}>
-                        <TouchableOpacity style={Styles.data} onPress={() => onClickData()}>
-                            <View style={Styles.imgContainer}>
-                                <Image style={Styles.image} source={require('../../../assets/image/training.png')}></Image>
-                            </View>
-                            <Text style={Styles.boxText}>레그레이즈</Text>
-                            <Text style={Styles.boxTextInner}>복근, 허벅지</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={Styles.data} onPress={() => onClickData()}>
-                            <View style={Styles.imgContainer}>
-                                <Image style={Styles.image} source={require('../../../assets/image/training.png')}></Image>
-                            </View>
-                            <Text style={Styles.boxText}>레그레이즈</Text>
-                            <Text style={Styles.boxTextInner}>복근, 허벅지</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={Styles.column}>
-                        <TouchableOpacity style={Styles.data} onPress={() => onClickData()}>
-                            <View style={Styles.imgContainer}>
-                                <Image style={Styles.image} source={require('../../../assets/image/training.png')}></Image>
-                            </View>
-                            <Text style={Styles.boxText}>레그레이즈</Text>
-                            <Text style={Styles.boxTextInner}>복근, 허벅지</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={Styles.data} onPress={() => onClickData()}>
-                            <View style={Styles.imgContainer}>
-                                <Image style={Styles.image} source={require('../../../assets/image/training.png')}></Image>
-                            </View>
-                            <Text style={Styles.boxText}>레그레이즈</Text>
-                            <Text style={Styles.boxTextInner}>복근, 허벅지</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={Styles.column}>
-                        <TouchableOpacity style={Styles.data} onPress={() => onClickData()}>
-                            <View style={Styles.imgContainer}>
-                                <Image style={Styles.image} source={require('../../../assets/image/training.png')}></Image>
-                            </View>
-                            <Text style={Styles.boxText}>레그레이즈</Text>
-                            <Text style={Styles.boxTextInner}>복근, 허벅지</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={Styles.data} onPress={() => onClickData()}>
-                            <View style={Styles.imgContainer}>
-                                <Image style={Styles.image} source={require('../../../assets/image/training.png')}></Image>
-                            </View>
-                            <Text style={Styles.boxText}>레그레이즈</Text>
-                            <Text style={Styles.boxTextInner}>복근, 허벅지</Text>
-                        </TouchableOpacity>
-                    </View>
                     <View style={Styles.column}>
                         <TouchableOpacity style={Styles.data} onPress={() => onClickData()}>
                             <View style={Styles.imgContainer}>
@@ -157,6 +135,8 @@ const Styles = StyleSheet.create({
         width: constants.width,
         gap: 20,
         rowGap: 20,
+        paddingTop: 20,
+        paddinBottom: 20,
     },
     search: {
         width: constants.width,
@@ -183,10 +163,10 @@ const Styles = StyleSheet.create({
     },
     box: {
         backgroundColor: color.White,
-        width: constants.width/2.3,
+        width: constants.width/2.2,
         height: 80,
         borderRadius: 10,
-        display: 'flex',
+        display: 'flex',    
         justifyContent: 'space-around',
         alignItems: 'center',
         flexDirection: 'row',
@@ -205,15 +185,15 @@ const Styles = StyleSheet.create({
     },
     column: {
         width: constants.width,
-        height: constants.height/5,
+        height: constants.height/5.5,
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-evenly',
     },
     data: {
-        width: 170,
-        height: 170,
+        width: constants.width/2.2,
+        height: constants.width/2.2,
         borderRadius: 20,
         borderWidth: 1,
         borderColor: color.Gray[1],
@@ -226,12 +206,12 @@ const Styles = StyleSheet.create({
         bottom: 0,
     },
     imgContainer: {
-        width: 140,
-        height: 110,
+        width: constants.width/2.5,
+        height: constants.width/3.2,
         alignItems: 'center',
     },
     image: {
-        height: 110,
+        height: constants.width/3.5,
         resizeMode: "contain",
     }
 })
