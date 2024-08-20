@@ -2,6 +2,8 @@ import axios from 'axios';
 import { Alert } from 'react-native';
 import { getStorage, setStorage, removeStorage } from "../utils/Storage";
 
+import onRefresh from "./Refresh";
+
 const onCommunityPost = async ( data ) => {
 
     const result = await getStorage('token');
@@ -23,7 +25,9 @@ const onCommunityPost = async ( data ) => {
         }
     } catch (error) {
         if (error.response) {
-            if (error.response.status === 403) {
+            if(error.response.status === 401) {
+                onRefresh();
+            } else if (error.response.status === 403) {
               console.log('post : 존재하지 않는 유저입니다.');
               Alert.alert('존재하지 않는 유저입니다.');
             } else {

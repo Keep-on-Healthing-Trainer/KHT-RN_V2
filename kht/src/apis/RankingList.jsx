@@ -2,6 +2,8 @@ import axios from 'axios';
 import { Alert } from 'react-native';
 import { getStorage, setStorage, removeStorage } from "../utils/Storage";
 
+import onRefresh from "./Refresh";
+
 const onRanking = async () => {
 
     const result = await getStorage('token')
@@ -20,7 +22,9 @@ const onRanking = async () => {
         }
     } catch (error) {
         if (error.response) {
-            if (error.response.status === 404) {
+            if(error.response.status === 401) {
+                onRefresh();
+            } else if (error.response.status === 404) {
               console.log('ranking : 유저를 찾을 수 없습니다');
               Alert.alert('유저를 찾을 수 없습니다.');
             } else {

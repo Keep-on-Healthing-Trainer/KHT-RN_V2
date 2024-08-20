@@ -2,6 +2,8 @@ import axios from 'axios';
 import { Alert } from 'react-native';
 import { getStorage, setStorage, removeStorage } from "../utils/Storage";
 
+import onRefresh from "./Refresh";
+
 const onCommunityPostImage = async ( data, id ) => {
 
     const result = await getStorage('token');
@@ -24,7 +26,9 @@ const onCommunityPostImage = async ( data, id ) => {
         }
     } catch (error) {
         if (error.response) {
-            if (error.response.status === 403) {
+          if(error.response.status === 401) {
+            onRefresh();
+        } else if (error.response.status === 403) {
               console.log('image : 유저를 찾을 수 없습니다');
               Alert.alert('유저를 찾을 수 없습니다.');
             } else {

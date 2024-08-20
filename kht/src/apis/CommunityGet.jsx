@@ -2,6 +2,8 @@ import axios from 'axios';
 import { Alert } from 'react-native';
 import { getStorage, setStorage, removeStorage } from "../utils/Storage";
 
+import onRefresh from "./Refresh";
+
 const onCommunityGet = async ( id ) => {
 
     const result = await getStorage('token');
@@ -20,7 +22,9 @@ const onCommunityGet = async ( id ) => {
         }
     } catch (error) {
         if (error.response) {
-            if (error.response.status === 404) {
+            if(error.response.status === 401) {
+                onRefresh();
+            } else if (error.response.status === 404) {
               console.log('community get : 잘못된 요청입니다.');
               Alert.alert('잘못된 요청입니다.');
             } else {
