@@ -45,10 +45,6 @@ const SelectPage = ({navigation}) => {
         navigation.navigate("MainPage", { screen: 'MainPage' });
     }
 
-    const onClickReSelect = () => {
-        navigation.navigate("ReSelectPage", { screen: 'ReSelectPage' });
-    }
-
     return(
         <View style={Styles.container}>
             <BackHeader data='프로필 편집' onPress={() => onClickBack()} />
@@ -77,12 +73,6 @@ const SelectPage = ({navigation}) => {
                     <Text style={Styles.nameTagStyle}>전화번호</Text>
                     <Text style={Styles.nameStyle}>{data ? data.phoneNumber : null}</Text>
                     <TouchableOpacity style={Styles.nameBox} onPress={() => onClickPhone()}>
-                        <ProfileArrow></ProfileArrow>
-                    </TouchableOpacity>
-                </View>
-                <View style={Styles.nameDiv}>
-                    <Text style={Styles.nameTagStyle}>부상 부위 재선택</Text>
-                    <TouchableOpacity style={Styles.box} onPress={() => onClickReSelect()}>
                         <ProfileArrow></ProfileArrow>
                     </TouchableOpacity>
                 </View>

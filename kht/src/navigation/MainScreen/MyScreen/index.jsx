@@ -6,7 +6,6 @@ import EditPage from "../../../screens/Info/Edit";
 import MainPage from "../../../screens/Info/Main";
 import ProfilePage from "../../../screens/Info/Profile";
 import SelectPage from "../../../screens/Info/Select";
-import ReSelectPage from '../../../screens/Info/ReSelect';
 
 const Stack = createStackNavigator();
 
@@ -17,7 +16,6 @@ const MyScreen = () => {
             <Stack.Screen name="SelectPage" component={SelectPage} options={{ headerShown: false }} />
             <Stack.Screen name="ProfilePage" component={ProfilePage} options={{ headerShown: false }} />
             <Stack.Screen name="EditPage" component={EditPage} options={{ headerShown: false }} />
-            <Stack.Screen name="ReSelectPage" component={ReSelectPage} options={{ headerShown: false }} />
         </Stack.Navigator>
     );
 }
