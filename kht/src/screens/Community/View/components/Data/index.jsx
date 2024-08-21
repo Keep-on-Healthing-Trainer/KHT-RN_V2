@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from "react-native";
+import CustomText from '../../../../../styles/CustomText';
 import { color } from '../../../../../styles/theme';
 import constants from '../../../../../styles/constants';
 
@@ -11,11 +12,11 @@ const DataComponents = ( props ) => {
         <View style={Styles.dataContainer}>
             <View style={Styles.profileContainer}>
                 <Image style={Styles.profile} source={{uri: props.profileImage}}></Image>
-                <Text style={Styles.boldText}>{props.userNickname}</Text>
+                <CustomText style={Styles.boldText}>{props.userNickname}</CustomText>
             </View>
             <View style={Styles.textContainer}>
-                <Text style={Styles.mainBoldText}>{props.title}</Text>
-                <Text style={Styles.text}>{props.content}</Text>
+                <CustomText style={Styles.mainBoldText}>{props.title}</CustomText>
+                <CustomText style={Styles.text}>{props.content}</CustomText>
                 {props.file ? (
                     <Image style={Styles.fileImage} source={{uri: props.file}}></Image>
                 ) : undefined}
@@ -23,7 +24,7 @@ const DataComponents = ( props ) => {
             <View style={Styles.labelContainer}>
                 <View style={Styles.label}>
                     <Comment />
-                    <Text>{props.count ? props.count : 0}</Text>
+                    <CustomText>{props.count ? props.count : 0}</CustomText>
                 </View>
             </View>
         </View>

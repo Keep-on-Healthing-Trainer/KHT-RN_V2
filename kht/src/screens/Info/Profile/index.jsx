@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, Image, StyleSheet, TouchableOpacity } from "react-native";
+import CustomText from '../../../styles/CustomText';
 import * as DocumentPicker from 'expo-document-picker';
 
 import { color } from "../../../styles/theme";
@@ -72,16 +73,16 @@ const ProfilePage = ({navigation}) => {
             <View style={Styles.profileContainer}>
                 <Image style={Styles.profile} source={imageData ? {uri: imageData.uri} : (data ? {uri: data.profileImgeUrl} : undefined)} />
                 <View style={Styles.textContainer}>
-                    <Text style={Styles.text}>프로필 이미지를 설정하지 않을</Text>
-                    <Text style={Styles.text}>경우에는 기본 프로필로 설정됩니다.</Text>
+                    <CustomText style={Styles.text}>프로필 이미지를 설정하지 않을</CustomText>
+                    <CustomText style={Styles.text}>경우에는 기본 프로필로 설정됩니다.</CustomText>
                 </View>
             </View>
             <View style={Styles.buttonContainer}>
                 <TouchableOpacity style={Styles.button} onPress={() => onClickEdit()}>
-                    <Text style={Styles.buttonText}>수정하기</Text>
+                    <CustomText style={Styles.buttonText}>수정하기</CustomText>
                 </TouchableOpacity>
                 <TouchableOpacity style={Styles.button} onPress={() => onClickSave()}>
-                    <Text style={Styles.buttonText}>저장하기</Text>
+                    <CustomText style={Styles.buttonText}>저장하기</CustomText>
                 </TouchableOpacity>
             </View>
         </View>

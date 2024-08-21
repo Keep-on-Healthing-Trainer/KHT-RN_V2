@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { View, Text, TouchableOpacity, StyleSheet, Image, ScrollView } from "react-native";
+import CustomText from "../../../styles/CustomText";
 import { useFocusEffect } from '@react-navigation/native';
 import { color } from "../../../styles/theme";
 import constants from "../../../styles/constants";
@@ -48,29 +49,29 @@ const MainPage = ({navigation}) => {
               <View style={Styles.profileMargin}></View>
               <View style={Styles.profileContainer}>
                 <TouchableOpacity style={Styles.editButton} onPress={() => onClickSelect()}>
-                  <Text style={Styles.editButtonText}>편집</Text>
+                  <CustomText style={Styles.editButtonText}>편집</CustomText>
                 </TouchableOpacity>
                 <View style={Styles.nameContanier}>
-                  <Text style={Styles.IdName}>{data.name}</Text>
-                  <Text style={Styles.IdComment}>누적 운동 횟수 : {data.totalCounts}</Text>
+                  <CustomText style={Styles.IdName}>{data.name}</CustomText>
+                  <CustomText style={Styles.IdComment}>누적 운동 횟수 : {data.totalCounts}</CustomText>
                 </View>
               </View>
               <Image style={Styles.profile} source={data ? {uri: data.profileImgeUrl} : undefined}></Image>
             </View>
             <View style={Styles.containerGap}>
               <View style={Styles.dataContainer}>
-                <Text style={Styles.textCount}>총 {data.sitUpCounts == null ? 0 : data.sitUpCounts}회</Text>
-                <Text style={Styles.textComment}>KHT와 함께 {chartData.totalSitUpCounts == null ? 0 : chartData.totalSitUpCounts}회 윗몸일으키기를 진행했어요</Text>
+                <CustomText style={Styles.textCount}>총 {data.sitUpCounts == null ? 0 : data.sitUpCounts}회</CustomText>
+                <CustomText style={Styles.textComment}>KHT와 함께 {chartData.totalSitUpCounts == null ? 0 : chartData.totalSitUpCounts}회 윗몸일으키기를 진행했어요</CustomText>
                 <Chart data={chartData.sitUpResponses}></Chart>
               </View>
               <View style={Styles.dataContainer}>
-                <Text style={Styles.textCount}>총 {data.squatCounts == null ? 0 : data.squatCounts}회</Text>
-                <Text style={Styles.textComment}>KHT와 함께 {chartData.totalSquatCounts == null ? 0 : chartData.totalSquatCounts}회 스쿼트를 진행했어요</Text>
+                <CustomText style={Styles.textCount}>총 {data.squatCounts == null ? 0 : data.squatCounts}회</CustomText>
+                <CustomText style={Styles.textComment}>KHT와 함께 {chartData.totalSquatCounts == null ? 0 : chartData.totalSquatCounts}회 스쿼트를 진행했어요</CustomText>
                 <Chart data={chartData.squatResponses}></Chart>
               </View>
               <View style={Styles.dataContainer}>
-                <Text style={Styles.textCount}>총 {data.pushUpCounts == null ? 0 : data.pushUpCounts}회</Text>
-                <Text style={Styles.textComment}>KHT와 함께 {chartData.totalPushUpCounts == null ? 0 : chartData.totalPushUpCounts}회 팔굽혀펴기를 진행했어요</Text>
+                <CustomText style={Styles.textCount}>총 {data.pushUpCounts == null ? 0 : data.pushUpCounts}회</CustomText>
+                <CustomText style={Styles.textComment}>KHT와 함께 {chartData.totalPushUpCounts == null ? 0 : chartData.totalPushUpCounts}회 팔굽혀펴기를 진행했어요</CustomText>
                 <Chart data={chartData.pushUpResponses}></Chart>
               </View>
             </View>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, Image, ScrollView, StyleSheet, TouchableOpacity } from "react-native";
+import CustomText from '../../../styles/CustomText';
 import { color } from "../../../styles/theme";
 import constants from "../../../styles/constants";
 
@@ -72,9 +73,9 @@ const ResultPage = ({navigation, route}) => {
                             <TouchableOpacity key={index} style={Styles.box} onPress={() => onClickData(item)}>
                                 <Image style={Styles.img} source={{uri: item.path}}></Image>
                                 <View style={Styles.right}>
-                                    <Text style={Styles.boldText}>{item.title}</Text>
-                                    <Text style={Styles.text}>{item.tags}</Text>
-                                    <Text style={Styles.text}>{item.introduction}</Text>
+                                    <CustomText style={Styles.boldText}>{item.title}</CustomText>
+                                    <CustomText style={Styles.text}>{item.tags}</CustomText>
+                                    <CustomText style={Styles.text}>{item.introduction}</CustomText>
                                 </View>
                             </TouchableOpacity>
                         );

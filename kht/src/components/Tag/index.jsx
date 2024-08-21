@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { TouchableOpacity, Text, StyleSheet, Animated } from 'react-native';
+import CustomText from "../../styles/CustomText";
 import { color } from "../../styles/theme";
 import constants from "../../styles/constants";
 
@@ -28,9 +29,9 @@ const Tag = (props) => {
     return (
         <TouchableOpacity onPress={onAnimationPress}>
             <Animated.View style={[Styles.container, { borderWidth }]}>
-                <Text style={Styles.font}>
+                <CustomText style={Styles.font}>
                     {props.innerText}
-                </Text>
+                </CustomText>
             </Animated.View>
         </TouchableOpacity>
     );

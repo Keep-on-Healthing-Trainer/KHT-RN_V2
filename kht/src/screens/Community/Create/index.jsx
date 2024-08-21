@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, TextInput, Image, TouchableOpacity, TouchableWithoutFeedback, Keyboard, StyleSheet } from "react-native";
+import CustomText from "../../../styles/CustomText";
 import Textarea from 'react-native-textarea';
 import * as DocumentPicker from 'expo-document-picker';
 import { color } from "../../../styles/theme";
@@ -114,8 +115,8 @@ const CreatePage = ({navigation}) => {
                     />
                 </View>
                 <View style={Styles.fontContainer}>
-                    <Text style={Styles.boldText}>이미지</Text>
-                    <Text style={Styles.text}>업로드된 이미지를 다시 클릭하면 삭제할 수 있습니다.</Text>
+                    <CustomText style={Styles.boldText}>이미지</CustomText>
+                    <CustomText style={Styles.text}>업로드된 이미지를 다시 클릭하면 삭제할 수 있습니다.</CustomText>
                     <View style={Styles.ImageContainer}>
                         <TouchableOpacity style={Styles.image} onPress={() => onClickEdit()}>
                             <ImageIcon />

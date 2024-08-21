@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
+import CustomText from "../../../../styles/CustomText";
 import constants from '../../../../styles/constants';
 import { color } from '../../../../styles/theme';
 
@@ -18,8 +19,8 @@ const ButtonComponents = ( props ) => {
             <CheckBox onGetInPress={(state) => setCheckBoxState(state)}/>
             <Button innerText="로그인" onPress={props.onLogin} />
             <TouchableOpacity style={Styles.buttonContainer} onPress={props.onSignup} >
-                <Text style={Styles.text}>계정이 없으신가요?</Text>
-                <Text style={Styles.textColor}>회원가입</Text>
+                <CustomText style={Styles.text}>계정이 없으신가요?</CustomText>
+                <CustomText style={Styles.textColor}>회원가입</CustomText>
             </TouchableOpacity>
         </View>
     );

@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Text, View, TouchableOpacity, Image, ScrollView, StyleSheet } from "react-native";
+import CustomText from "../../../styles/CustomText";
 import { LinearGradient } from 'expo-linear-gradient';
 import { useFocusEffect } from '@react-navigation/native';
 import { color } from "../../../styles/theme";
@@ -85,9 +86,9 @@ const SearchPage = ({navigation}) => {
                             },
                     )}>
                         <View>
-                            <Text style={Styles.boxText}>운동 전 준비 운동</Text>
-                            <Text style={Styles.boxTextInner}>준비운동으로 부상을 예방하고,</Text>
-                            <Text style={Styles.boxTextInner}>운동 효과를 향상시켜요.</Text>
+                            <CustomText style={Styles.boxText}>운동 전 준비 운동</CustomText>
+                            <CustomText style={Styles.boxTextInner}>준비운동으로 부상을 예방하고,</CustomText>
+                            <CustomText style={Styles.boxTextInner}>운동 효과를 향상시켜요.</CustomText>
                         </View>
                         <Image source={require('../../../assets/image/safety.png')} style={Styles.img}></Image>
                     </TouchableOpacity>
@@ -102,14 +103,14 @@ const SearchPage = ({navigation}) => {
                             },
                     )}>
                         <View>
-                            <Text style={Styles.boxText}>운동 후 마무리 운동</Text>
-                            <Text style={Styles.boxTextInner}>운동을 한 후, 신체 각 부위의</Text>
-                            <Text style={Styles.boxTextInner}>근육을 풀어줘요.</Text>
+                            <CustomText style={Styles.boxText}>운동 후 마무리 운동</CustomText>
+                            <CustomText style={Styles.boxTextInner}>운동을 한 후, 신체 각 부위의</CustomText>
+                            <CustomText style={Styles.boxTextInner}>근육을 풀어줘요.</CustomText>
                         </View>
                         <Image source={require('../../../assets/image/finally.png')} style={Styles.img}></Image>
                     </TouchableOpacity>
                 </View>
-                <Text style={Styles.boldText}>{userData.name}님을 위한 운동</Text>
+                <CustomText style={Styles.boldText}>{userData.name}님을 위한 운동</CustomText>
                 <View style={Styles.dataContainer}>
                     {recommendData ? recommendData.map((item, index) => {
                             return (
@@ -117,11 +118,11 @@ const SearchPage = ({navigation}) => {
                                     <View style={Styles.imgContainer}>
                                         <Image style={Styles.image} source={{uri: item.path}}></Image>
                                     </View>
-                                    <Text style={Styles.boxText}>{item.title}</Text>
+                                    <CustomText style={Styles.boxText}>{item.title}</CustomText>
                                     <View style={Styles.gap} >
                                         {item.tags.map((item, index) => {
                                             return (
-                                                    <Text style={Styles.boxTextInner}>{item}</Text>
+                                                    <CustomText style={Styles.boxTextInner}>{item}</CustomText>
                                                 )
                                             })
                                         }

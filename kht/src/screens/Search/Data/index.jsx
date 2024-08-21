@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View, Image, StyleSheet, TextComponent } from "react-native";
+import CustomText from '../../../styles/CustomText';
 import { color } from "../../../styles/theme";
 import constants from "../../../styles/constants";
 
@@ -22,16 +23,16 @@ const DataPage = ({navigation, route}) => {
             <BackHeader onPress={name ? () => onClickBackSearch() : () => onClickBackResult()} title={data.title} tags={data.tags} />
             <Image style={Styles.img} source={data ? {uri: data.path} : undefined}></Image>
             <View style={Styles.textContainer}>
-                <Text style={Styles.boldText}>시작 자세</Text>
-                <Text style={Styles.text}>{data.startPosture}</Text>
+                <CustomText style={Styles.boldText}>시작 자세</CustomText>
+                <CustomText style={Styles.text}>{data.startPosture}</CustomText>
             </View>
             <View style={Styles.textContainer}>
-                <Text style={Styles.boldText}>운동 방법</Text>
-                <Text style={Styles.text}>{data.exerciseMethod}</Text>
+                <CustomText style={Styles.boldText}>운동 방법</CustomText>
+                <CustomText style={Styles.text}>{data.exerciseMethod}</CustomText>
             </View>
             <View style={Styles.textContainer}>
-                <Text style={Styles.boldText}>주의 사항</Text>
-                <Text style={Styles.text}>{data.warning}</Text>
+                <CustomText style={Styles.boldText}>주의 사항</CustomText>
+                <CustomText style={Styles.text}>{data.warning}</CustomText>
             </View>
         </View>
     );

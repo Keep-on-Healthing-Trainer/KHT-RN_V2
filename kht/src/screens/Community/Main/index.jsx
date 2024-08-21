@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Text, View, TouchableOpacity, ScrollView, StyleSheet } from "react-native";
+import CustomText from '../../../styles/CustomText';
 import { useFocusEffect } from '@react-navigation/native';
 import { color } from "../../../styles/theme";
 import constants from "../../../styles/constants";
@@ -49,8 +50,8 @@ const MainPage = ({navigation}) => {
             <Header />
             <TouchableOpacity style={Styles.create} onPress={() => onClickCreate()}>
                 <View style={Styles.createLeft}>
-                    <Text style={Styles.boldText}>운동에 관한 생각을 나누어보세요!</Text>
-                    <Text style={Styles.text}>KHT 커뮤니티에서 의견을 나누며 도움을 받아요.</Text>
+                    <CustomText style={Styles.boldText}>운동에 관한 생각을 나누어보세요!</CustomText>
+                    <CustomText style={Styles.text}>KHT 커뮤니티에서 의견을 나누며 도움을 받아요.</CustomText>
                 </View>
                 <Create />
             </TouchableOpacity>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from "react-native";
+import CustomText from "../../../../styles/CustomText";
 import constants from '../../../../styles/constants';
 import { color } from '../../../../styles/theme';
 
@@ -7,8 +8,8 @@ const TextComponents = ( props ) => {
 
     return(
         <View style={Styles.textConteiner}>
-            <Text style={Styles.boldText}>{props.boldText}</Text>
-            <Text style={Styles.text}>{props.text}</Text>
+            <CustomText style={Styles.boldText}>{props.boldText}</CustomText>
+            <CustomText style={Styles.text}>{props.text}</CustomText>
         </View>
     );
 }

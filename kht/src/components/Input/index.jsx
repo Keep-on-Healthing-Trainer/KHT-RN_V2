@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { TextInput, StyleSheet } from "react-native";
+import CustomText from "../../styles/CustomText";
 import { color } from "../../styles/theme";
 import constants from "../../styles/constants";
 

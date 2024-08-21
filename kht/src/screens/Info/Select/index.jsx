@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Text, View, Image, StyleSheet, TouchableOpacity } from "react-native";
+import CustomText from '../../../styles/CustomText';
 import { useFocusEffect } from '@react-navigation/native';
 import { color } from "../../../styles/theme";
 import constants from "../../../styles/constants";
@@ -51,27 +52,27 @@ const SelectPage = ({navigation}) => {
             <View style={Styles.profileContainer}>
                 <Image style={Styles.profile} source={data ? {uri: data.profileImgeUrl} : undefined}></Image>
                 <TouchableOpacity onPress={() => onClickProfile()}>
-                    <Text style={Styles.profileText}>프로필 사진 수정</Text>
+                    <CustomText style={Styles.profileText}>프로필 사진 수정</CustomText>
                 </TouchableOpacity>
             </View>
             <View style={Styles.nameContainer}>
                 <View style={Styles.nameDiv}>
-                    <Text style={Styles.nameTagStyle}>이름</Text>
-                    <Text style={Styles.nameStyle}>{data ? data.name : null}</Text>
+                    <CustomText style={Styles.nameTagStyle}>이름</CustomText>
+                    <CustomText style={Styles.nameStyle}>{data ? data.name : null}</CustomText>
                     <TouchableOpacity style={Styles.nameBox} onPress={() => onClickName()}>
                         <ProfileArrow></ProfileArrow>
                     </TouchableOpacity>
                 </View>
                 <View style={Styles.nameDiv}>
-                    <Text style={Styles.nameTagStyle}>아이디</Text>
-                    <Text style={Styles.nameStyle}>{data ? data.userId : null}</Text>
+                    <CustomText style={Styles.nameTagStyle}>아이디</CustomText>
+                    <CustomText style={Styles.nameStyle}>{data ? data.userId : null}</CustomText>
                     <TouchableOpacity style={Styles.nameBox} onPress={() => onClickId()}>
                         <ProfileArrow></ProfileArrow>
                     </TouchableOpacity>
                 </View>
                 <View style={Styles.nameDiv}>
-                    <Text style={Styles.nameTagStyle}>전화번호</Text>
-                    <Text style={Styles.nameStyle}>{data ? data.phoneNumber : null}</Text>
+                    <CustomText style={Styles.nameTagStyle}>전화번호</CustomText>
+                    <CustomText style={Styles.nameStyle}>{data ? data.phoneNumber : null}</CustomText>
                     <TouchableOpacity style={Styles.nameBox} onPress={() => onClickPhone()}>
                         <ProfileArrow></ProfileArrow>
                     </TouchableOpacity>

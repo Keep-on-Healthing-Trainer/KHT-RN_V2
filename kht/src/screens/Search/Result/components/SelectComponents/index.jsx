@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
+import CustomText from "../../../../../styles/CustomText";
 import { color } from "../../../../../styles/theme";
 import constants from "../../../../../styles/constants";
 
@@ -9,11 +10,11 @@ const SelectComponents = ( props ) => {
         <TouchableOpacity onPress={props.onPress}>
             {props.state == props.data ? (
                 <View style={Styles.focusSelect}>
-                    <Text style={Styles.focusSelectText}>{props.data}</Text>
+                    <CustomText style={Styles.focusSelectText}>{props.data}</CustomText>
                 </View>
             ) : (
                 <View style={Styles.noFocusSelect}>
-                    <Text style={Styles.noFocusSelectText}>{props.data}</Text> 
+                    <CustomText style={Styles.noFocusSelectText}>{props.data}</CustomText> 
                 </View>
             )}
         </TouchableOpacity>

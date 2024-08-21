@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { TextInput, View, TouchableOpacity, Text, ScrollView, StyleSheet, TouchableWithoutFeedback, Keyboard, Image, Alert } from "react-native";
+import CustomText from "../../../styles/CustomText";
 import { useFocusEffect } from '@react-navigation/native';
 import { color } from "../../../styles/theme";
 import constants from "../../../styles/constants";
@@ -93,7 +94,7 @@ const ViewPage = ({navigation, route}) => {
                             ) : 
                                 undefined
                             }
-                            <Text style={Styles.text}>댓글</Text>
+                            <CustomText style={Styles.text}>댓글</CustomText>
                             {viewData && viewData.comments.map((item, index) => {
                                 return (
                                     <CommentDataComponents
@@ -112,7 +113,7 @@ const ViewPage = ({navigation, route}) => {
                         <TextInput style={Styles.input} placeholder='댓글 추가...' onChangeText={(text) => setData(text)}>{data}</TextInput>
                         {data ? (
                             <TouchableOpacity onPress={() => onClickPost()}>
-                                <Text style={Styles.button}>등록</Text>
+                                <CustomText style={Styles.button}>등록</CustomText>
                             </TouchableOpacity>
                             ) : (
                                 <></>

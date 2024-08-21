@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
+import CustomText from "../../../../../styles/CustomText";
 import { color } from '../../../../../styles/theme';
 import constants from '../../../../../styles/constants';
 
@@ -9,11 +10,11 @@ const DataComponents = (props) => {
         <TouchableOpacity style={Styles.dataContainer} onPress={props.onPress}>
             <View style={Styles.profileContainer}>
                 <Image style={Styles.profile} source={{ uri: props.profile }} />
-                <Text style={Styles.boldText}>{props.name}</Text>
+                <CustomText style={Styles.boldText}>{props.name}</CustomText>
             </View>
             <View style={Styles.textContainer}>
-                <Text style={Styles.mainBoldText}>{props.title}</Text>
-                <Text style={Styles.text}>{props.content}</Text>
+                <CustomText style={Styles.mainBoldText}>{props.title}</CustomText>
+                <CustomText style={Styles.text}>{props.content}</CustomText>
                 {props.path ? (
                     <Image style={Styles.dataImage} source={{ uri: props.path }} />
                 ) : undefined}

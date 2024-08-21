@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
+import CustomText from "../../../../../styles/CustomText";
 import { color } from "../../../../../styles/theme";
 import constants from "../../../../../styles/constants";
 
@@ -13,7 +14,7 @@ const BackHeader = ( props ) => {
                 <TouchableOpacity onPress={props.onPress}>
                     <Back />
                 </TouchableOpacity>
-                <Text style={Styles.text}>커뮤니티</Text>
+                <CustomText style={Styles.text}>커뮤니티</CustomText>
             </View>
         </View>
     );

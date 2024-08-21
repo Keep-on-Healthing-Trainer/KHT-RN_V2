@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, Text, Alert, Image, StyleSheet } from "react-native";
+import CustomText from '../../../../../styles/CustomText';
 import { color } from "../../../../../styles/theme";
 import constants from "../../../../../styles/constants";
 
@@ -35,13 +36,13 @@ const CommentDataComponents = ( props ) => {
                     <View style={Styles.profileContainer}>
                         <Image style={Styles.profile} source={props.profileImage ? {uri: props.profileImage} : undefined}></Image>
                         <View>
-                            <Text style={Styles.profileText}>{props.userNickname}</Text>
-                            <Text style={Styles.dataText}>{props.content}</Text>
+                            <CustomText style={Styles.profileText}>{props.userNickname}</CustomText>
+                            <CustomText style={Styles.dataText}>{props.content}</CustomText>
                         </View>
                     </View>
                     {moreState ? (
                         <TouchableOpacity style={Styles.delete} onPress={() => onClickDelete()}>
-                            <Text style={Styles.dataText}>댓글 삭제하기</Text>
+                            <CustomText style={Styles.dataText}>댓글 삭제하기</CustomText>
                         </TouchableOpacity>
                     ) :
                     undefined}

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, StyleSheet, Touchable } from "react-native";
+import CustomText from '../../../styles/CustomText';
 import { color } from "../../../styles/theme";
 import constants from "../../../styles/constants";
 
@@ -24,7 +25,7 @@ const ExitPage = ({navigation, route}) => {
                     text="만들어진 계정으로 다시 한 번 로그인 해주세요!"
                 />
                 <Character />
-                <Text style={Styles.fixText}>KHT가 최고의 맞춤 플랜을 제공할게요!</Text>
+                <CustomText style={Styles.fixText}>KHT가 최고의 맞춤 플랜을 제공할게요!</CustomText>
                 <Button innerText="로그인" onPress={onClickLogin} />
             </View>
         </View>

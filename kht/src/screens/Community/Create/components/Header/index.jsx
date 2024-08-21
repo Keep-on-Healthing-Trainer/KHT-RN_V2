@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
+import CustomText from "../../../../../styles/CustomText";
 import { color } from "../../../../../styles/theme";
 import constants from "../../../../../styles/constants";
 
@@ -13,15 +14,15 @@ const Header = ( props ) => {
               <X />
             </TouchableOpacity>
             <View style={Styles.button}>
-                <Text style={Styles.boldText}>작성하기</Text>
+                <CustomText style={Styles.boldText}>작성하기</CustomText>
             </View>
             {props.backState ? (
                 <TouchableOpacity style={Styles.button} onPress={props.onPostPress}>
-                    <Text style={Styles.colorText}>등록</Text>
+                    <CustomText style={Styles.colorText}>등록</CustomText>
                 </TouchableOpacity>
             ) : (
                 <View style={Styles.button}>
-                    <Text style={Styles.text}>등록</Text>
+                    <CustomText style={Styles.text}>등록</CustomText>
                 </View>
             )}
         </View>

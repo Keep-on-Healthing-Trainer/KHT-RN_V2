@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Text, View, StyleSheet, Image } from "react-native";
+import CustomText from '../../styles/CustomText';
 import { useFocusEffect } from '@react-navigation/native';
 import { color } from "../../styles/theme";
 import constants from "../../styles/constants";
@@ -55,8 +56,8 @@ const RankingPage = ({navigation}) => {
     <View style={Styles.container}>
         <Header />
         <View style={Styles.textConteiner}>
-          <Text style={Styles.boldText}>유저 랭킹</Text>
-          <Text style={Styles.text}>KHT로 측정한 운동의 총합 횟수입니다.</Text>
+          <CustomText style={Styles.boldText}>유저 랭킹</CustomText>
+          <CustomText style={Styles.text}>KHT로 측정한 운동의 총합 횟수입니다.</CustomText>
         </View>
         {isLoading && data ? (
             <View>
@@ -68,8 +69,8 @@ const RankingPage = ({navigation}) => {
         )}
         <View style={Styles.bottom}>
             <Image style={Styles.myRankingImg} source={userData ? {uri: userData.profileImgeUrl} : undefined}></Image>
-            <Text style={Styles.myBoldText}>{userData.name}</Text>
-            <Text style={Styles.myBoldText}>{userData.totalCounts}회</Text>
+            <CustomText style={Styles.myBoldText}>{userData.name}</CustomText>
+            <CustomText style={Styles.myBoldText}>{userData.totalCounts}회</CustomText>
         </View>
     </View>
     );

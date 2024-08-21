@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import CustomText from "../../styles/CustomText";
 import { color } from "../../styles/theme";
 import constants from '../../styles/constants';
 
@@ -19,7 +20,7 @@ const CheckBox = ( props ) => {
         ) : (
           <View style={Styles.checkbox}></View>
         )}
-        <Text style={Styles.text}>자동 로그인</Text>
+        <CustomText style={Styles.text}>자동 로그인</CustomText>
     </TouchableOpacity>
   )
 }

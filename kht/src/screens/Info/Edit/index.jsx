@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, Keyboard, StyleSheet, TextInput, TouchableOpacity, TouchableWithoutFeedback } from "react-native";
+import CustomText from "../../../styles/CustomText";
 import { color } from "../../../styles/theme";
 import constants from "../../../styles/constants";
 
@@ -54,7 +55,7 @@ const EditPage = ({navigation, route}) => {
             onPress={() => onClickBack()}
             />
             <View style={Styles.titleContainer}>
-                <Text style={Styles.nameTitle}>{name === 'name' ? '이름' : (name === 'userId' ? '아이디' : '전화번호')}</Text>
+                <CustomText style={Styles.nameTitle}>{name === 'name' ? '이름' : (name === 'userId' ? '아이디' : '전화번호')}</CustomText>
                 <View>
                     <TextInput
                     style={Styles.Bottom}
@@ -67,7 +68,7 @@ const EditPage = ({navigation, route}) => {
                 </View>
             </View>
             <TouchableOpacity style={Styles.button} onPress={() => onClickPatch()}>
-              <Text style={Styles.buttonText}>저장하기</Text>
+              <CustomText style={Styles.buttonText}>저장하기</CustomText>
             </TouchableOpacity>
         </View>
       </TouchableWithoutFeedback>

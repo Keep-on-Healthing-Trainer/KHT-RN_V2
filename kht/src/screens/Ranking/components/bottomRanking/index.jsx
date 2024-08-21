@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View, Image, StyleSheet } from "react-native";
+import CustomText from "../../../../styles/CustomText";
 import { color } from "../../../../styles/theme";
 import constants from "../../../../styles/constants";
 
@@ -12,8 +13,8 @@ const BottomRankingComponent = (props) => {
                 return(
                     <View style={Styles.rankingContainer}>
                         <Image style={Styles.rankingImg} source={item.profileImgUrl ? {uri: item.profileImgUrl} : undefined}></Image>
-                        <Text>{item.userName}</Text>
-                        <Text>{item.totalCounts}회</Text>
+                        <CustomText>{item.userName}</CustomText>
+                        <CustomText>{item.totalCounts}회</CustomText>
                     </View>
                 );
                 }
