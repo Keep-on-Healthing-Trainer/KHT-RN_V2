@@ -21,7 +21,7 @@ const LoginPage = ({navigation}) => {
                   navigation.navigate("MainScreen", { screen: 'MainScreen' });
                 }
             } catch (error) {
-                console.log("로그인 오류");
+                //console.log("로그인 오류");
             }
         }
     }

@@ -36,7 +36,7 @@ const ProfilePage = ({navigation}) => {
                 type: 'image/*',
             });
 
-            console.log(result);
+            //console.log(result);
 
             setImageData(result.assets[0]);
         } catch (err) {
@@ -55,7 +55,7 @@ const ProfilePage = ({navigation}) => {
 
         if(imageData) {
             formData.append("image", image);
-            console.log('폼데이터 추가');
+            //console.log('폼데이터 추가');
         } else {
             formData.append("image", "");
         }

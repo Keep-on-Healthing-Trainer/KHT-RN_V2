@@ -38,7 +38,7 @@ const SearchPage = ({navigation}) => {
         const res = await onGetRecommendData();
         if(res) {
             setRecommendData(res);
-            console.log(res);
+            //console.log(res);
         }
     }
     
@@ -58,7 +58,7 @@ const SearchPage = ({navigation}) => {
             const data = await onSearch(searchData);
             navigation.navigate("ResultPage", { screen: 'ResultPage', name: data, title: searchData.title });
         } catch (error) {
-            console.log("검색 정보 가져오기 오류");
+            //console.log("검색 정보 가져오기 오류");
         }
     }
 
@@ -74,7 +74,16 @@ const SearchPage = ({navigation}) => {
                     />
                 </View>
                 <View style={Styles.boxContainer}>
-                    <TouchableOpacity style={Styles.box}  onPress={() => onClickData()}>
+                    <TouchableOpacity style={Styles.box}  onPress={() => onClickData(
+                            {
+                                "title": "운동 전 준비 운동",
+                                "startPosture": "편안한 자세로 서서 다리를 어깨너비로 벌리고 양팔을 자연스럽게 내립니다.",
+                                "exerciseMethod": "1. 가벼운 동작으로 목, 어깨, 팔, 허리, 다리 등을 순차적으로 스트레칭합니다.\n2. 목은 천천히 좌우로 돌리고, 어깨는 앞뒤로 돌려줍니다.\n3. 팔과 허리는 양옆으로 천천히 늘려주고, 다리는 허벅지를 들어올리며 스트레칭합니다.\n4. 각 부위별로 10~15초간 스트레칭을 유지하며 근육을 풀어줍니다.",
+                                "warning": "스트레칭 시 무리하게 당기지 않도록 주의하며, 부위별로 천천히 움직여줍니다.\n호흡을 자연스럽게 유지하며, 통증이 느껴지면 즉시 멈춥니다.",
+                                "tags": [],
+                                "path": "https://khtback.s3.ap-northeast-2.amazonaws.com/jumping-jacks.gif"
+                            },
+                    )}>
                         <View>
                             <Text style={Styles.boxText}>운동 전 준비 운동</Text>
                             <Text style={Styles.boxTextInner}>준비운동으로 부상을 예방하고,</Text>
@@ -82,7 +91,16 @@ const SearchPage = ({navigation}) => {
                         </View>
                         <Image source={require('../../../assets/image/safety.png')} style={Styles.img}></Image>
                     </TouchableOpacity>
-                    <TouchableOpacity style={Styles.box}  onPress={() => onClickData()}>
+                    <TouchableOpacity style={Styles.box}  onPress={() => onClickData(
+                            {
+                                "title": "운동 후 마무리 운동",
+                                "startPosture": "편안한 자세로 서서 다리를 어깨너비로 벌리고 양팔을 자연스럽게 내립니다.",
+                                "exerciseMethod": "1. 가벼운 동작으로 목, 어깨, 팔, 허리, 다리 등을 순차적으로 스트레칭합니다.\n2. 목은 천천히 좌우로 돌리고, 어깨는 앞뒤로 돌려줍니다.\n3. 팔과 허리는 양옆으로 천천히 늘려주고, 다리는 허벅지를 들어올리며 스트레칭합니다.\n4. 각 부위별로 10~15초간 스트레칭을 유지하며 근육을 풀어줍니다.",
+                                "warning": "스트레칭 시 무리하게 당기지 않도록 주의하며, 부위별로 천천히 움직여줍니다.\n호흡을 자연스럽게 유지하며, 통증이 느껴지면 즉시 멈춥니다.",
+                                "tags": [],
+                                "path": "https://khtback.s3.ap-northeast-2.amazonaws.com/bd9db9e2a81f2b4c935814efecd15a23.gif"
+                            },
+                    )}>
                         <View>
                             <Text style={Styles.boxText}>운동 후 마무리 운동</Text>
                             <Text style={Styles.boxTextInner}>운동을 한 후, 신체 각 부위의</Text>

@@ -32,10 +32,6 @@ const SickPage = ({navigation, route}) => {
         }
     }
 
-    useEffect(() => {
-        console.log(data);
-    }, [data]);
-
     return(
         <View style={Styles.container} >
             <View style={Styles.center}>

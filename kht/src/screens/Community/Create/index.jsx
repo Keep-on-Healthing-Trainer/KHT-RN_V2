@@ -26,11 +26,11 @@ const CreatePage = ({navigation}) => {
                 type: 'image/*',
             });
 
-            console.log(result);
+            //console.log(result);
 
             setImageData(result.assets[0]);
         } catch (err) {
-            console.error(err);
+            //console.error(err);
         }
     }
 
@@ -43,7 +43,7 @@ const CreatePage = ({navigation}) => {
 
         if(imageData) {
             formData.append("image", data);
-            console.log('폼데이터 추가');
+            //console.log('폼데이터 추가');
         } else {
             formData.append("image", "");
         }
@@ -55,7 +55,7 @@ const CreatePage = ({navigation}) => {
                 navigation.navigate("MainPage", { screen: 'MainPage' });
             }
         } catch (error) {
-            console.log("게시물 이미지 등록 실패");
+            //console.log("게시물 이미지 등록 실패");
         }
     }
 
@@ -86,7 +86,7 @@ const CreatePage = ({navigation}) => {
                 onImageUpload(data);
             }
         } catch (error) {
-            console.log("게시물 등록 실패");
+            //console.log("게시물 등록 실패");
         }
     }
 

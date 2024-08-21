@@ -47,7 +47,7 @@ const RankingPage = ({navigation}) => {
         setData(rank);
       }
     } catch (error) {
-      console.log("랭킹 정보 가져오기 오류");
+      //console.log("랭킹 정보 가져오기 오류");
     }
   }
 

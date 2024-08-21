@@ -11,10 +11,6 @@ import InputComponents from './components/InputComponents';
 const InputPage = ({navigation}) => {
     const [ signupData, setSignupData] = useState();
 
-    useEffect(() => {
-        console.log(signupData);
-    },[signupData]);
-
     const onClickNext = () => {
         if(signupData.name.length >= 2 && signupData.name.length <= 8) {
             if(signupData.userId.length >= 6 && signupData.userId.length <= 15) {

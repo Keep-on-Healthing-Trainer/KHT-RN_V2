@@ -44,7 +44,7 @@ const ResultPage = ({navigation, route}) => {
             const data = await onSearch(searchData);
             navigation.navigate("ResultPage", { screen: 'ResultPage', name: data });
         } catch (error) {
-            console.log("검색 정보 가져오기 오류");
+            //console.log("검색 정보 가져오기 오류");
         }
     }
 

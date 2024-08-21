@@ -32,7 +32,7 @@ const MainPage = ({navigation}) => {
       const res = await onGetChartData();
       if(res) {
         setChartData(res);
-        console.log(res);
+        //console.log(res);
       }
     }
 

@@ -40,7 +40,7 @@ const MainPage = ({navigation}) => {
             const data = await onCommunityList();
             setListData(data);
         } catch (error) {
-            console.log("게시물 목록 불러오기 실패");
+            //console.log("게시물 목록 불러오기 실패");
         }
     }
 

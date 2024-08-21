@@ -36,7 +36,7 @@ const ViewPage = ({navigation, route}) => {
     }
 
     const getViewData = async () => {
-        console.log(id);
+        //console.log(id);
         
         const res = await onCommunityGet(id);
         if(res) {
@@ -54,7 +54,7 @@ const ViewPage = ({navigation, route}) => {
     }
 
     const onClickPost = async () => {
-        console.log(id);
+        //console.log(id);
 
         if(data.length >= 5 && data.length <= 5000) {
             const res = await onCommentPost(data, id);
