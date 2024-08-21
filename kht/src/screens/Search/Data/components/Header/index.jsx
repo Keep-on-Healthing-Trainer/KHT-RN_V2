@@ -13,8 +13,15 @@ const BackHeader = ( props ) => {
                  <Back />
             </TouchableOpacity>
             <View style={Styles.dataContainer}>
-                <Text style={Styles.text}>캡틴스 체어 레그 레이즈</Text>
-                <Text style={Styles.dataText}>복근, 허벅지</Text>
+                <Text style={Styles.text}>{props.title}</Text>
+                <View style={Styles.gap}>
+                    {props.tags.map((item, index) => {
+                        return (
+                            <Text style={Styles.dataText}>{item}</Text>
+                            )
+                        })
+                    }
+                </View>
             </View>
         </View>
     );
@@ -45,6 +52,11 @@ const Styles = StyleSheet.create({
         height: constants.height/22,
         display: 'flex',
         justifyContent: 'center',
+    },
+    gap: {
+        display: 'flex',
+        flexDirection: 'row',
+        gap: 10
     }
 })
 

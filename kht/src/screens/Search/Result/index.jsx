@@ -35,8 +35,8 @@ const ResultPage = ({navigation, route}) => {
         navigation.navigate("SearchPage", { screen: 'SearchPage' });
     }
 
-    const onClickData = () => {
-        navigation.navigate("DataPage", { screen: 'DataPage' });
+    const onClickData = (item) => {
+        navigation.navigate("DataPage", { screen: 'DataPage', data: item });
     }
 
     const onClickEnter = async () => {
@@ -69,8 +69,8 @@ const ResultPage = ({navigation, route}) => {
             <ScrollView>
                 {resultData ? resultData.map((item, index) => {
                         return (
-                            <TouchableOpacity key={index} style={Styles.box} onPress={() => onClickData()}>
-                                <View style={Styles.img}></View>
+                            <TouchableOpacity key={index} style={Styles.box} onPress={() => onClickData(item)}>
+                                <Image style={Styles.img} source={{uri: item.path}}></Image>
                                 <View style={Styles.right}>
                                     <Text style={Styles.boldText}>{item.title}</Text>
                                     <Text style={Styles.text}>{item.tags}</Text>
@@ -120,9 +120,9 @@ const Styles = StyleSheet.create({
         gap: 20,
     },
     img: {
-        width: 70,
+        width: 90,
         height: 100,
-        backgroundColor: color.Black,
+        resizeMode: 'contain'
     },
     boldText: {
         fontSize: 15,

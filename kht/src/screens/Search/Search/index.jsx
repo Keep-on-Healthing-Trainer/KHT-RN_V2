@@ -49,8 +49,8 @@ const SearchPage = ({navigation}) => {
         }));
       };
 
-    const onClickData = () => {
-        navigation.navigate("DataPage", { screen: 'DataPage', name: true });
+    const onClickData = (item) => {
+        navigation.navigate("DataPage", { screen: 'DataPage', name: true, data: item });
     }
 
     const onClickEnter = async () => {
@@ -74,41 +74,44 @@ const SearchPage = ({navigation}) => {
                     />
                 </View>
                 <View style={Styles.boxContainer}>
-                    <View style={Styles.box}>
+                    <TouchableOpacity style={Styles.box}  onPress={() => onClickData()}>
                         <View>
                             <Text style={Styles.boxText}>운동 전 준비 운동</Text>
                             <Text style={Styles.boxTextInner}>준비운동으로 부상을 예방하고,</Text>
                             <Text style={Styles.boxTextInner}>운동 효과를 향상시켜요.</Text>
                         </View>
                         <Image source={require('../../../assets/image/safety.png')} style={Styles.img}></Image>
-                    </View>
-                    <View style={Styles.box}>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={Styles.box}  onPress={() => onClickData()}>
                         <View>
                             <Text style={Styles.boxText}>운동 후 마무리 운동</Text>
                             <Text style={Styles.boxTextInner}>운동을 한 후, 신체 각 부위의</Text>
                             <Text style={Styles.boxTextInner}>근육을 풀어줘요.</Text>
                         </View>
                         <Image source={require('../../../assets/image/finally.png')} style={Styles.img}></Image>
-                    </View>
+                    </TouchableOpacity>
                 </View>
                 <Text style={Styles.boldText}>{userData.name}님을 위한 운동</Text>
                 <View style={Styles.dataContainer}>
-                    <View style={Styles.column}>
-                        <TouchableOpacity style={Styles.data} onPress={() => onClickData()}>
-                            <View style={Styles.imgContainer}>
-                                <Image style={Styles.image} source={require('../../../assets/image/training.png')}></Image>
-                            </View>
-                            <Text style={Styles.boxText}>레그레이즈</Text>
-                            <Text style={Styles.boxTextInner}>복근, 허벅지</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={Styles.data} onPress={() => onClickData()}>
-                            <View style={Styles.imgContainer}>
-                                <Image style={Styles.image} source={require('../../../assets/image/training.png')}></Image>
-                            </View>
-                            <Text style={Styles.boxText}>레그레이즈</Text>
-                            <Text style={Styles.boxTextInner}>복근, 허벅지</Text>
-                        </TouchableOpacity>
-                    </View>
+                    {recommendData ? recommendData.map((item, index) => {
+                            return (
+                                <TouchableOpacity style={Styles.data} onPress={() => onClickData(item)}>
+                                    <View style={Styles.imgContainer}>
+                                        <Image style={Styles.image} source={{uri: item.path}}></Image>
+                                    </View>
+                                    <Text style={Styles.boxText}>{item.title}</Text>
+                                    <View style={Styles.gap} >
+                                        {item.tags.map((item, index) => {
+                                            return (
+                                                    <Text style={Styles.boxTextInner}>{item}</Text>
+                                                )
+                                            })
+                                        }
+                                    </View>
+                                </TouchableOpacity>
+                            );
+                        }) : undefined
+                    }
                 </View>
             </ScrollView>
             <LinearGradient style={Styles.linear} colors={['rgba(255,255,255,0)', '#ffffff']}></LinearGradient>
@@ -133,10 +136,13 @@ const Styles = StyleSheet.create({
     },
     dataContainer: {
         width: constants.width,
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
         gap: 20,
-        rowGap: 20,
+        justifyContent: 'center',
         paddingTop: 20,
-        paddinBottom: 20,
+        paddingBottom: 20,
     },
     search: {
         width: constants.width,
@@ -183,16 +189,8 @@ const Styles = StyleSheet.create({
         fontWeight: 'light',
         color: color.Gray[5],
     },
-    column: {
-        width: constants.width,
-        height: constants.height/5.5,
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-evenly',
-    },
     data: {
-        width: constants.width/2.2,
+        width: constants.width/2.3,
         height: constants.width/2.2,
         borderRadius: 20,
         borderWidth: 1,
@@ -202,7 +200,7 @@ const Styles = StyleSheet.create({
     linear: {
         position: 'absolute',
         width: constants.width,
-        height: constants.height/5,
+        height: constants.height/7,
         bottom: 0,
     },
     imgContainer: {
@@ -211,8 +209,14 @@ const Styles = StyleSheet.create({
         alignItems: 'center',
     },
     image: {
+        width: constants.width/2.5,
         height: constants.width/3.5,
-        resizeMode: "contain",
+        resizeMode: 'contain'
+    },
+    gap: {
+        display: 'flex',
+        flexDirection: 'row',
+        gap: 5
     }
 })
 

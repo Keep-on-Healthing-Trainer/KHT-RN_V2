@@ -7,6 +7,7 @@ import BackHeader from './components/Header';
 
 const DataPage = ({navigation, route}) => {
     const name = route.params.name;
+    const data = route.params.data;
     
     const onClickBackResult = () => {
         navigation.navigate("ResultPage", { screen: 'ResultPage' });
@@ -18,23 +19,19 @@ const DataPage = ({navigation, route}) => {
 
     return(
         <View style={Styles.container}>
-            <BackHeader onPress={name ? () => onClickBackSearch() : () => onClickBackResult()} />
-            <View style={Styles.img}></View>
+            <BackHeader onPress={name ? () => onClickBackSearch() : () => onClickBackResult()} title={data.title} tags={data.tags} />
+            <Image style={Styles.img} source={data ? {uri: data.path} : undefined}></Image>
             <View style={Styles.textContainer}>
                 <Text style={Styles.boldText}>시작 자세</Text>
-                <Text style={Styles.text}>그걸 내가 어떻게 알아 난 운동의 운짜도 모르는 사람이야</Text>
+                <Text style={Styles.text}>{data.startPosture}</Text>
             </View>
             <View style={Styles.textContainer}>
                 <Text style={Styles.boldText}>운동 방법</Text>
-                <Text style={Styles.text}>1. 그걸 내가 알고 있었으면 대마고에서 이런 게 아니라 </Text>
-                <Text style={Styles.text}>2. 동네 헬스장에서 아줌마들 PT 해주고 있었겠죠?</Text>
-                <Text style={Styles.text}>3. 진짜 하기 싫다...</Text>
+                <Text style={Styles.text}>{data.exerciseMethod}</Text>
             </View>
             <View style={Styles.textContainer}>
                 <Text style={Styles.boldText}>주의 사항</Text>
-                <Text style={Styles.text}>1. 아무래도 이거 하기 전에 술마시면 넘어지겠죠?</Text>
-                <Text style={Styles.text}>2. 음 아무래도 이거 하고 독약을 먹으면 안됩니다.</Text>
-                <Text style={Styles.text}>3. 허리 아프신분들 하지 마세요호</Text>
+                <Text style={Styles.text}>{data.warning}</Text>
             </View>
         </View>
     );
@@ -52,8 +49,8 @@ const Styles = StyleSheet.create({
     img: {
         width: constants.width/1.2,
         height: constants.height/4,
-        backgroundColor: color.Gray[2],
         borderRadius: 20,
+        resizeMode: 'contain'
     },
     textContainer: {
         width: constants.width/1.2,
