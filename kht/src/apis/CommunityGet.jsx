@@ -17,7 +17,7 @@ const onCommunityGet = async ( id ) => {
         });
 
         if(response.status == 200) {
-            console.log("게시물 상세보기 가져오기에 성공하였습니다.");
+            //console.log("게시물 상세보기 가져오기에 성공하였습니다.");
             return response.data;
         }
     } catch (error) {
@@ -25,14 +25,14 @@ const onCommunityGet = async ( id ) => {
             if(error.response.status === 401) {
                 onRefresh();
             } else if (error.response.status === 404) {
-              console.log('community get : 잘못된 요청입니다.');
+              //console.log('community get : 잘못된 요청입니다.');
               Alert.alert('잘못된 요청입니다.');
             } else {
-              console.log('community get : 상세보기 오류');
+              //console.log('community get : 상세보기 오류');
               Alert.alert('상세보기 오류입니다.');
             }
         } else {
-            console.log('community get : 네트워크 오류');
+            //console.log('community get : 네트워크 오류');
             Alert.alert('네트워크 오류입니다.');
         }
         return false;

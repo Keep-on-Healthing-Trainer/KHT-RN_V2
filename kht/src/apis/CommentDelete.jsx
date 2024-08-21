@@ -17,7 +17,7 @@ const onCommentDelete = async ( id ) => {
         });
 
         if(response.status == 204) {
-            console.log("댓글 삭제에 성공하였습니다.");
+            //console.log("댓글 삭제에 성공하였습니다.");
             return true;
         }
     } catch (error) {
@@ -25,14 +25,14 @@ const onCommentDelete = async ( id ) => {
             if(error.response.status === 401) {
                 onRefresh();
             } else if (error.response.status === 404) {
-              console.log('comment del : 일치하지 유저입니다.');
+              //console.log('comment del : 일치하지 유저입니다.');
               Alert.alert('삭제할 수 없는 댓글입니다.');
             } else {
-              console.log('comment del : 댓글 삭제 오류');
+              //console.log('comment del : 댓글 삭제 오류');
               Alert.alert('댓글 삭제 오류입니다.');
             }
         } else {
-            console.log('comment del : 네트워크 오류');
+            //console.log('comment del : 네트워크 오류');
             Alert.alert('네트워크 오류입니다.');
         }
         return false;

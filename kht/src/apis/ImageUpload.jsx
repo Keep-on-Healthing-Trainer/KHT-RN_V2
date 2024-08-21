@@ -20,7 +20,7 @@ const onImageUpload = async ( data ) => {
             }
           );
         if(response.status == 201) {
-            console.log("이미지 업로드에 성공했습니다.");
+            //console.log("이미지 업로드에 성공했습니다.");
             return true;
         }
     } catch (error) {
@@ -28,14 +28,14 @@ const onImageUpload = async ( data ) => {
           if(error.response.status === 401) {
             onRefresh();
         } else if (error.response.status === 403) {
-              console.log('image : 유저를 찾을 수 없습니다');
+              //console.log('image : 유저를 찾을 수 없습니다');
               Alert.alert('유저를 찾을 수 없습니다.');
             } else {
-              console.log('image : 이미지 업로드 오류');
+              //console.log('image : 이미지 업로드 오류');
               Alert.alert('이미지 업로드 오류입니다.');
             }
         } else {
-            console.log('image : 네트워크 오류');
+            //console.log('image : 네트워크 오류');
             Alert.alert('네트워크 오류입니다.');
         }
         return false;

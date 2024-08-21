@@ -13,20 +13,20 @@ const onSignup = async ( data, sick ) => {
         });
 
         if(response.status == 201) {
-            console.log("회원가입에 성공하였습니다.");
+            //console.log("회원가입에 성공하였습니다.");
             return true;
         }
     } catch (error) {
         if (error.response) {
             if (error.response.status === 409) {
-              console.log('signup : 아이디가 이미 존재함');
+              //console.log('signup : 아이디가 이미 존재함');
               Alert.alert('아이디가 이미 존재합니다.');
             } else {
-              console.log('signup : 회원가입 오류');
+              //console.log('signup : 회원가입 오류');
               Alert.alert('회원가입 오류입니다.');
             }
         } else {
-            console.log('signup : 네트워크 오류');
+            //console.log('signup : 네트워크 오류');
             Alert.alert('네트워크 오류입니다.');
         }
         return false;

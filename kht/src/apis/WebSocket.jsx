@@ -8,22 +8,22 @@ const onWeb = async ( sessionId, id ) => {
         senderId: id
     };
 
-    console.log(message);
+    //console.log(message);
 
     webSocket.onopen = () => {
-        console.log("WebSocket is open");
+        //console.log("WebSocket is open");
         webSocket.send(JSON.stringify(message));
     };
 
     webSocket.onmessage = () => {
         webSocket.close();
-        console.log('정상적으로 작동했습니다.');
+        //console.log('정상적으로 작동했습니다.');
         return true;
     }
 
     webSocket.onerror = (error) => {
         webSocket.close();
-        console.log(error);
+        //console.log(error);
         return false;
     };
 };

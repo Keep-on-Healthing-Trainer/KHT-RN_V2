@@ -17,23 +17,23 @@ const onLogin = async ( data, state ) => {
             await setStorage('token', JSON.stringify(accessToken));
             await setStorage('refreshToken', JSON.stringify(refreshToken));
             await setStorage('autoLogin', JSON.stringify(state));
-            console.log("로그인에 성공하였습니다.");
+            //console.log("로그인에 성공하였습니다.");
             return true;
         }
     } catch (error) {
         if (error.response) {
             if (error.response.status === 400) {
-              console.log('login : 비밀번호가 일치하지 않습니다');
+              //console.log('login : 비밀번호가 일치하지 않습니다');
               Alert.alert('비밀번호가 일치하지 않습니다.');
             } else if (error.response.status === 404) {
-              console.log('login : 아이디를 찾을 수 없습니다');
+              //console.log('login : 아이디를 찾을 수 없습니다');
               Alert.alert('아이디를 찾을 수 없습니다.');
             } else {
-              console.log('login : 로그인 오류');
+              //console.log('login : 로그인 오류');
               Alert.alert('로그인 오류입니다.');
             }
         } else {
-            console.log('login : 네크워크 오류');
+            //console.log('login : 네크워크 오류');
             Alert.alert('네트워크 오류입니다.');
         }
         return false;

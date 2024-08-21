@@ -17,20 +17,20 @@ const onRefresh = async ( ) => {
         if(response.status == 201) {
             await setStorage('token', JSON.stringify(accessToken));
             await setStorage('refreshToken', JSON.stringify(refreshToken));
-            console.log("token refresh에 성공하였습니다.");
+            //console.log("token refresh에 성공하였습니다.");
             return true;
         }
     } catch (error) {
         if (error.response) {
             if (error.response.status === 404) {
-              console.log('refresh : 잘못된 요청입니다.');
+              //console.log('refresh : 잘못된 요청입니다.');
               Alert.alert('잘못된 요청입니다.');
             } else {
-              console.log('refresh : token refresh 오류');
+              //console.log('refresh : token refresh 오류');
               Alert.alert('자동 로그인 실패입니다.');
             }
         } else {
-            console.log('refresh : 네트워크 오류');
+            //console.log('refresh : 네트워크 오류');
             Alert.alert('네트워크 오류입니다.');
         }
         return false;
