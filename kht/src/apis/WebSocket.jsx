@@ -8,6 +8,8 @@ const onWeb = async ( sessionId, id ) => {
         senderId: id
     };
 
+    console.log(message);
+
     webSocket.onopen = () => {
         console.log("WebSocket is open");
         webSocket.send(JSON.stringify(message));

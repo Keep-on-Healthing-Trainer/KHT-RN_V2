@@ -8,6 +8,7 @@ import constants from "../../styles/constants";
 import Header from "../../components/Header";
 
 import onWeb from "../../apis/WebSocket";
+import onGetUserData from "../../apis/GetUserData";
 
 const TrainingPage = ({navigation}) => {
     const [scanned, setScanned] = useState(false);
