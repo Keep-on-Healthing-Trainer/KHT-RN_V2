@@ -18,7 +18,21 @@ const BackHeader = ( props ) => {
                 <View style={Styles.gap}>
                     {props.tags.map((item, index) => {
                         return (
-                            <CustomText style={Styles.dataText}>{item}</CustomText>
+                            <CustomText style={Styles.dataText}>
+                                {item == 'CARDIO' ? '유산소' : (
+                                    item == 'SHOULDER' ? '어깨' : (
+                                        item == 'ARM' ? '팔' : (
+                                            item == 'ABDOMINAL' ? '복근' : (
+                                                item == 'BACK' ? '등' : (
+                                                    item == 'THIGH' ? '허벅지' : (
+                                                        item == 'CALF' ? '종아리' : undefined
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                )} 
+                            </CustomText>
                             )
                         })
                     }

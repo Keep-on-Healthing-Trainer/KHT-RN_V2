@@ -37,7 +37,7 @@ const ResultPage = ({navigation, route}) => {
     }
 
     const onClickData = (item) => {
-        navigation.navigate("DataPage", { screen: 'DataPage', data: item });
+        navigation.navigate("DataPage", { screen: 'DataPage', data: item, title: beforeData });
     }
 
     const onClickEnter = async () => {
@@ -74,7 +74,28 @@ const ResultPage = ({navigation, route}) => {
                                 <Image style={Styles.img} source={{uri: item.path}}></Image>
                                 <View style={Styles.right}>
                                     <CustomText style={Styles.boldText}>{item.title}</CustomText>
-                                    <CustomText style={Styles.text}>{item.tags}</CustomText>
+                                    <View style={Styles.gap}>
+                                        {item.tags.map((item, index) => {
+                                                return (
+                                                        <CustomText style={Styles.tagText}>
+                                                            {item == 'CARDIO' ? '유산소' : (
+                                                                item == 'SHOULDER' ? '어깨' : (
+                                                                    item == 'ARM' ? '팔' : (
+                                                                        item == 'ABDOMINAL' ? '복근' : (
+                                                                            item == 'BACK' ? '등' : (
+                                                                                item == 'THIGH' ? '허벅지' : (
+                                                                                    item == 'CALF' ? '종아리' : undefined
+                                                                                )
+                                                                            )
+                                                                        )
+                                                                    )
+                                                                )
+                                                            )}
+                                                        </CustomText>
+                                                    )
+                                                })
+                                            }
+                                        </View>
                                     <CustomText style={Styles.text}>{item.introduction}</CustomText>
                                 </View>
                             </TouchableOpacity>
@@ -151,6 +172,16 @@ const Styles = StyleSheet.create({
         paddingLeft: 20,
         paddingRight: 20,
     },
+    tagText: {
+        fontSize: 12,
+        fontWeight: '500',
+        color: color.Gray[4],
+    },
+    gap: {
+        display: 'flex',
+        flexDirection: 'row',
+        gap: 10,
+    }
 });
 
 export default ResultPage;

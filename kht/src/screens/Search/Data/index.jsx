@@ -9,9 +9,10 @@ import BackHeader from './components/Header';
 const DataPage = ({navigation, route}) => {
     const name = route.params.name;
     const data = route.params.data;
+    const title = route.params.title;
     
     const onClickBackResult = () => {
-        navigation.navigate("ResultPage", { screen: 'ResultPage' });
+        navigation.navigate("ResultPage", { screen: 'ResultPage', title: title });
     }
 
     const onClickBackSearch = () => {

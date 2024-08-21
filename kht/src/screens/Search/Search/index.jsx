@@ -122,7 +122,21 @@ const SearchPage = ({navigation}) => {
                                     <View style={Styles.gap} >
                                         {item.tags.map((item, index) => {
                                             return (
-                                                    <CustomText style={Styles.boxTextInner}>{item}</CustomText>
+                                                    <CustomText style={Styles.boxTextInner}>
+                                                        {item == 'CARDIO' ? '유산소' : (
+                                                            item == 'SHOULDER' ? '어깨' : (
+                                                                item == 'ARM' ? '팔' : (
+                                                                    item == 'ABDOMINAL' ? '복근' : (
+                                                                        item == 'BACK' ? '등' : (
+                                                                            item == 'THIGH' ? '허벅지' : (
+                                                                                item == 'CALF' ? '종아리' : undefined
+                                                                            )
+                                                                        )
+                                                                    )
+                                                                )
+                                                            )
+                                                        )}
+                                                    </CustomText>
                                                 )
                                             })
                                         }
