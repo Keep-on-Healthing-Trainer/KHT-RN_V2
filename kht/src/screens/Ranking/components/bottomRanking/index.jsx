@@ -10,6 +10,7 @@ const BottomRankingComponent = (props) => {
         <View>
             {props.data.RankingResponse.map((item , index) => {
                 if(index > 2 && index < 10) {
+                    console.log(item.profileImgUrl);
                 return(
                     <View style={Styles.rankingContainer}>
                         <Image style={Styles.rankingImg} source={item.profileImgUrl ? {uri: item.profileImgUrl} : undefined}></Image>

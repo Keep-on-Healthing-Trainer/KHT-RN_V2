@@ -116,7 +116,7 @@ const SearchPage = ({navigation}) => {
                             return (
                                 <TouchableOpacity style={Styles.data} onPress={() => onClickData(item)}>
                                     <View style={Styles.imgContainer}>
-                                        <Image style={Styles.image} source={{uri: item.path}}></Image>
+                                        <Image style={Styles.image} source={{uri: item.thumbnail}}></Image>
                                     </View>
                                     <CustomText style={Styles.boxText}>{item.title}</CustomText>
                                     <View style={Styles.gap} >
@@ -125,7 +125,7 @@ const SearchPage = ({navigation}) => {
                                                     <CustomText style={Styles.boxTextInner}>
                                                         {item == 'CARDIO' ? '유산소' : (
                                                             item == 'SHOULDER' ? '어깨' : (
-                                                                item == 'ARM' ? '팔' : (
+                                                                item == 'ARM' ? '팔  가슴' : (
                                                                     item == 'ABDOMINAL' ? '복근' : (
                                                                         item == 'BACK' ? '등' : (
                                                                             item == 'THIGH' ? '허벅지' : (

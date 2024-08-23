@@ -58,9 +58,9 @@ const Styles = StyleSheet.create({
         width: constants.width/1.2,
     },
     boldText: {
-        fontSize: 18,
+        fontSize: 20,
         fontWeight: 'bold',
-        color: color.Black,
+        color: color.Blue[10],
     },
     text: {
         fontSize: 16,

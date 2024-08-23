@@ -71,7 +71,7 @@ const ResultPage = ({navigation, route}) => {
                 {resultData ? resultData.map((item, index) => {
                         return (
                             <TouchableOpacity key={index} style={Styles.box} onPress={() => onClickData(item)}>
-                                <Image style={Styles.img} source={{uri: item.path}}></Image>
+                                <Image style={Styles.img} source={{uri: item.thumbnail}}></Image>
                                 <View style={Styles.right}>
                                     <CustomText style={Styles.boldText}>{item.title}</CustomText>
                                     <View style={Styles.gap}>
@@ -80,7 +80,7 @@ const ResultPage = ({navigation, route}) => {
                                                         <CustomText style={Styles.tagText}>
                                                             {item == 'CARDIO' ? '유산소' : (
                                                                 item == 'SHOULDER' ? '어깨' : (
-                                                                    item == 'ARM' ? '팔' : (
+                                                                    item == 'ARM' ? '팔    가슴' : (
                                                                         item == 'ABDOMINAL' ? '복근' : (
                                                                             item == 'BACK' ? '등' : (
                                                                                 item == 'THIGH' ? '허벅지' : (

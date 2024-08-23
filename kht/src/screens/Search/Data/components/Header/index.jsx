@@ -21,7 +21,7 @@ const BackHeader = ( props ) => {
                             <CustomText style={Styles.dataText}>
                                 {item == 'CARDIO' ? '유산소' : (
                                     item == 'SHOULDER' ? '어깨' : (
-                                        item == 'ARM' ? '팔' : (
+                                        item == 'ARM' ? '팔   가슴' : (
                                             item == 'ABDOMINAL' ? '복근' : (
                                                 item == 'BACK' ? '등' : (
                                                     item == 'THIGH' ? '허벅지' : (
@@ -59,9 +59,9 @@ const Styles = StyleSheet.create({
         fontSize: 16,
     },
     text: {
-        fontSize: 18,
+        fontSize: 21,
         fontWeight: 'bold',
-        color: color.Black,
+        color: color.Blue[10],
     },
     dataContainer: {
         height: constants.height/22,
