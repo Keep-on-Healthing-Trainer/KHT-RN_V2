@@ -8,6 +8,7 @@ import constants from "../../../styles/constants";
 
 import Header from '../../../components/Header';
 import Search from "../../../components/Search";
+import Banner from "./components/banner";
 
 import onSearch from '../../../apis/Search';
 import onGetUserData from "../../../apis/GetUserData";
@@ -39,7 +40,6 @@ const SearchPage = ({navigation}) => {
         const res = await onGetRecommendData();
         if(res) {
             setRecommendData(res);
-            //console.log(res);
         }
     }
     
@@ -59,7 +59,6 @@ const SearchPage = ({navigation}) => {
             const data = await onSearch(searchData);
             navigation.navigate("ResultPage", { screen: 'ResultPage', name: data, title: searchData.title });
         } catch (error) {
-            //console.log("검색 정보 가져오기 오류");
         }
     }
 
@@ -67,7 +66,7 @@ const SearchPage = ({navigation}) => {
         <View style={Styles.container}>
             <Header />
             <ScrollView>
-                <Image style={Styles.banner} source={require('../../../assets/image/banner.png')}></Image>
+                <Banner />
                 <View style={Styles.search}>
                     <Search
                     onGetInText={(text) => handleInputChange(text, "title")}
