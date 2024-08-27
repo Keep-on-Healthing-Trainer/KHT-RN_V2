@@ -113,7 +113,7 @@ const SearchPage = ({navigation}) => {
                 <View style={Styles.dataContainer}>
                     {recommendData ? recommendData.map((item, index) => {
                             return (
-                                <TouchableOpacity style={Styles.data} onPress={() => onClickData(item)}>
+                                <TouchableOpacity style={Styles.data} onPress={() => onClickData(item)} key={index}>
                                     <View style={Styles.imgContainer}>
                                         <Image style={Styles.image} source={{uri: item.thumbnail}}></Image>
                                     </View>
@@ -121,7 +121,7 @@ const SearchPage = ({navigation}) => {
                                     <View style={Styles.gap} >
                                         {item.tags.map((item, index) => {
                                             return (
-                                                    <CustomText style={Styles.boxTextInner}>
+                                                    <CustomText style={Styles.boxTextInner}  key={index}>
                                                         {item == 'CARDIO' ? '유산소' : (
                                                             item == 'SHOULDER' ? '어깨' : (
                                                                 item == 'ARM' ? '팔  가슴' : (

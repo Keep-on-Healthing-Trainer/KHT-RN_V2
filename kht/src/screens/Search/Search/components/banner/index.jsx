@@ -26,7 +26,7 @@ export default function Banner() {
       >
         {imageList.map((banner) => {
           return (
-            <Image style={Styles.banner} source={{uri: banner}}></Image>
+            <Image style={Styles.banner} source={{uri: banner}} key={banner}></Image>
           )}
         )}
       </Swiper>

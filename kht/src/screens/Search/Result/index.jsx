@@ -77,7 +77,7 @@ const ResultPage = ({navigation, route}) => {
                                     <View style={Styles.gap}>
                                         {item.tags.map((item, index) => {
                                                 return (
-                                                        <CustomText style={Styles.tagText}>
+                                                        <CustomText style={Styles.tagText} key={index}>
                                                             {item == 'CARDIO' ? '유산소' : (
                                                                 item == 'SHOULDER' ? '어깨' : (
                                                                     item == 'ARM' ? '팔    가슴' : (

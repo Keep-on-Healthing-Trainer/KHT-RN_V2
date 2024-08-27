@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View, TextInput, Image, TouchableOpacity, TouchableWithoutFeedback, Keyboard, StyleSheet } from "react-native";
 import CustomText from "../../../styles/CustomText";
-import Textarea from 'react-native-textarea';
+//import Textarea from 'react-native-textarea';
 import * as DocumentPicker from 'expo-document-picker';
 import { color } from "../../../styles/theme";
 import constants from "../../../styles/constants";
@@ -104,8 +104,8 @@ const CreatePage = ({navigation}) => {
                     ></TextInput>
                 </View>
                 <View>
-                    <Textarea
-                        containerStyle={Styles.textareaContainer}
+                    <TextInput
+                        multiline={true}
                         style={Styles.textarea}
                         onChangeText={(text) => handleInputChange(text, "content")}
                         maxLength={400}
@@ -155,14 +155,12 @@ const Styles = StyleSheet.create({
     input: {
         fontSize: 18,
     },
-    textareaContainer: {
-      height: constants.height/2,
-      padding: 20,
-      backgroundColor: color.White,
-    },
     textarea: {
       fontSize: 16,
       color: color.Black,
+      height: constants.height/2,
+      padding: 20,
+      backgroundColor: color.White,
     },
     fontContainer: {
         width: constants.width,

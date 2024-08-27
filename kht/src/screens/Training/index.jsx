@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { View, Text, StyleSheet, Alert } from "react-native";
 import CustomText from "../../styles/CustomText";
 import { useIsFocused } from '@react-navigation/native';
 import { CameraView, useCameraPermissions } from 'expo-camera';
+import { useFocusEffect } from '@react-navigation/native';
 import { color } from "../../styles/theme";
 import constants from "../../styles/constants";
 
@@ -12,15 +13,21 @@ import onWeb from "../../apis/WebSocket";
 import onGetUserData from "../../apis/GetUserData";
 
 const TrainingPage = ({navigation}) => {
-    const [scanned, setScanned] = useState(false);
+    const [ scanned, setScanned ] = useState(false);
     const [ userData, setUserData ] = useState({});
     const [permission, requestPermission] = useCameraPermissions();
     const isFocused = useIsFocused();
 
     useEffect(() => {
-      setScanned(true);
       getUserData();
+      setScanned(true);
     }, []);
+
+    useFocusEffect(
+      useCallback(() => {
+        setScanned(true);
+      }, [])
+    );
 
     const getUserData = async () => {
       const res = await onGetUserData();
