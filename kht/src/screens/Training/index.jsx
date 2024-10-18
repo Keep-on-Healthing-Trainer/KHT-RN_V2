@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { View, Text, StyleSheet, Alert } from "react-native";
+import { View, Text, StyleSheet, Alert,  } from "react-native";
 import CustomText from "../../styles/CustomText";
 import { useIsFocused } from '@react-navigation/native';
 import { CameraView, useCameraPermissions } from 'expo-camera';
@@ -8,6 +8,7 @@ import { color } from "../../styles/theme";
 import constants from "../../styles/constants";
 
 import Header from "../../components/Header";
+import Button from "../../components/Button";
 
 import onWeb from "../../apis/WebSocket";
 import onGetUserData from "../../apis/GetUserData";
@@ -46,9 +47,9 @@ const TrainingPage = ({navigation}) => {
     
     if (!permission.granted) {
       return (
-          <View style={Styles.container}>
-            <CustomText style={{ textAlign: 'center' }}>카메라 권한을 허용해주세요</CustomText>
-            <Button onPress={requestPermission} title="grant permission" />
+          <View style={{ width: constants.width, height: constants.height, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', rowGap: 50 }}>
+            <CustomText style={{ fontSize: 18, alignItems: 'center', justifyContent: 'center' }}>카메라 권한을 허용해주세요</CustomText>
+            <Button onPress={requestPermission} innerText="권한 허용하기" />
           </View>
       );
     }
