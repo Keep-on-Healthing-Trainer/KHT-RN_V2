@@ -19,7 +19,7 @@ const Header = ( props ) => {
 const Styles = StyleSheet.create({
     container: {
         width: constants.width,
-        height: constants.height/12,
+        height: constants.height/20,
         alignItems: 'flex-start',
         justifyContent: 'flex-end',
     },
