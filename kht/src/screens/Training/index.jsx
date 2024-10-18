@@ -59,7 +59,7 @@ const TrainingPage = ({navigation}) => {
       const sessionId = (data.data.split('?')[1]).split('=')[1];
       const res = onWeb(sessionId, userData.id);
       if(res) { 
-        Alert.alert('QR코드 스캔에 성공했습니다.');
+        Alert.alert(`QR코드 스캔에 성공했습니다.`);
       }
     };
 
