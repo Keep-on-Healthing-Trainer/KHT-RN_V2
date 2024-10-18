@@ -26,7 +26,6 @@ const onWeb = async ( sessionId, id ) => {
     webSocket.onerror = (error) => {
         webSocket.close();
         console.log(error);
-        Alert.alert(`${error}`);
         return false;
     };
 };
