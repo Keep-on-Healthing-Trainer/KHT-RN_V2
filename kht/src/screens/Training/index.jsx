@@ -57,7 +57,6 @@ const TrainingPage = ({navigation}) => {
     const handleBarCodeScanned = ( data ) => {
       setScanned(false);
       const sessionId = (data.data.split('?')[1]).split('=')[1];
-      Alert.alert(`${sessionId}`);
       const res = onWeb(sessionId, userData.id);
       if(res) { 
         Alert.alert(`QR코드 스캔에 성공했습니다.`);
